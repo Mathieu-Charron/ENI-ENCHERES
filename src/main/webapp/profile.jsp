@@ -41,5 +41,8 @@
 
 	<label for="confirmationPassword">Confirmation du mot de passe :</label>
 	<input type="password" id="confirmationPassword" name="confirmationPassword"><br><br>
+	
+	<input type="submit" value="Créer">
+    <input type="button" value="Annuler">
 </body>
 </html>
