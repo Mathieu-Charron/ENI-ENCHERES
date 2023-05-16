@@ -6,30 +6,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Connexion</title>
+	 <link rel="stylesheet" type="text/css" href="./CSS/style.css">
 </head>
 <body>
-	<h1>Connexion</h1>
+	<div class="container-connection">
+		<h1>Connexion</h1>
 	
-	<form action="/" method="post">
-		<label for="username">Identifiant:</label>
-		<input type="text" id="username" name="username"><br><br>
-		
-		<label for="password">Mot de passe:</label>
-		<input type="password" id="password" name="password"><br><br>
-		
-		<label for="rememberme">Se souvenir de moi:</label>
-		<input type="checkbox" id="rememberme" name="rememberme"><br><br>
-		
-		<input type="submit" value="Connexion">
-		
+		<form action="/" method="post">
+		<div>
+			<label for="username">Identifiant:</label>
+			<input type="text" id="username" name="username">
+		</div>
+		<div>
+			<label for="password">Mot de passe:</label>
+			<input type="password" id="password" name="password">
+		</div>
+		<div>
+			<input type="submit" value="Connexion">
+			<div>
+				<div>
+					<input type="checkbox" id="rememberme" name="rememberme">
+					<label for="rememberme">Se souvenir de moi:</label>
+				</div>
+				<a href="motDePasseOublie.jsp">Mot de passe oublié</a>
+			</div>
+		</div>
+			
+		</form>
+	
 		<br>
-		
-		<a href="motDePasseOublie.jsp">Mot de passe oublié</a>
-	</form>
 	
-	<br>
-	
-	<a href="/">Créer un compte</a>
-	
+		<a href="/">Créer un compte</a>
+	</div>
 </body>
 </html>
