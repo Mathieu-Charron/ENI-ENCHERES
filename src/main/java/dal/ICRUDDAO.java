@@ -1,7 +1,7 @@
 package dal;
 
 public interface ICRUDDAO<T> {
-	void insert(T t);
-	void delete(int id);
-	void update(T t);
+	T insert(T t) throws DALException;
+	void delete(int id) throws DALException;
+	void update(T t) throws DALException;
 }

@@ -3,6 +3,7 @@ package bo;
 public class User {
 	private int userId;
 	private String username;
+	private String password;
 	private String lastName;
 	private String firstName;
 	private String email;
@@ -13,11 +14,9 @@ public class User {
 	private int credit;
 	private boolean administrator;
 	
-	
-	public User(int userId, String username, String lastName, String firstName, String email, String phone,
+	public User(String username, String lastName, String firstName, String email, String phone,
 			String street, String postalCode, String city, int credit, boolean administrator) {
 		super();
-		this.userId = userId;
 		this.username = username;
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -29,17 +28,43 @@ public class User {
 		this.credit = credit;
 		this.administrator = administrator;
 	}
+	
+	public User(int userId, String username, String lastName, String firstName, String email, String phone,
+			String street, String postalCode, String city, int credit, boolean administrator) {
+		this(username,lastName,firstName,email,phone,street,postalCode,city,credit,administrator);
+		this.userId = userId;
+	}
+	
+	
 
-
+	public User(String username, String lastName, String firstName, String email, String phone,
+			String street, String postalCode, String city, int credit, boolean administrator, String password) {
+		this(username,lastName,firstName,email,phone,street,postalCode,city,credit,administrator);
+		this.password = password;
+	}
+	
+	public User(int userId, String username, String lastName, String firstName, String email, String phone,
+			String street, String postalCode, String city, int credit, boolean administrator, String password) {
+		this(userId, username,lastName,firstName,email,phone,street,postalCode,city,credit,administrator);
+		this.password = password;
+	}
+	
+	
 	public int getUserId() {
 		return userId;
 	}
 
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getUsername() {
 		return username;
 	}
 
+	public String getPassword() {
+		return password;
+	}
 
 	public String getLastName() {
 		return lastName;
@@ -81,7 +106,7 @@ public class User {
 	}
 
 
-	public boolean isAdministrator() {
+	public boolean getAdministrator() {
 		return administrator;
 	}
 
