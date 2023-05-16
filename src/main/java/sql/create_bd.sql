@@ -1,0 +1,107 @@
+CREATE TABLE CATEGORIES (
+categoryId INTEGER IDENTITY(1,1) NOT NULL,
+label VARCHAR(30) NOT NULL
+)
+
+ALTER TABLE CATEGORIES ADD CONSTRAINT category_pk PRIMARY KEY (categoryId)
+
+
+/*****************************
+CATEGORIES
+******************************/
+
+
+CREATE TABLE USERS (
+	userId INTEGER IDENTITY(1,1) NOT NULL,
+	username VARCHAR(30) NOT NULL,
+	lastName VARCHAR(30) NOT NULL,
+	firstName VARCHAR(30) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	phone VARCHAR(15),
+	street VARCHAR(30) NOT NULL,
+	postalCode VARCHAR(10) NOT NULL,
+	city VARCHAR(50) NOT NULL,
+	password VARCHAR(30) NOT NULL,
+	credit INTEGER NOT NULL,
+	administrator bit NOT NULL
+)
+
+/*****************************
+USER
+******************************/
+
+ALTER TABLE USERS ADD CONSTRAINT user_pk PRIMARY KEY (userId)
+
+CREATE TABLE SOLD_ITEMS (
+	soldItemId INTEGER IDENTITY(1,1) NOT NULL,
+	itemName VARCHAR(30) NOT NULL,
+	description VARCHAR(300) NOT NULL,
+	startDate DATE NOT NULL,
+	endDate DATE NOT NULL,
+	initialPrice INTEGER,
+	salePrice INTEGER,
+	userId INTEGER NOT NULL,
+	categoryId INTEGER NOT NULL
+)
+
+ALTER TABLE SOLD_ITEMS ADD CONSTRAINT sold_items_pk PRIMARY KEY (item_id)
+
+
+/*****************************
+SOLD_ITEMS
+******************************/
+
+CREATE TABLE WITHDRAWALS (
+	soldItemId INTEGER NOT NULL,
+	street VARCHAR(30) NOT NULL,
+	postalCode VARCHAR(15) NOT NULL,
+	city VARCHAR(30) NOT NULL
+)
+
+ALTER TABLE WITHDRAWALS ADD CONSTRAINT withdrawal_pk PRIMARY KEY (soldItemId)
+
+ALTER TABLE WITHDRAWALS
+ADD CONSTRAINT withdrawal_item_fk FOREIGN KEY (soldItemId) REFERENCES SOLD_ITEMS (soldItemId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+
+/*****************************
+WITHDRAWALS
+******************************/
+
+CREATE TABLE BIDS (
+	bidId INTEGER IDENTITY(1,1) NOT NULL,
+	bidDate DATETIME NOT NULL,
+	bidAmount INTEGER NOT NULL,
+	soldItemId INTEGER NOT NULL,
+	userId INTEGER NOT NULL
+)
+
+
+
+
+ALTER TABLE BIDS ADD CONSTRAINT bid_pk PRIMARY KEY (bid_id)
+
+ALTER TABLE BIDS
+ADD CONSTRAINT bid_user_fk FOREIGN KEY (userId) REFERENCES USERS (userId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+
+ALTER TABLE BIDS
+ADD CONSTRAINT bid_item_fk FOREIGN KEY (soldItemId) REFERENCES SOLD_ITEMS (soldItemId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+
+/*****************************
+BIDS
+******************************/
+
+ALTER TABLE SOLD_ITEMS
+ADD CONSTRAINT sold_items_category_fk FOREIGN KEY (categoryId) REFERENCES CATEGORIES (categoryId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+
+ALTER TABLE SOLD_ITEMS
+ADD CONSTRAINT sold_items_user_fk FOREIGN KEY (userId) REFERENCES USERS (userId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
