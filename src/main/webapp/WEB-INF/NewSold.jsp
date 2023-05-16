@@ -10,7 +10,7 @@
 		<link rel="icon" href="favicon.jpg" />
 	</head>
 	<body>
-		<header style="display: flex;">
+		<header>
 			<div class="logo">
 				<!--<p>logo</p>-->
 				<img class="logo" src="logo.jpg">
