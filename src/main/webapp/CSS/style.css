@@ -19,7 +19,7 @@ a {
 .container-connection label {
 	width: 25%;
 }
-.container-connection input[type=text] {
+.container-connection input[type=text], .container-connection input[type=password] {
 	width: 75%;
 }
 .container-connection input[type=submit] {

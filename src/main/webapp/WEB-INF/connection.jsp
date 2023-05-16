@@ -12,7 +12,7 @@
 	<div class="container-connection">
 		<h1>Connexion</h1>
 	
-		<form action="/" method="post">
+		<form action="${pageContext.request.contextPath}/Connection" method="post">
 		<div>
 			<label for="username">Identifiant:</label>
 			<input type="text" id="username" name="username">
