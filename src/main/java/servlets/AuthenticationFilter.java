@@ -28,7 +28,8 @@ public class AuthenticationFilter implements Filter {
 
         if (httpRequest.getSession().getAttribute("user") == null 
         		&& !link.contains("Connection")
-        		&& !link.equals("/")) {
+        		&& !link.equals("/")
+        		&& !link.contains("public")) {
         	
             httpResponse.sendRedirect(httpRequest.getContextPath());
         } else {
