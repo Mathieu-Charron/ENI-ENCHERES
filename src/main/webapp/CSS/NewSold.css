@@ -18,17 +18,17 @@ body {
 }
 
 .image-container {
-	flex: 1;
+	flex: 0.4;
 	margin-right: 20px;
 }
 
 .image-container img {
-	max-width: 100%;
+	max-width: 70%;
 	height: auto;
 }
 
 .form {
-	flex: 1;
+	flex: 0.3;
 }
 
 .form div {
