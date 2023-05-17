@@ -22,14 +22,23 @@
 	border: none;
 	border-bottom: 1px solid #000000;
 }
+.container-connection input[type=text]:focus-visible , .container-connection input[type=password]:focus-visible {
+	border-bottom: 1px solid #1a73e8;
+}
 .container-connection input[type=submit] {
 	width: 60%;
 	padding: 15px;
-	background: #ffffff;
     border: none;
     cursor: pointer;
     background: #1a73e8;
     color: #ffffff;
+    border: 2px solid #1a73e8;
+    transition: 0.25s;
+}
+.container-connection input[type=submit]:hover {
+    background: white;
+    color: #1a73e8;
+    transition: 0.25s;
 }
 .container-connection > a {
 	display: flex;

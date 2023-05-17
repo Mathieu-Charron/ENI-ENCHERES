@@ -41,6 +41,7 @@ public class servletConnection extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("title", title);
 		User user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
 		if(user != null) {
 			HttpSession session = request.getSession();

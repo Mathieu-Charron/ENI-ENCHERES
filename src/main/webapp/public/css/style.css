@@ -21,7 +21,7 @@ li {
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 90%;
+    width: 80%;
     margin: auto;
 }
 .header .header-page {
@@ -47,7 +47,7 @@ li {
     transition: 0.25s
 }
 .header-image {
-	width: 150px;
+	width: 110px;
 }
 .header-image img {
 	width: 100%;

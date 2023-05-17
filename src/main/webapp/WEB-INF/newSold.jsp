@@ -2,15 +2,9 @@
 		<style>
 			<%@ include file="../public/css/NewSold.css"%>
 		</style>
-		<header>
-			<div class="logo">
-				<!--<p>logo</p>-->
-				<img class="logo" src="logo.jpg">
+		<div>
+				<h1 class="title">Nouvelle vente</h1>
 			</div>
-			<div>
-				<p class="title">Nouvelle vente</p>
-			</div>
-		</header>
 		<div>
 			<div class="container">
 				<div class="image-container">
