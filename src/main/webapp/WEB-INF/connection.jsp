@@ -30,7 +30,7 @@
 		</form>
 	
 		<br>
-	
+		<p>${error}</p>
 		<a href="/">Créer un compte</a>
 	</div>
 <%@ include file="templates/footer.jsp"%>

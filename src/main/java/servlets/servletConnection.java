@@ -47,6 +47,7 @@ public class servletConnection extends HttpServlet {
 			session.setAttribute("user", user);
 	        response.sendRedirect(request.getContextPath());
 		}else {
+            request.setAttribute("error", "Identifiants incorrects");
 			request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
 		}
 	}
