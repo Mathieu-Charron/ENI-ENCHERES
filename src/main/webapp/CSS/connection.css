@@ -1,0 +1,47 @@
+.container-connection {
+	max-width: 350px;
+   	margin: auto;
+    padding: 20px 20px;
+    margin-top: 100px;
+    box-shadow: 0px 5px 15px 2px #a7a7a7;
+}
+.container-connection form > div {
+	display: flex;
+	margin : 25px 0px;
+	justify-content: center;
+}
+.container-connection label {
+	width: 25%;
+}
+.container-connection input[type=text], .container-connection input[type=password] {
+	width: 85%;
+	padding: 15px;
+	border: none;
+	border-bottom: 1px solid #000000;
+}
+.container-connection input[type=submit] {
+	width: 60%;
+	padding: 15px;
+	background: #ffffff;
+    border: none;
+    cursor: pointer;
+    background: #1a73e8;
+    color: #ffffff;
+}
+.container-connection > a {
+	display: flex;
+    width: 225px;
+    margin: 25px auto;
+    text-align: center;
+    justify-content: center;
+    padding: 20px 0px;
+    background: #ffffff;
+}
+.container-connection .section-password {
+	width: 50%;
+	text-align: center;
+}
+.container-connection input {
+	outline:none;
+	font-size: 1rem;
+}
