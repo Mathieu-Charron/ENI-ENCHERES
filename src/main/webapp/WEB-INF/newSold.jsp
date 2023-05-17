@@ -1,6 +1,6 @@
 <%@ include file="templates/header.jsp"%>
 		<style>
-			<%@ include file="../CSS/NewSold.css"%>
+			<%@ include file="../css/NewSold.css"%>
 		</style>
 		<header>
 			<div class="logo">

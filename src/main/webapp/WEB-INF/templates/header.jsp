@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	<%@ include file="../../CSS/style.css"%>
+	<%@ include file="../../css/style.css"%>
 </style>
 <title>ENI ENCHERE - <%= request.getAttribute("title") %></title>
 </head>

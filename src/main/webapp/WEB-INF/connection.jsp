@@ -1,6 +1,8 @@
 <%@ include file="templates/header.jsp"%>
-	<link rel="stylesheet" type="text/css" href="./CSS/style.css">
 	<div class="container-connection">
+	<style>
+		<%@ include file="../css/connection.css"%>
+	</style>
 		<h1>Connexion</h1>
 	
 		<form action="${pageContext.request.contextPath}/Connection" method="post">
