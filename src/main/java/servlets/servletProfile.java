@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Profile")
 public class servletProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private String title = "Profile";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,6 +28,7 @@ public class servletProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setAttribute("title", title);
 		request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
 	}
 

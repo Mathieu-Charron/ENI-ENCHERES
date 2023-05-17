@@ -16,7 +16,7 @@ import bo.User;
 @WebServlet("/Connection")
 public class servletConnection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private String title = "Connection";
 	private UserManager manager;
 	
     public void init() throws ServletException{
@@ -32,6 +32,7 @@ public class servletConnection extends HttpServlet {
 //		user = manager.insertUser(user);
 //		user = new User(user.getUserId(),"a", "b", "c", "d", "e", "f", "g", "h", 0, false, "i");
 //		manager.updateUser(user);
+		request.setAttribute("title", title);
 		request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
 	}
 

@@ -1,15 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Nouvelle vente</title>
-		<link href="CSS/NewSold.css" rel="stylesheet">
-		<link rel="icon" href="favicon.jpg" />
-	</head>
-	<body>
+<%@ include file="templates/header.jsp"%>
+		<style>
+			<%@ include file="../CSS/NewSold.css"%>
+		</style>
 		<header>
 			<div class="logo">
 				<!--<p>logo</p>-->
@@ -25,7 +17,7 @@
 					<img src="chemin/vers/mon-image.jpg" alt="#">
 				</div>
 				<div class="form">
-					<form action="#">
+					<form action="${pageContext.request.contextPath}/newSold">
 						<div>
 							<label for="article">Article :</label>
 							<input type="text" id="article" name="article" required size="20">
@@ -35,9 +27,9 @@
 							<textarea id="description" name="description" required rows="5"></textarea>
 						</div>
 						<div>
-							<label for="categorie-select">CatÃ©gorie :</label>
+							<label for="categorie-select">Catégorie :</label>
 							<select name="categorie" id="categorie-select" required>
-								<option value="">--Choisir une CatÃ©gorie--</option>
+								<option value="">--Choisir une Catégorie--</option>
 							    <option value="informatique">Informatique</option>
 							    <option value="meuble">Meuble</option>
 							    <option value="livre">Livre</option>
@@ -48,15 +40,15 @@
 							<input type="file" id="picture" name="picture" accept="image/png, image/jpeg" required>
 						</div>
 						<div>
-							<label for="price">Mise Ã  prix :</label>
+							<label for="price">Mise à prix :</label>
 							<input type="number" id="price" name="price" min="0" max="9999999" required>
 						</div>
 						<div>
-							<label for="startBids">DÃ©but de l'enchÃ¨re :</label>
+							<label for="startBids">Début de l'enchère :</label>
 							<input type="date" name="startBids" id="startBids" required>
 						</div>
 						<div>
-							<label for="endBids">Fin de l'enchÃ¨re :</label>
+							<label for="endBids">Fin de l'enchère :</label>
 							<input type="date" name="endBids" id="endBids" required>
 						</div>
 						<div>
@@ -80,21 +72,21 @@
 				</div>
 			</div>
 		</div>
-	</body>
 	<script>
 		// Obtient la date actuelle
 		var today = new Date().toISOString().split('T')[0];
-		// DÃ©finit la date minimale pour le champ de dÃ©but d'enchÃ¨re
+		// Définit la date minimale pour le champ de début d'enchère
 		document.getElementById('startBids').setAttribute('min', today);
 	
-		// GÃ¨re l'Ã©vÃ©nement de changement de date de dÃ©but d'enchÃ¨re
+		// Gère l'événement de changement de date de début d'enchère
 		document.getElementById('startBids').addEventListener('change', function() {
-			// Obtient la valeur sÃ©lectionnÃ©e du champ de dÃ©but d'enchÃ¨re
+			// Obtient la valeur sélectionnée du champ de début d'enchère
 			var startDate = this.value;
 			
-			// DÃ©finit la date minimale pour le champ de fin d'enchÃ¨re
+			// Définit la date minimale pour le champ de fin d'enchère
 			document.getElementById('endBids').setAttribute('min', startDate);
 		});
 	</script>	
-</html>
+<%@ include file="templates/footer.jsp"%>
+
 

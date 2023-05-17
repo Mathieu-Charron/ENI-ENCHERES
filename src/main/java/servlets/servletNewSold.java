@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/NewSold")
 public class servletNewSold extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String title = "Nouvelle vente";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,7 +29,8 @@ public class servletNewSold extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/WEB-INF/NewSold.jsp").forward(request, response);
+		request.setAttribute("title", title);
+		request.getRequestDispatcher("/WEB-INF/newSold.jsp").forward(request, response);
 	}
 
 	/**
@@ -37,7 +39,7 @@ public class servletNewSold extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		request.getRequestDispatcher("/WEB-INF/NewSold.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/newSold.jsp").forward(request, response);
 	}
 
 }

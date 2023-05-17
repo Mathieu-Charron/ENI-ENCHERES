@@ -1,20 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Accueil</title>
-</head>
-<body>
+<%@ include file="templates/header.jsp"%>
 <form action="/recherche" method="get">
 	<h2>Filtres :</h2>
 	<div>
   	<input type="text" name="q" placeholder="Rechercher...">
   	<select name="category">
-    	<option value="all">Toutes les catÃ©gories</option>
-    	<option value="electronics">Ã‰lectronique</option>
-    	<option value="clothing">VÃªtements</option>
+    	<option value="all">Toutes les catégories</option>
+    	<option value="electronics">Électronique</option>
+    	<option value="clothing">Vêtements</option>
     	<option value="books">Livres</option>
   	</select>
   	</div>
@@ -29,5 +21,4 @@
 		<li></li>
 	</ul>
 </div>
-</body>
-</html>
+<%@ include file="templates/footer.jsp"%>

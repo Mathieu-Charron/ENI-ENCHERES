@@ -1,14 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Connexion</title>
-	 <link rel="stylesheet" type="text/css" href="./CSS/style.css">
-</head>
-<body>
+<%@ include file="templates/header.jsp"%>
+	<link rel="stylesheet" type="text/css" href="./CSS/style.css">
 	<div class="container-connection">
 		<h1>Connexion</h1>
 	
@@ -28,7 +19,7 @@
 					<input type="checkbox" id="rememberme" name="rememberme">
 					<label for="rememberme">Se souvenir de moi:</label>
 				</div>
-				<a href="motDePasseOublie.jsp">Mot de passe oubliÃ©</a>
+				<a href="motDePasseOublie.jsp">Mot de passe oublié</a>
 			</div>
 		</div>
 			
@@ -36,7 +27,6 @@
 	
 		<br>
 	
-		<a href="/">CrÃ©er un compte</a>
+		<a href="/">Créer un compte</a>
 	</div>
-</body>
-</html>
+<%@ include file="templates/footer.jsp"%>
