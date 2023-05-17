@@ -2,13 +2,13 @@ package bo;
 
 import java.sql.Date;
 
-public class Bids {
+public class Bid {
 	private Date bidsDate;
     private int bidsAmount;
     private SoldItem soldItem;
     private User user;
     
-	public Bids(Date bidsDate, int bidsAmount, SoldItem soldItem, User user) {
+	public Bid(Date bidsDate, int bidsAmount, SoldItem soldItem, User user) {
 		super();
 		this.bidsDate = bidsDate;
 		this.bidsAmount = bidsAmount;

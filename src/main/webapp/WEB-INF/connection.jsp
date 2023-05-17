@@ -1,7 +1,7 @@
 <%@ include file="templates/header.jsp"%>
 	<div class="container-connection">
 	<style>
-		<%@ include file="../css/connection.css"%>
+		<%@ include file="../public/css/connection.css"%>
 	</style>
 		<h1>Connexion</h1>
 	
