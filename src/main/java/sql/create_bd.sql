@@ -1,10 +1,11 @@
 USE [ENI-ENCHERE]
 
-DROP TABLE BIDS
-DROP TABLE WITHDRAWALS
-DROP TABLE SOLD_ITEMS
-DROP TABLE USERS
-DROP TABLE CATEGORIES
+DROP TABLE IF EXISTS BIDS
+DROP TABLE IF EXISTS WITHDRAWALS
+DROP TABLE IF EXISTS SOLD_ITEMS
+DROP TABLE IF EXISTS USERS
+DROP TABLE IF EXISTS CATEGORIES
+
 /*****************************
 CATEGORIES
 ******************************/
@@ -32,7 +33,7 @@ CREATE TABLE USERS (
 	street VARCHAR(30) NOT NULL,
 	postalCode VARCHAR(10) NOT NULL,
 	city VARCHAR(50) NOT NULL,
-	password VARCHAR(30) NOT NULL,
+	password VARCHAR(255) NOT NULL,
 	credit INTEGER NOT NULL,
 	administrator bit NOT NULL
 )
@@ -40,8 +41,9 @@ CREATE TABLE USERS (
 ALTER TABLE USERS ADD CONSTRAINT user_pk PRIMARY KEY (userId)
 
 INSERT INTO USERS (username, lastName, firstName, email, phone, street, postalCode, city, password, credit, administrator)
-VALUES ('johnDoe', 'Doe', 'John', 'johndoe@example.com', '1234567890', '123 Main St', '12345', 'New York', 'password123', 100, 0),
-('janeSmith', 'Smith', 'Jane', 'janesmith@example.com', '9876543210', '456 Oak Ave', '67890', 'Los Angeles', 'password456', 200, 1);
+VALUES ('johnDoe', 'Doe', 'John', 'johndoe@example.com', '1234567890', '123 Main St', '12345', 'New York', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 100, 0),
+('janeSmith', 'Smith', 'Jane', 'janesmith@example.com', '9876543210', '456 Oak Ave', '67890', 'Los Angeles', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 200, 1);
+
 
 
 /*****************************
