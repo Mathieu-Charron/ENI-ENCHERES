@@ -12,3 +12,43 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
+li {
+	list-style: none;
+}
+
+.header {
+	display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+}
+.header .header-page {
+	display: flex;
+}
+.header .header-page li {
+	margin: 0px 23px;
+}
+.header .header-page li a {
+	position: relative;
+}
+.header .header-page li a:before {
+	content: "";
+    width: 0%;
+    position: absolute;
+    height: 2px;
+    background: #1a73e8;
+    bottom: -5px;
+    transition: 0.25s
+}
+.header .header-page li:hover a:before {
+    width: 100%;
+    transition: 0.25s
+}
+.header-image {
+	width: 150px;
+}
+.header-image img {
+	width: 100%;
+}
