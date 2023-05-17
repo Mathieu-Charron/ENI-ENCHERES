@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bll.UserManager;
 import bo.User;
@@ -39,12 +40,14 @@ public class servletConnection extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("username"));
-		System.out.println(request.getParameter("password"));
-//		doGet(request, response);
-//		manager.authentication(getServletName(), getServletInfo());
-		request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
+		User user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
+		if(user != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+	        response.sendRedirect(request.getContextPath());
+		}else {
+			request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
+		}
 	}
 
 }
