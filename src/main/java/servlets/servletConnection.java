@@ -7,27 +7,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.UserManager;
+import bo.User;
+
 /**
  * Servlet implementation class servletConnection
  */
 @WebServlet("/Connection")
 public class servletConnection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    /*public servletConnection() {
-        super();
-        // TODO Auto-generated constructor stub
-    }*/
-
+	
+	private UserManager manager;
+	
+    public void init() throws ServletException{
+    	super.init();
+    	manager = UserManager.getInstance();
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		System.out.println(manager.authentication("johnDoe", "password123"));
+//		User user = new User("a", "a", "a", "a", "a", "a", "a", "a", 0, false, "test");
+//		user = manager.insertUser(user);
+//		user = new User(user.getUserId(),"a", "b", "c", "d", "e", "f", "g", "h", 0, false, "i");
+//		manager.updateUser(user);
 		request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
 	}
 
@@ -36,8 +40,10 @@ public class servletConnection extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		System.out.println(request.getParameter("username"));
+		System.out.println(request.getParameter("password"));
 //		doGet(request, response);
+//		manager.authentication(getServletName(), getServletInfo());
 		request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
 	}
 

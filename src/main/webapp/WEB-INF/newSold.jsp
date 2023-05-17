@@ -6,7 +6,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Nouvelle vente</title>
-		<link rel="css" href="css/newSold.css">
+		<link href="CSS/NewSold.css" rel="stylesheet">
 		<link rel="icon" href="favicon.jpg" />
 	</head>
 	<body>

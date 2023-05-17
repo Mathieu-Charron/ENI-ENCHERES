@@ -15,11 +15,11 @@
 		<form action="${pageContext.request.contextPath}/Connection" method="post">
 		<div>
 			<label for="username">Identifiant:</label>
-			<input type="text" id="username" name="username">
+			<input type="text" id="username" name="username" required>
 		</div>
 		<div>
 			<label for="password">Mot de passe:</label>
-			<input type="password" id="password" name="password">
+			<input type="password" id="password" name="password" required>
 		</div>
 		<div>
 			<input type="submit" value="Connexion">
