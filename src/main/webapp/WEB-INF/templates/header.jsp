@@ -8,13 +8,14 @@
 	<%@ include file="../../public/css/style.css"%>
 </style>
 <title>ENI ENCHERE - <%= request.getAttribute("title") %></title>
+<link rel="icon" href="<%= request.getContextPath() %>/public/assets/image/logo.png" />
 </head>
 <body>
 <nav class="header">
 	<div class="header-image">
 		<!-- <img src="../../assets/image/logo.png"> -->
 		<%-- <%@ include file="../../assets/image/logo.png" %> --%>
-		 <img src="<%= request.getContextPath() %>/assets/image/logo.png" alt="Nom de l'image">
+		 <img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="Nom de l'image">
 	</div>
 	<ul class ="header-page">
 		<li><a href="<%= request.getContextPath() %>">Enchères</a></li>
