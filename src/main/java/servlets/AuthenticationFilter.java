@@ -25,11 +25,11 @@ public class AuthenticationFilter implements Filter {
         String contextPath = httpRequest.getContextPath(); 
 
         String link = requestURI.substring(contextPath.length());
-        System.out.println(link);
+        
         if (httpRequest.getSession().getAttribute("user") == null 
         		&& !link.contains("Connection")
         		&& !link.equals("/")
-        		&& !link.contains("public")
+        		&& !link.contains("/public/")
         		&& !link.equals("/rest/bids/searchWithFilters")) {
         	
             httpResponse.sendRedirect(httpRequest.getContextPath());

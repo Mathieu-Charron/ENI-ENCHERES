@@ -43,7 +43,6 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 		
 		String sql= getRequestOnStringForSelectItemsByFilters(searchItemName,categoryId,isTypeBuy,filterCheck, user);
 		
-		System.out.println(sql);
 		try(Connection uneConnection= ConnectionProvider.getConnection();
 				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
 			int i = 0;
