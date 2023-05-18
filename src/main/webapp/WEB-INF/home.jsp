@@ -21,4 +21,27 @@
 		<li></li>
 	</ul>
 </div>
+
+<script type="text/javascript">
+	let urlParameters = "?searchItemName=e";
+	urlParameters+= "&categoryId=0";
+	urlParameters+= "&isTypeBuy=false";
+	urlParameters+= "&openBids=false";
+	urlParameters+= "&myBids=false";
+	urlParameters+= "&myWonBids=false";
+	urlParameters+= "&myCurrentSales=false";
+	urlParameters+= "&myNotStartedSales=false";
+	urlParameters+= "&myEndedSales=false";
+	fetch("/ENI-ENCHERES/rest/bids/searchWithFilters"+urlParameters, {
+	  method: 'GET',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+	})
+	  .then(response => response.json())
+	  .then(data => {
+	    console.log(data);
+	  })
+</script>
 <%@ include file="templates/footer.jsp"%>

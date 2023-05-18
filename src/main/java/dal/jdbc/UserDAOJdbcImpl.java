@@ -140,7 +140,7 @@ public class UserDAOJdbcImpl implements IUserDAO {
 			
 			while(rs.next()) {
 				int userId = rs.getInt("userId");
-				username = rs.getString("username").trim();
+				username = rs.getString("username");
 				String lastName = rs.getString("lastName");
 				String firstName = rs.getString("firstName");
 				String email = rs.getString("email");

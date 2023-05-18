@@ -49,6 +49,11 @@ public class User {
 		this.password = password;
 	}
 	
+	public User(int userId, String username) {
+		this.userId = userId;
+		this.username = username;
+	}
+	
 	
 	public int getUserId() {
 		return userId;

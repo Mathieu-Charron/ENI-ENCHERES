@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bll.BidManager;
 import bll.UserManager;
 import bo.User;
 
@@ -19,10 +23,12 @@ public class servletConnection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String title = "Connection";
 	private UserManager manager;
+	private BidManager manager2;
 	
     public void init() throws ServletException{
     	super.init();
     	manager = UserManager.getInstance();
+    	manager2 = BidManager.getInstance();
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,6 +39,7 @@ public class servletConnection extends HttpServlet {
 //		user = manager.insertUser(user);
 //		user = new User(user.getUserId(),"a", "b", "c", "d", "e", "f", "g", "h", 0, false, "i");
 //		manager.updateUser(user);
+//		System.out.println(manager2.SearchBidsWithFilters("Ipho", 1, true, new ArrayList<>()/*Arrays.asList("Valeur 1", "Valeur 2", "Valeur 3")*/,(User) request.getSession().getAttribute("user")));
 		request.setAttribute("title", title);
 		request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
 	}

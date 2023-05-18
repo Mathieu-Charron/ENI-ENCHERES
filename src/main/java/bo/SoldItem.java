@@ -1,29 +1,39 @@
 package bo;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class SoldItem {
     private int soldItemId;
     private String itemName;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int initialPrice;
     private int salePrice;
-    private User userId;
-    private Category categoryId;
+    private User seller;
+    private Category category;
     
-	public SoldItem(int itemId, String itemName, String description, Date startDate, Date endDate, int initialPrice,
-			int salePrice) {
-		super();
+//	public SoldItem(int itemId, String itemName, String description, LocalDate startDate, LocalDate endDate, int initialPrice,
+//			int salePrice) {
+//		super();
+//		this.soldItemId = itemId;
+//		this.itemName = itemName;
+//		this.description = description;
+//		this.startDate = startDate;
+//		this.endDate = endDate;
+//		this.initialPrice = initialPrice;
+//		this.salePrice = salePrice;
+//	}
+//	
+	public SoldItem(int itemId, String itemName, int salePrice, LocalDate endDate, User seller) {
 		this.soldItemId = itemId;
 		this.itemName = itemName;
-		this.description = description;
-		this.startDate = startDate;
 		this.endDate = endDate;
-		this.initialPrice = initialPrice;
 		this.salePrice = salePrice;
+		this.seller = seller;
 	}
+	
 	public int getItemId() {
 		return soldItemId;
 	}
@@ -42,16 +52,16 @@ public class SoldItem {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 	public int getInitialPrice() {
@@ -67,22 +77,23 @@ public class SoldItem {
 		this.salePrice = salePrice;
 	}
 	public Category getCategory() {
-		return categoryId;
+		return category;
 	}
 	public void setCategory(Category category) {
-		this.categoryId = category;
+		this.category = category;
 	}
-	public User getUser() {
-		return userId;
+	public User getSeller() {
+		return seller;
 	}
-	public void setUser(User user) {
-		this.userId = user;
+	public void setSeller(User seller) {
+		this.seller = seller;
 	}
+	
 	@Override
 	public String toString() {
 		return "SoldItem [itemId=" + soldItemId + ", itemName=" + itemName + ", description=" + description + ", startDate="
 				+ startDate + ", endDate=" + endDate + ", initialPrice=" + initialPrice + ", salePrice=" + salePrice
-				+ ", user=" + userId + ", category=" + categoryId + "]";
+				+ ", seller=" + seller + ", category=" + category + "]";
 	}
 	
 }
