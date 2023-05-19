@@ -39,7 +39,7 @@ public class servletNewSold extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		request.getRequestDispatcher("/WEB-INF/newSold.jsp").forward(request, response);
+        doGet(request, response);
 	}
 
 }
