@@ -64,6 +64,8 @@
 			<c:if test="${not empty sessionScope.user}">
 		    <input class="button-style-1" type="button" value="Supprimer mon compte">
 		    </c:if>
+		    
+		    
 		    <c:if test="${empty sessionScope.user}">
 		    <input class="button-style-1" type="submit" value="Créer">
 		    </c:if>
@@ -73,6 +75,12 @@
 		    </c:if>
 		    </div>
 		</form>
+		<c:if test="${not empty sessionScope.user}">
+    			<form action="${pageContext.request.contextPath}/EditProfile" method="post">
+        			<input type="hidden" name="action" value="delete">
+        			<input class="button-style-1" type="submit" value="Supprimer mon compte">
+    			</form>
+			</c:if>
 	</div>
 	</div>
 <%@ include file="templates/footer.jsp"%>
