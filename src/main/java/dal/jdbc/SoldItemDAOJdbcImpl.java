@@ -125,4 +125,10 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 		return request;
 	}
 
+	@Override
+	public SoldItem selectById(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

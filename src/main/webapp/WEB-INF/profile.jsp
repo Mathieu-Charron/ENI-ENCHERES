@@ -8,57 +8,47 @@
 		<form action="${pageContext.request.contextPath}/Profile">
 	
 			<div class="form-element">
-			<label for="username">Pseudo :</label>
-			<input type="text" id="username" name="username">
-			</div>
+                <label for="username">Pseudo :</label>
+                <label id="username" for="username">${user.username}</label>
+            </div>
+            
+            <div class="form-element">
+                <label for="lastName">Nom :</label>
+                <label id="lastName" for="lastName">${user.lastName}</label>
+            </div>
+            
+            <div class="form-element">
+                <label for="firstName">Prénom :</label>
+                <label id="firstName" for="firstName">${user.firstName}</label>
+            </div>
+            
+            <div class="form-element">
+                <label for="email">Email :</label>
+                <label id="email" for="email">${user.email}</label>
+            </div>
+            
+            <div class="form-element">
+                <label for="phone">Téléphone :</label>
+                <label id="phone" for="phone">${user.phone}</label>
+            </div>
+            
+            <div class="form-element">
+                <label for="street">Rue :</label>
+                <label id="street" for="street">${user.street}</label>
+            </div>
+        
+            <div class="form-element">
+                <label for="postalCode">Code Postal :</label>
+                <label id="postalCode" for="postalCode">${user.postalCode}</label>
+            </div>
+        
+            <div class="form-element">
+                <label for="city">Ville :</label>
+                <label id="city" for="city">${user.city}</label>
+            </div>
 			
-			<div class="form-element">
-			<label for="lastName">Nom :</label>
-			<input type="text" id="lastName" name="lastName">
-			</div>
-			
-			<div class="form-element">
-			<label for="firstName">Prenom :</label>
-			<input type="text" id="firstName" name="firstName">
-			</div>
-			
-			<div class="form-element">
-			<label for="email">Email :</label>
-			<input type="email" id="email" name="email">
-			</div>
-			
-			<div class="form-element">
-			<label for="phone">Téléphone :</label>
-			<input type="tel" id="phone" name="phone">
-			</div>
-			
-			<div class="form-element">
-			<label for="street">Rue :</label>
-			<input type="text" id="street" name="street">
-			</div>
-		
-			<div class="form-element">
-			<label for="postalCode">Code Postal :</label>
-			<input type="text" id="postalCode" name="postalCode">
-			</div>
-		
-			<div class="form-element">
-			<label for="city">Ville :</label>
-			<input type="text" id="city" name="city">
-			</div>
-		
-			<div class="form-element">
-			<label for="password">Mot de passe :</label>
-			<input type="password" id="password" name="password">
-			</div>
-		
-			<div class="form-element">
-			<label for="confirmationPassword">Confirmation du mot de passe :</label>
-			<input type="password" id="confirmationPassword" name="confirmationPassword" required>
-			</div>
-			
-			<input type="submit" value="Enregistrer">
-		    <input type="button" value="Annuler">
+		    <!-- <input type="button" value="Modifier"> -->
+		    <a href="<%= request.getContextPath() %>/EditProfile">Modifier</a>
 		</form>
 	</div>
 	</div>

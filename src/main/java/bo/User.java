@@ -14,6 +14,9 @@ public class User {
 	private int credit;
 	private boolean administrator;
 	
+
+	
+	
 	public User(String username, String lastName, String firstName, String email, String phone,
 			String street, String postalCode, String city, int credit, boolean administrator) {
 		super();
@@ -30,10 +33,27 @@ public class User {
 	}
 	
 	public User(int userId, String username, String lastName, String firstName, String email, String phone,
+			String street, String postalCode, String city, int credit) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.phone = phone;
+		this.street = street;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.credit = credit;
+	}
+	
+	public User(int userId, String username, String lastName, String firstName, String email, String phone,
 			String street, String postalCode, String city, int credit, boolean administrator) {
 		this(username,lastName,firstName,email,phone,street,postalCode,city,credit,administrator);
 		this.userId = userId;
 	}
+	
+	
 	
 	
 

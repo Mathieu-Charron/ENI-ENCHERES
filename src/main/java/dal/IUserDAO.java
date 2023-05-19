@@ -6,4 +6,6 @@ public interface IUserDAO extends ICRUDDAO<User> {
 
 	
 	User authenticate(String username, String password) throws DALException;
+	
+	
 }

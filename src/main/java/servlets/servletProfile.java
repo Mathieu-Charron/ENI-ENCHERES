@@ -7,38 +7,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class servletProfile
- */
+import bo.User;
+import dal.DALException;
+import dal.IUserDAO;
+import dal.jdbc.UserDAOJdbcImpl;
+
 @WebServlet("/Profile")
 public class servletProfile extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private String title = "Profile";
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletProfile() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+    private String title = "Profile";
+    private IUserDAO userDAO;
+
+    public void init() throws ServletException {
+        super.init();
+        userDAO = new UserDAOJdbcImpl();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setAttribute("title", title);
-		request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
-		request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
-	}
+        try {
+            if (user != null) {
+                int userId = user.getUserId();
 
+                User userProfile = userDAO.selectById(userId);
+
+                request.setAttribute("user", userProfile);
+            }
+
+            request.setAttribute("title", title);
+            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+        } catch (DALException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
 }
