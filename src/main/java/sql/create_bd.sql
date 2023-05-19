@@ -56,7 +56,6 @@ CREATE TABLE SOLD_ITEMS (
 	startDate DATE NOT NULL,
 	endDate DATE NOT NULL,
 	initialPrice INTEGER,
-	salePrice INTEGER,
 	userId INTEGER NOT NULL,
 	categoryId INTEGER NOT NULL
 )
@@ -73,9 +72,9 @@ ADD CONSTRAINT sold_items_user_fk FOREIGN KEY (userId) REFERENCES USERS (userId)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 
-INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, salePrice, userId, categoryId)
-VALUES ('iPhone X', 'Used iPhone X in good condition', '2023-05-01', '2023-05-10', 500, 450, 1, 1),
-('Leather Jacket', 'Black leather jacket, size M', '2023-05-03', '2023-05-08', 100, 80, 2, 2);
+INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
+VALUES ('iPhone X', 'Used iPhone X in good condition', '2023-05-01', '2023-05-10', 450, 1, 1),
+('Leather Jacket', 'Black leather jacket, size M', '2023-05-03', '2023-05-08', 80, 2, 2);
 
 
 /*****************************

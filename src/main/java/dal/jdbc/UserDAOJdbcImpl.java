@@ -177,4 +177,10 @@ public class UserDAOJdbcImpl implements IUserDAO {
         
         return null;
     }
+
+	@Override
+	public User selectById(int id) throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

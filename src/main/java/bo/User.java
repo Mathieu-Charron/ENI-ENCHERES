@@ -109,6 +109,10 @@ public class User {
 	public int getCredit() {
 		return credit;
 	}
+	
+	public void addCredit(int credit) {
+		this.credit = credit;
+	}
 
 
 	public boolean getAdministrator() {

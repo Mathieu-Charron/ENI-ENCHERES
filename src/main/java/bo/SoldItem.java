@@ -10,9 +10,11 @@ public class SoldItem {
     private LocalDate startDate;
     private LocalDate endDate;
     private int initialPrice;
-    private int salePrice;
     private User seller;
     private Category category;
+    private User buyer;
+    private Integer bestOffer;
+    private Withdrawal withdrawal;
     
 //	public SoldItem(int itemId, String itemName, String description, LocalDate startDate, LocalDate endDate, int initialPrice,
 //			int salePrice) {
@@ -26,13 +28,25 @@ public class SoldItem {
 //		this.salePrice = salePrice;
 //	}
 //	
-	public SoldItem(int itemId, String itemName, int salePrice, LocalDate endDate, User seller) {
+	public SoldItem(int itemId, String itemName, int initialPrice, LocalDate endDate, User seller) {
 		this.soldItemId = itemId;
 		this.itemName = itemName;
 		this.endDate = endDate;
-		this.salePrice = salePrice;
+		this.initialPrice = initialPrice;
 		this.seller = seller;
 	}
+	
+	public SoldItem(int itemId, String itemName, int initialPrice, 
+			LocalDate endDate, User seller, String description, 
+			Category category, User buyer, Integer betterOffer,
+			Withdrawal widWithdrawal) {
+		this(itemId,itemName,initialPrice,endDate,seller);
+		this.description = description;
+		this.category = category;
+		this.buyer = buyer;
+		this.bestOffer = betterOffer;
+		this.withdrawal = widWithdrawal;
+	}	
 	
 	public int getItemId() {
 		return soldItemId;
@@ -70,12 +84,6 @@ public class SoldItem {
 	public void setInitialPrice(int initialPrice) {
 		this.initialPrice = initialPrice;
 	}
-	public int getSalePrice() {
-		return salePrice;
-	}
-	public void setSalePrice(int salePrice) {
-		this.salePrice = salePrice;
-	}
 	public Category getCategory() {
 		return category;
 	}
@@ -89,10 +97,23 @@ public class SoldItem {
 		this.seller = seller;
 	}
 	
+	
+	public User getBuyer() {
+		return buyer;
+	}
+
+	public Integer getBestOffer() {
+		return bestOffer;
+	}
+
+	public Withdrawal getWithdrawal() {
+		return withdrawal;
+	}
+
 	@Override
 	public String toString() {
 		return "SoldItem [itemId=" + soldItemId + ", itemName=" + itemName + ", description=" + description + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", initialPrice=" + initialPrice + ", salePrice=" + salePrice
+				+ startDate + ", endDate=" + endDate + ", initialPrice=" + initialPrice
 				+ ", seller=" + seller + ", category=" + category + "]";
 	}
 	
