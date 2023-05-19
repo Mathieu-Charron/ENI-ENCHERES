@@ -48,7 +48,11 @@
             </div>
 			
 		    <!-- <input type="button" value="Modifier"> -->
-		    <a href="<%= request.getContextPath() %>/EditProfile">Modifier</a>
+<%-- 		    <a class="button-style-1" href="<%= request.getContextPath() %>/EditProfile">Modifier</a>
+ --%>		    <c:if test="${sessionScope.user.userId eq param.userId}">
+    			<a class="button-style-1" href="<%= request.getContextPath() %>/EditProfile">Modifier</a>
+			</c:if>
+		    
 		</form>
 	</div>
 	</div>

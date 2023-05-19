@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.UserManager;
 import bo.User;
 import dal.DALException;
 import dal.IUserDAO;
@@ -16,31 +17,28 @@ import dal.jdbc.UserDAOJdbcImpl;
 public class servletProfile extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String title = "Profile";
-    private IUserDAO userDAO;
+    private UserManager manager;
 
     public void init() throws ServletException {
         super.init();
-        userDAO = new UserDAOJdbcImpl();
+        manager = UserManager.getInstance();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
 
-        try {
-            if (user != null) {
-                int userId = user.getUserId();
+        if (request.getParameter("userId") != null) {
 
-                User userProfile = userDAO.selectById(userId);
+		    User userProfile = manager.selectById(Integer.valueOf(request.getParameter("userId")));
 
-                request.setAttribute("user", userProfile);
-            }
+		    request.setAttribute("user", userProfile);
 
-            request.setAttribute("title", title);
-            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
-        } catch (DALException e) {
-            e.printStackTrace();
-        }
+			request.setAttribute("title", title);
+			request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+		}else {
+	        response.sendRedirect(request.getContextPath());
+		}
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

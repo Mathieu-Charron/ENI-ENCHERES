@@ -29,7 +29,7 @@ public class AuthenticationFilter implements Filter {
         if (httpRequest.getSession().getAttribute("user") == null 
         		&& !link.contains("Connection")
         		&& !link.equals("/")
-        		&& !link.contains("EditProfile")
+        		&& !link.contains("Register")
         		&& !link.contains("/public/")
         		&& !link.equals("/rest/bids/searchWithFilters")) {
         	

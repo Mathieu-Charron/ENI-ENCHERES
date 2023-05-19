@@ -15,7 +15,7 @@
 			<input type="password" id="password" name="password" required placeholder="Mot de passe">
 		</div>
 		<div>
-			<input type="submit" value="Connexion">
+			<input type="submit" value="Connexion" class="button-style-1">
 		</div>
 		<!-- <div>
 			<div class="section-password">
@@ -31,6 +31,6 @@
 	
 		<br>
 		<p>${error}</p>
-		<a href="<%= request.getContextPath() %>/EditProfile">Créer un compte</a>
+		<a href="<%= request.getContextPath() %>/Register">Créer un compte</a>
 	</div>
 <%@ include file="templates/footer.jsp"%>

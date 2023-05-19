@@ -30,6 +30,16 @@ public class UserManager /*SINGLETON*/ {
 		return null;
 	}
 	
+	public User selectById(int id) {
+		try {
+			return userDAO.selectById(id);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void deleteUser(int id) {
 		try {
 			userDAO.delete(id);

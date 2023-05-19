@@ -23,9 +23,10 @@
 	border-bottom: 1px solid #000000;
 }
 .container-connection input[type=text]:focus-visible , .container-connection input[type=password]:focus-visible {
-	border-bottom: 1px solid #1a73e8;
+	border-bottom: 1px solid #f8ab3f;
+	transition: 0.25s;
 }
-.container-connection input[type=submit] {
+/* .container-connection input[type=submit] {
 	width: 60%;
 	padding: 15px;
     border: none;
@@ -39,7 +40,7 @@
     background: white;
     color: #f8ab3f;
     transition: 0.25s;
-}
+} */
 .container-connection > a {
 	display: flex;
     width: 225px;
