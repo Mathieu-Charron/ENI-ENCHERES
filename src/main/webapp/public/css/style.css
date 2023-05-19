@@ -38,7 +38,7 @@ li {
     width: 0%;
     position: absolute;
     height: 2px;
-    background: #1a73e8;
+    background: #f8ab3f;
     bottom: -5px;
     transition: 0.25s
 }
@@ -51,4 +51,20 @@ li {
 }
 .header-image img {
 	width: 100%;
+}
+
+.button-style-1 {
+	padding: 15px 45px;
+    border: none;
+    cursor: pointer;
+    background: #f8ab3f;
+    color: #ffffff;
+    border: 2px solid #f8ab3f;
+    transition: 0.25s;
+    margin: 25px auto 0px auto;
+}
+.button-style-1:hover {
+	background: white;
+    color: #f8ab3f;
+    transition: 0.25s;
 }

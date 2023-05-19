@@ -1,16 +1,35 @@
-.container-profile {
-	max-width: 725px;
-    margin: auto;
-    padding: 0px 50px;
+.container-profile h1, .container-edit-profile h1 {
+	text-align: center;
 }
-.container-profile form {
+.container-profile, .container-edit-profile {
+	max-width: 500px;
+    margin: 55px auto;
+    padding: 20px 120px;
+    box-shadow: 0px 5px 15px 2px #a7a7a7;
+}
+.container-profile form, .container-edit-profile form {
 	display: flex;
     flex-wrap: wrap;
 }
-.container-profile form .form-element {
+.container-edit-profile form .form-element {
 	width: 50%;
 	display: flex;
+	margin: 15px 0px;
 }
-.container-profile form .form-element label, .container-profile form .form-element input {
+.container-profile form .form-element {
+	width: 100%;
+	display: flex;
+	margin: 15px 0px;
+}
+.container-edit-profile form .form-element label, .container-profile form .form-element input {
 	width: 50%;
+}
+.container-profile form .form-element label {
+	width: 50%;
+}
+.container-profile form .form-element input {
+	width: 75%;
+}
+.container-edit-profile .profile-button {
+	margin: 20px auto;
 }

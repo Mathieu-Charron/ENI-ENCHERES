@@ -7,38 +7,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class servletProfile
- */
+import bll.UserManager;
+import bo.User;
+import dal.DALException;
+import dal.IUserDAO;
+import dal.jdbc.UserDAOJdbcImpl;
+
 @WebServlet("/Profile")
 public class servletProfile extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private String title = "Profile";
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletProfile() {
-        super();
-        // TODO Auto-generated constructor stub
+    private static final long serialVersionUID = 1L;
+    private String title = "Profile";
+    private UserManager manager;
+
+    public void init() throws ServletException {
+        super.init();
+        manager = UserManager.getInstance();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setAttribute("title", title);
-		request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
-		request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
-	}
+        if (request.getParameter("userId") != null) {
 
+		    User userProfile = manager.selectById(Integer.valueOf(request.getParameter("userId")));
+
+		    request.setAttribute("user", userProfile);
+
+			request.setAttribute("title", title);
+			request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+		}else {
+	        response.sendRedirect(request.getContextPath());
+		}
+
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

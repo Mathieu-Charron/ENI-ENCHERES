@@ -26,7 +26,7 @@
 		<li><a href="<%= request.getContextPath() %>/NewSold">Vendre un article</a></li>
 		</c:if>
 		<c:if test="${not empty sessionScope.user}">
-		<li><a href="<%= request.getContextPath() %>/Profile">Mon profil</a></li>
+		<li><a href="<%= request.getContextPath() %>/Profile?userId=${sessionScope.user.userId}">Mon profil</a></li>
 		</c:if>
 		<c:if test="${not empty sessionScope.user}">
 		<li><a href="<%= request.getContextPath() %>/Logout">Déconnexion</a></li>

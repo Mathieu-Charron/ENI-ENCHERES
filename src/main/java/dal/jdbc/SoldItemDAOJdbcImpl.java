@@ -252,7 +252,6 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage());
-//			throw new RuntimeException(e);
 		}
 	}
 

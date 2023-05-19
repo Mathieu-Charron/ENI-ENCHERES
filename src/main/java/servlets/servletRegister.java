@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class servletNewSold
+ * Servlet implementation class servletRegister
  */
-@WebServlet("/NewSold")
-public class servletNewSold extends HttpServlet {
+@WebServlet("/Register")
+public class servletRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String title = "Nouvelle vente";
+	private String title = "Register";
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletNewSold() {
+    public servletRegister() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +26,11 @@ public class servletNewSold extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setAttribute("title", title);
-		request.getRequestDispatcher("/WEB-INF/newSold.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request, response);
 	}
 
 	/**
@@ -38,8 +38,7 @@ public class servletNewSold extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-        doGet(request, response);
+		doGet(request, response);
 	}
 
 }

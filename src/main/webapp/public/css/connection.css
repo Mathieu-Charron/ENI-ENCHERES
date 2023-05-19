@@ -23,23 +23,24 @@
 	border-bottom: 1px solid #000000;
 }
 .container-connection input[type=text]:focus-visible , .container-connection input[type=password]:focus-visible {
-	border-bottom: 1px solid #1a73e8;
+	border-bottom: 1px solid #f8ab3f;
+	transition: 0.25s;
 }
-.container-connection input[type=submit] {
+/* .container-connection input[type=submit] {
 	width: 60%;
 	padding: 15px;
     border: none;
     cursor: pointer;
-    background: #1a73e8;
+    background: #f8ab3f;
     color: #ffffff;
-    border: 2px solid #1a73e8;
+    border: 2px solid #f8ab3f;
     transition: 0.25s;
 }
 .container-connection input[type=submit]:hover {
     background: white;
-    color: #1a73e8;
+    color: #f8ab3f;
     transition: 0.25s;
-}
+} */
 .container-connection > a {
 	display: flex;
     width: 225px;
@@ -48,6 +49,11 @@
     justify-content: center;
     padding: 20px 0px;
     background: #ffffff;
+    color: #f8ab3f;
+    transition: 0.25s;
+}
+.container-connection > a:hover {
+	color: #664d2a;
 }
 .container-connection .section-password {
 	width: 50%;

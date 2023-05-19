@@ -56,7 +56,7 @@ CREATE TABLE SOLD_ITEMS (
 	startDate DATE NOT NULL,
 	endDate DATE NOT NULL,
 	initialPrice INTEGER,
-	userId INTEGER NOT NULL,
+	userId INTEGER,
 	categoryId INTEGER NOT NULL
 )
 
@@ -69,10 +69,11 @@ ON UPDATE NO ACTION
 
 ALTER TABLE SOLD_ITEMS
 ADD CONSTRAINT sold_items_user_fk FOREIGN KEY (userId) REFERENCES USERS (userId)
-ON DELETE NO ACTION
+ON DELETE SET NULL
 ON UPDATE NO ACTION
 
 INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
+
 VALUES ('iPhone X', 'Used iPhone X in good condition', '2023-05-01', '2023-05-10', 450, 1, 1),
 ('Leather Jacket', 'Black leather jacket, size M', '2023-05-03', '2023-05-08', 80, 2, 2);
 
@@ -106,14 +107,14 @@ CREATE TABLE BIDS (
 	bidDate DATETIME NOT NULL,
 	bidAmount INTEGER NOT NULL,
 	soldItemId INTEGER NOT NULL,
-	userId INTEGER NOT NULL
+	userId INTEGER
 )
 
 ALTER TABLE BIDS ADD CONSTRAINT bid_pk PRIMARY KEY (bidId)
 
 ALTER TABLE BIDS
 ADD CONSTRAINT bid_user_fk FOREIGN KEY (userId) REFERENCES USERS (userId)
-ON DELETE NO ACTION
+ON DELETE SET NULL
 ON UPDATE NO ACTION
 
 ALTER TABLE BIDS

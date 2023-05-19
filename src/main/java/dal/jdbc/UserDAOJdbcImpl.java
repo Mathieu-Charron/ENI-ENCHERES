@@ -13,6 +13,8 @@ import dal.DALException;
 import dal.IUserDAO;
 
 public class UserDAOJdbcImpl implements IUserDAO {
+	
+	private static final String SELECT_BY_ID =	"select userID, username, lastname, firstname, email, phone, street, postalCode, city FROM USERS where userID=?";
 
 	@Override
 	public User insert(User user) throws DALException {
@@ -180,7 +182,34 @@ public class UserDAOJdbcImpl implements IUserDAO {
 
 	@Override
 	public User selectById(int id) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+	    String sql = "SELECT userID, username, lastname, firstname, email, phone, street, postalCode, city, credit FROM USERS WHERE userID=?";
+	    
+	    try (Connection uneConnection = ConnectionProvider.getConnection();
+	         PreparedStatement unStmt = uneConnection.prepareStatement(sql);) {
+	        
+	        unStmt.setInt(1, id);
+	        
+	        ResultSet rs = unStmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            int userId = rs.getInt("userID");
+	            String username = rs.getString("username");
+	            String lastName = rs.getString("lastname");
+	            String firstName = rs.getString("firstname");
+	            String email = rs.getString("email");
+	            String phone = rs.getString("phone");
+	            String street = rs.getString("street");
+	            String postalCode = rs.getString("postalCode");
+	            String city = rs.getString("city");
+	            int credit = rs.getInt("credit");
+	            
+				return new User(userId, username, lastName, firstName, email, phone, street, postalCode, city, credit);
+	        }
+	        
+	        return null;
+	    } catch (SQLException e) {
+	        throw new DALException(e.getMessage());
+	    }
 	}
+
 }
