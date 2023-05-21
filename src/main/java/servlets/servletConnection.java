@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bll.BLLException;
 import bll.BidManager;
 import bll.UserManager;
 import bo.User;
@@ -48,7 +49,13 @@ public class servletConnection extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
+		User user = null;
+		try {
+			user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);

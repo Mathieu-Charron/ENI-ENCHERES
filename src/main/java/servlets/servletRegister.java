@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.UserManager;
+
 /**
  * Servlet implementation class servletRegister
  */
@@ -14,21 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 public class servletRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String title = "Register";
+	private UserManager manager;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletRegister() {
-        super();
-        // TODO Auto-generated constructor stub
+    public void init() throws ServletException {
+        super.init();
+        manager = UserManager.getInstance();
     }
-
+    
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		request.setAttribute("title", title);
 		request.getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request, response);
 	}
@@ -37,7 +37,7 @@ public class servletRegister extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

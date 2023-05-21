@@ -9,6 +9,8 @@ public class UserManager /*SINGLETON*/ {
 	private IUserDAO userDAO;
 	private static UserManager instance;
 	
+	private static final String ERROR_BDD = "Une erreur est survenue";
+	
 	private UserManager() {
 		this.userDAO=DAOFactory.getUserDAO();
 	}
@@ -20,51 +22,122 @@ public class UserManager /*SINGLETON*/ {
 		return instance;
 	}
 	
-	public User authentication(String username,String password) {
+	public User authentication(String username,String password) throws BLLException {
 		try {
 			return userDAO.authenticate(username, password);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
 		}
-		return null;
 	}
 	
-	public User selectById(int id) {
+	public User selectById(int id) throws BLLException {
 		try {
 			return userDAO.selectById(id);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
 		}
-		return null;
 	}
 	
-	public void deleteUser(int id) {
+	public void deleteUser(int id) throws BLLException {
 		try {
 			userDAO.delete(id);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
 		}
 	}
 	
-	public void updateUser(User user) {
+	public User updateUser (
+			User user,
+			String username,
+			String lastName,
+			String firstName,
+			String email,
+			String phone,
+			String street,
+			String postalCode,
+			String city,
+			String oldPassword,
+			String password,
+			String confirmationPassword) throws BLLException {
+		user = null;
+		//verif authenticate with oldUsername && oldPassword
+		
+		//verif not null values
+		
+		//verif username > 3 characters
+		
+		//verif regex email
+		
+		//verif regex phone
+		
+		//verif password = confirmPassword
+		
+		//verif regex password
+		
+		//verif alphaNumeric username
+		
+		//FIRST THROW IF errorMessage is not empty
+		
+		//verif unique username && email in the BDD
+		
+		//SECOND THROW IF errorMessage is not empty
+		
+		
 		try {
-			userDAO.update(user);
+			userDAO.update(new User(username, lastName, firstName, email, phone, street, postalCode, city, 100, false, password));
+			user = userDAO.authenticate(username, confirmationPassword);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			throw new BLLException(ERROR_BDD);
+
 		}
+		return user;
 	}
 	
-	public User insertUser(User user) {
+	public User insertUser(
+			String username,
+			String lastName,
+			String firstName,
+			String email,
+			String phone,
+			String street,
+			String postalCode,
+			String city,
+			String password,
+			String confirmationPassword) throws BLLException {
+		
+		String errorMessage = "";
+		
+		//verif not null values
+		
+		//verif username > 3 characters
+		
+		//verif regex email
+		
+		//verif regex phone
+		
+		//verif password = confirmPassword
+		
+		//verif regex password
+		
+		//verif alphaNumeric username
+		
+		//FIRST THROW IF errorMessage is not empty
+		
+		//verif unique username && email in the BDD
+		
+		//SECOND THROW IF errorMessage is not empty
 		try {
-			return userDAO.insert(user);
+			return userDAO.insert(new User(username, lastName, firstName, email, phone, street, postalCode, city, 100, false, password));
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			throw new BLLException(ERROR_BDD);
 		}
-		return null;
 	}
 }

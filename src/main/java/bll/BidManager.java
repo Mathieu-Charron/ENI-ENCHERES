@@ -14,6 +14,9 @@ public class BidManager {
 	private ISoldItemDAO soldItemDAO;
 	private static BidManager instance;
 	
+	private static final String ERROR_BDD = "Une erreur est survenue";
+
+	
 	private BidManager() {
 		this.soldItemDAO = DAOFactory.getSoldItemDAO();
 	}
@@ -30,26 +33,24 @@ public class BidManager {
 			int categoryId,
 			boolean isTypeBuy,
 			List<String> filterCheck,
-			User user){
+			User user) throws BLLException{
 				
 		try {
 			return soldItemDAO.selectItemsByFilters(searchItemName, categoryId, isTypeBuy, filterCheck,user);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
 		}
-		
-		return null;
 	}
 	
-	public List<Category> getCategories(){
+	public List<Category> getCategories() throws BLLException{
 		try {
 			return soldItemDAO.selectAllCategories();
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
+
 		}
 		
-		return null;
 	}
 }

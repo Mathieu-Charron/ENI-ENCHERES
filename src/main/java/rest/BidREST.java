@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 
+import bll.BLLException;
 import bll.BidManager;
 import bo.SoldItem;
 import bo.User;
@@ -54,6 +55,10 @@ public class BidREST {
 			if(myEndedSales == true) filterCheck.add("myEndedSales");
 		}
 
-		return mgt.SearchBidsWithFilters(searchItemName, categoryId, isTypeBuy, filterCheck, (User) httpRequest.getSession().getAttribute("user"));
+		try {
+			return mgt.SearchBidsWithFilters(searchItemName, categoryId, isTypeBuy, filterCheck, (User) httpRequest.getSession().getAttribute("user"));
+		} catch (BLLException e) {
+			return null;
+		}
 	}
 }

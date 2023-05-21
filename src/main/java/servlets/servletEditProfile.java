@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.BLLException;
 import bll.UserManager;
 import bo.User;
 
@@ -38,10 +39,7 @@ public class servletEditProfile extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        doGet(request, response);
-//	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String action = request.getParameter("action");
 	    if (action != null && action.equals("delete")) {
@@ -49,11 +47,18 @@ public class servletEditProfile extends HttpServlet {
 	        if (currentUser != null) {
 	            int userId = currentUser.getUserId();
 	            UserManager userManager = UserManager.getInstance();
-	            userManager.deleteUser(userId);
+	            try {
+					userManager.deleteUser(userId);
+		            // Déconnecter l'utilisateur et rediriger vers une page appropriée
+		            request.getSession().invalidate();
+		            response.sendRedirect(request.getContextPath());
+
+				} catch (BLLException e) {
+					e.printStackTrace();
+		            response.sendRedirect(request.getContextPath() + "/EditProfile");
+
+				}
 	            
-	            // Déconnecter l'utilisateur et rediriger vers une page appropriée
-	            request.getSession().invalidate();
-	            response.sendRedirect(request.getContextPath() + "/Connection");
 	        } else {
 	            // L'utilisateur n'est pas connecté, gérer l'erreur ou la redirection
 	            response.sendRedirect(request.getContextPath() + "/Connection");

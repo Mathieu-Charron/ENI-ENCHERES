@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.BLLException;
 import bll.UserManager;
 import bo.User;
 import dal.DALException;
@@ -29,12 +30,26 @@ public class servletProfile extends HttpServlet {
 
         if (request.getParameter("userId") != null) {
 
-		    User userProfile = manager.selectById(Integer.valueOf(request.getParameter("userId")));
+		    User user = null;
+			try {
+				user = manager.selectById(Integer.valueOf(request.getParameter("userId")));
+				
+				if(user == null) {
+					response.sendRedirect(request.getContextPath());
+				} else {
+				    request.setAttribute("user", user);
 
-		    request.setAttribute("user", userProfile);
-
-			request.setAttribute("title", title);
-			request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+				    request.setAttribute("title", title);
+				    request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+				}
+			} catch (NumberFormatException e) {
+				
+		        response.sendRedirect(request.getContextPath());
+		        
+			}catch(BLLException e){
+				e.printStackTrace();
+		        response.sendRedirect(request.getContextPath());
+			}
 		}else {
 	        response.sendRedirect(request.getContextPath());
 		}

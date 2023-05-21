@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bll.BLLException;
 import bll.BidManager;
 import bll.UserManager;
 
@@ -30,7 +31,11 @@ public class servletHome extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setAttribute("categories", manager.getCategories());
+		try {
+			request.setAttribute("categories", manager.getCategories());
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("title", title);
 		
 		request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
