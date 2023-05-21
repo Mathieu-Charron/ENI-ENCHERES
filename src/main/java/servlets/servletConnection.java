@@ -52,16 +52,11 @@ public class servletConnection extends HttpServlet {
 		User user = null;
 		try {
 			user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(user != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 	        response.sendRedirect(request.getContextPath());
-		}else {
-            request.setAttribute("error", "Identifiants incorrects");
+		} catch (BLLException e) {
+            request.setAttribute("error", e.getSimpleMessage());
             doGet(request, response);
 		}
 	}

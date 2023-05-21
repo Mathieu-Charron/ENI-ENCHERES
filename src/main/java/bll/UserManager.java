@@ -10,6 +10,7 @@ public class UserManager /*SINGLETON*/ {
 	private static UserManager instance;
 	
 	private static final String ERROR_BDD = "Une erreur est survenue";
+	private static final String INCORRECT_CREDENTIALS = "Identifiants incorrects";
 	
 	private UserManager() {
 		this.userDAO=DAOFactory.getUserDAO();
@@ -24,7 +25,13 @@ public class UserManager /*SINGLETON*/ {
 	
 	public User authentication(String username,String password) throws BLLException {
 		try {
-			return userDAO.authenticate(username, password);
+			User user = userDAO.authenticate(username, password);
+			
+			if(user == null) {
+				throw new BLLException(INCORRECT_CREDENTIALS);
+			}
+			
+			return user;
 		} catch (DALException e) {
 			e.printStackTrace();
 			throw new BLLException(ERROR_BDD);

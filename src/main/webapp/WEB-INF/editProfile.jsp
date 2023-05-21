@@ -6,7 +6,7 @@
 	<div class="container-edit-profile">
 	<h1>Mon profil</h1>
 	<div class="form">
-		<form action="${pageContext.request.contextPath}/EditProfile">
+		<form method="POST" action="${pageContext.request.contextPath}${servletPath}">
 	
 			<div class="form-element">
                 <label for="username">Pseudo :</label>
