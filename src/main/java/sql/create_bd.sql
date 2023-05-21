@@ -81,17 +81,17 @@ ON UPDATE NO ACTION
 
 INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
 
-VALUES ('iPhone X', 'Used iPhone X in good condition', '2023-05-01', '2023-05-10', 450, 1, 1),
+VALUES ('iPhone X', 'Used iPhone X in good condition', CAST( GETDATE() AS Date ) , '2023-05-10', 450, 1, 1),
 ('Leather Jacket', 'Black leather jacket, size M', '2023-05-03', '2023-05-08', 80, 2, 2),
 ('Montre intelligente', 'Montre intelligente neuve avec fonctionnalités de suivi fitness', '2023-06-15', '2023-06-20', 200, 3, 1),
 ('Lunettes de soleil de designer', 'Lunettes de soleil élégantes avec protection UV', '2023-06-10', '2023-06-15', 150, 4, 2),
 ('Vinyles vintage', 'Collection de vinyles classiques', '2023-06-01', '2023-06-07', 100, 5, 3),
 ('Appareil photo numérique', 'Appareil photo numérique haute résolution avec plusieurs objectifs', '2023-06-05', '2023-06-12', 300, 6, 1),
 ('Écouteurs sans fil', 'Écouteurs Bluetooth avec technologie de réduction du bruit', '2023-06-08', '2023-06-14', 120, 7, 2),
-('Console de jeu', 'Dernière console de jeu avec des graphismes avancés', '2023-06-11', '2023-06-18', 400, 8, 3),
+('Console de jeu', 'Dernière console de jeu avec des graphismes avancés', '2023-05-11', '2023-06-18', 400, 8, 3),
 ('Équipement de fitness', 'Ensemble complet d''équipement d''entraînement pour la maison', '2023-06-20', '2023-06-26', 250, 9, 1),
 ('Sac à main de designer', 'Sac à main de luxe en cuir noir', '2023-06-13', '2023-06-19', 350, 10, 2),
-('Montre ancienne', 'Rare montre de poche antique du 19e siècle', '2023-06-07', '2023-06-14', 180, 1, 3),
+('Montre ancienne', 'Rare montre de poche antique du 19e siècle', '2023-05-07', '2023-06-14', 180, 1, 3),
 ('Ordinateur portable', 'Ordinateur portable puissant avec une grande vitesse de traitement', '2023-06-10', '2023-06-17', 700, 2, 1),
 ('Vélo de montagne', 'Vélo de montagne robuste pour les aventures en plein air', '2023-06-18', '2023-06-25', 450, 3, 2),
 ('Logiciel de design graphique', 'Logiciel professionnel pour les graphistes', '2023-06-05', '2023-06-12', 150, 4, 3),
@@ -107,13 +107,13 @@ VALUES ('iPhone X', 'Used iPhone X in good condition', '2023-05-01', '2023-05-10
 ('Système home cinéma', 'Configuration complète de home cinéma avec son surround', '2023-06-14', '2023-06-21', 600, 4, 1),
 ('Montre de sport', 'Montre de sport résistante à l''eau avec suivi GPS', '2023-06-18', '2023-06-25', 150, 5, 2),
 ('Tourne-disque vintage', 'Tourne-disque antique avec haut-parleurs intégrés', '2023-06-09', '2023-06-16', 200, 6, 3),
-('Souris et clavier de jeu', 'Accessoires de jeu hautes performances', '2023-06-12', '2023-06-19', 100, 7, 1),
+('Souris et clavier de jeu', 'Accessoires de jeu hautes performances', '2023-04-12', '2023-06-19', 100, 7, 1),
 ('Équipement de gym à domicile', 'Système de gym à domicile tout-en-un pour des séances d''entraînement complètes', '2023-06-19', '2023-06-26', 400, 8, 2),
 ('Portefeuille de designer', 'Portefeuille de designer luxueux en cuir véritable', '2023-06-15', '2023-06-22', 180, 9, 3),
 ('Système de sécurité domotique', 'Système de sécurité avancé avec caméras de surveillance', '2023-06-05', '2023-06-12', 300, 10, 1),
 ('Table à manger et chaises', 'Ensemble de meubles de salle à manger élégants pour votre maison', '2023-06-10', '2023-06-17', 500, 1, 2),
 ('Guitare électrique', 'Guitare électrique professionnelle avec amplificateur', '2023-06-17', '2023-06-24', 350, 2, 3),
-('Chargeur sans fil', 'Chargeur sans fil pratique pour les smartphones', '2023-06-13', '2023-06-20', 50, 3, 1);
+('Chargeur sans fil', 'Chargeur sans fil pratique pour les smartphones', '2023-03-13', '2023-06-20', 50, 3, 1);
 
 
 /*****************************

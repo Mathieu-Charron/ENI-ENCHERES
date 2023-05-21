@@ -17,8 +17,8 @@
 	display: inline-block;
 	box-shadow: 0px 5px 15px 2px #a7a7a7;
 	border-radius: 10px;
-	border-bottom: 2px solid var(--principal-color);
-	border-top: 2px solid var(--principal-color);
+	border-bottom: 2px solid var(--main-color);
+	border-top: 2px solid var(--main-color);
 	padding: 20px 0px;
 	flex: 0 0 auto;
 	margin: 0px 23px;
@@ -29,8 +29,8 @@
 	display: inline-block;
 	box-shadow: 0px 5px 15px 2px #a7a7a7;
 	border-radius: 10px;
-	border-left: 2px solid var(--principal-color);
-	border-right: 2px solid var(--principal-color);
+	border-left: 2px solid var(--main-color);
+	border-right: 2px solid var(--main-color);
 	padding: 20px 0px;
 	min-height: 50vh;
 	flex: 1 1 auto;
@@ -76,7 +76,7 @@
 }
 
 .container-filters input[type=text]:focus, select:focus{
-	border-color: #f8ab3f;
+	border-color: var(--main-color);
 	outline: none;
 }
 
@@ -84,7 +84,7 @@
 	margin-top: 0px;
 	text-align: center;
 	text-decoration: underline;
-	text-decoration-color: var(--principal-color);
+	text-decoration-color: var(--main-color);
 	text-decoration-thickness: 2px;
 }
 
@@ -102,7 +102,7 @@
 	width: 390px;
 	background: red;
 	margin: 10px 0px;
-	border-left: 3px solid var(--principal-color);
+	border-left: 3px solid var(--main-color);
 	background: #f2f2f2;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;

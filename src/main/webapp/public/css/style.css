@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 :root {
-  --principal-color: #f8ab3f;
+  --main-color: #f8ab3f;
 }
 
 * {
@@ -36,7 +36,7 @@ li {
     box-shadow: 0px 5px 15px 2px #a7a7a7;
     margin-top: 20px;
     margin-bottom: 40px;
-    border-bottom: 2px solid var(--principal-color);
+    border-bottom: 2px solid var(--main-color);
 }
 .header .header-page {
 	display: flex;
@@ -52,7 +52,7 @@ li {
     width: 0%;
     position: absolute;
     height: 2px;
-    background: var(--principal-color);
+    background: var(--main-color);
     bottom: -5px;
     transition: 0.25s
 }
@@ -72,15 +72,15 @@ li {
 	padding: 15px 45px;
     border: none;
     cursor: pointer;
-    background: var(--principal-color);
+    background: var(--main-color);
     color: #ffffff;
-    border: 2px solid var(--principal-color);
+    border: 2px solid var(--main-color);
     transition: 0.25s;
     margin: 25px auto 0px auto;
     border-radius: 30px;
 }
 .button-style-1:hover {
 	background: white;
-    color: var(--principal-color);
+    color: var(--main-color);
     transition: 0.25s;
 }

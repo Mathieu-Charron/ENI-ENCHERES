@@ -74,7 +74,7 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				+ "	(select top(1) b.userId from BIDS b where b.soldItemId=i.soldItemId) as buyerUserId, "
 				+ "	(select top(1) us.username "
 				+ "	from BIDS b "
-				+ "	JOIN USERS us ON b.userId = us.userId where b.soldItemId=i.soldItemId) as buyerUsername, "
+				+ "	LEFT JOIN USERS us ON b.userId = us.userId where b.soldItemId=i.soldItemId) as buyerUsername, "
 				+ "	(select top(1) b.bidAmount from BIDS b where b.soldItemId=i.soldItemId) as bestOffer, "
 				+ "	i.initialPrice, "
 				+ "	i.endDate, "
@@ -194,12 +194,17 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				+ " seller.userId, "
 				+ "	seller.username "
 				+ "from SOLD_ITEMS i "
-				+ "JOIN USERS seller ON i.userId =seller.userId "
+				+ "LEFT JOIN USERS seller ON i.userId =seller.userId "
 				+ "where itemName LIKE ?";
 		
 		if(categoryId!=0) request+=" AND categoryId=?";
 		
-		if(filterCheck.size() == 0 || user == null) return request;
+		if(filterCheck.size() == 0 || user == null) {
+			if(user == null) {
+				request+=" AND GETDATE() BETWEEN i.startDate and i.endDate";
+			}
+			return request;
+		}
 		
 		if(!isTypeBuy) request+= " AND  i.userId=?";
 		

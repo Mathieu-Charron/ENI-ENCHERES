@@ -24,20 +24,20 @@
 				  	<div class="container-checks-filters">
 				  		<div class="container-buys-filters">
 				  			<div>
-				  				<input type="radio" id="isTypeBuy-true" name="isTypeBuy" onclick="displayCheckboxFilters()">
+				  				<input type="radio" id="isTypeBuy-true" name="isTypeBuy" onclick="displayCheckboxFilters()" checked>
 				  				<label for="isTypeBuy-true">Achats</label>
 				  			</div>
 				  			<div>
-				  				<input type="checkbox" id="openBids" disabled>
-				  				<label for="openBids" class="disabled-opacity">enchères ouvertes</label>
+				  				<input type="checkbox" id="openBids" checked>
+				  				<label for="openBids">enchères ouvertes</label>
 				  			</div>
 				  			<div>
-				  				<input type="checkbox" id="myBids" disabled>
-				  				<label for="myBids" class="disabled-opacity">mes enchères</label>
+				  				<input type="checkbox" id="myBids">
+				  				<label for="myBids">mes enchères</label>
 				  			</div>
 				  			<div>
-				  				<input type="checkbox" id="myWonBids" disabled>
-				  				<label for="myWonBids" class="disabled-opacity">mes enchères remportées</label>
+				  				<input type="checkbox" id="myWonBids">
+				  				<label for="myWonBids">mes enchères remportées</label>
 				  			</div>
 				  		</div>
 				  		<div class="container-mySales-filters">
