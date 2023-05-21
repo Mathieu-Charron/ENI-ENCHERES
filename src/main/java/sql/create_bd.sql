@@ -116,6 +116,34 @@ VALUES ('iPhone X', 'Used iPhone X in good condition', CAST( GETDATE() AS Date )
 ('Chargeur sans fil', 'Chargeur sans fil pratique pour les smartphones', '2023-03-13', '2023-06-20', 50, 3, 1);
 
 
+DECLARE @Today DATE = CAST(GETDATE() AS DATE);
+DECLARE @StartDateOffset INT;
+DECLARE @EndDateOffset INT;
+
+-- Boucle pour ajouter 20 lignes
+DECLARE @Counter INT = 1;
+WHILE @Counter <= 20
+BEGIN
+    -- Génération d'un nombre aléatoire pour les offsets de startDate et endDate
+    SET @StartDateOffset = ABS(CHECKSUM(NEWID())) % 30;
+    SET @EndDateOffset = ABS(CHECKSUM(NEWID())) % 30;
+    
+    -- Insertion de la nouvelle ligne avec les valeurs générées
+    INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
+    VALUES (
+        'Item ' + CAST(@Counter AS VARCHAR(10)),
+        'Description of item ' + CAST(@Counter AS VARCHAR(10)),
+        DATEADD(DAY, -@StartDateOffset, @Today),
+        DATEADD(DAY, @EndDateOffset, @Today),
+        ABS(CHECKSUM(NEWID())) % 500 + 50,
+        ABS(CHECKSUM(NEWID())) % 10 + 1,
+        ABS(CHECKSUM(NEWID())) % 4 + 1
+    );
+
+    SET @Counter = @Counter + 1;
+END;
+
+
 /*****************************
 WITHDRAWALS
 ******************************/
