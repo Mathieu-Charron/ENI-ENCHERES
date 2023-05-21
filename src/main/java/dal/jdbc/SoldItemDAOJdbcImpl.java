@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,8 @@ import dal.ISoldItemDAO;
 
 public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 
+	private List<Category> categories;
+	
 	@Override
 	public SoldItem insert(SoldItem item) throws DALException {
 		String sql = "INSERT SOLD_ITEMS VALUES (?,?,?,?,?,?,?)";
@@ -218,7 +221,6 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 		}
 		whereCheck = whereCheck.substring(2); //cut the first "OR"
 		request+=whereCheck+")";
-		
 		return request;
 	}
 
@@ -233,26 +235,55 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			unStmt.setInt(++i, soldItemId);
 			unStmt.setInt(++i, user.getUserId());
 			
-			if(unStmt.executeUpdate()>0) {
-				//remove credits from buyer
-				user.addCredit(-credits);
-				DAOFactory.getUserDAO().update(user);
-				
-				//take soldItems
-				SoldItem soldItem = DAOFactory.getSoldItemDAO().selectById(soldItemId);
-				
-				
-				//take seller from soldItemId
-				User seller = DAOFactory.getUserDAO().selectById(soldItem.getSeller().getUserId());
-				
-				//update user add credits
-				user.addCredit(credits);
-				DAOFactory.getUserDAO().update(seller);
-			}
+//			if(unStmt.executeUpdate()>0) {
+//				//remove credits from buyer
+//				user.addCredit(-credits);
+//				DAOFactory.getUserDAO().update(user);
+//				
+//				//take soldItems
+//				SoldItem soldItem = DAOFactory.getSoldItemDAO().selectById(soldItemId);
+//				
+//				
+//				//take seller from soldItemId
+//				User seller = DAOFactory.getUserDAO().selectById(soldItem.getSeller().getUserId());
+//				
+//				//update user add credits
+//				user.addCredit(credits);
+//				DAOFactory.getUserDAO().update(seller);
+//			}
 			
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Category> selectAllCategories() throws DALException {
+		
+		if(categories == null || categories.size() == 0) {
+			
+			String sql = "SELECT * FROM CATEGORIES";
+			
+			categories = new ArrayList<Category>();
+			
+			try(Connection uneConnection= ConnectionProvider.getConnection();
+					Statement unStmt= uneConnection.createStatement();) {
+				
+				ResultSet rs = unStmt.executeQuery(sql);
+							
+				while(rs.next()) {
+					int categoryId = rs.getInt("categoryId");
+					String label = rs.getString("label");
+					
+					categories.add(new Category(categoryId, label));
+				}
+				
+			} catch (SQLException e) {
+				throw new DALException(e.getMessage());
+			}
+		}
+
+		return categories;
 	}
 
 }

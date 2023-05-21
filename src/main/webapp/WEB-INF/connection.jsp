@@ -29,7 +29,6 @@
 			
 		</form>
 	
-		<br>
 		<p>${error}</p>
 		<a href="<%= request.getContextPath() %>/Register">Créer un compte</a>
 	</div>

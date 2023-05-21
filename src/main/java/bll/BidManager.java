@@ -3,6 +3,7 @@ package bll;
 import java.util.List;
 
 import bo.Bid;
+import bo.Category;
 import bo.SoldItem;
 import bo.User;
 import dal.DALException;
@@ -33,6 +34,17 @@ public class BidManager {
 				
 		try {
 			return soldItemDAO.selectItemsByFilters(searchItemName, categoryId, isTypeBuy, filterCheck,user);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public List<Category> getCategories(){
+		try {
+			return soldItemDAO.selectAllCategories();
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

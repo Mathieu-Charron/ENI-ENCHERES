@@ -10,29 +10,45 @@
 </style>
 <title>ENI ENCHERE - <%= request.getAttribute("title") %></title>
 <link rel="icon" href="<%= request.getContextPath() %>/public/assets/image/logo.png" />
+  <link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
+  <link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/brands.css" rel="stylesheet">
+  <link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/solid.css" rel="stylesheet">
+<script type="text/javascript">
+
+window.addEventListener('scroll', function() {
+	  var navbar = document.querySelector('.header');
+	  var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+	  if (scrollPosition > 0) {
+	    navbar.classList.add('fixed');
+	  } else {
+	    navbar.classList.remove('fixed');
+	  }
+	});
+
+</script>
 </head>
 <body>
 <nav class="header">
-	<div class="header-image">
+	<div class="header-margin">
+		<div class="header-image">
 		<!-- <img src="../../assets/image/logo.png"> -->
 		<%-- <%@ include file="../../assets/image/logo.png" %> --%>
 		<a href="<%= request.getContextPath() %>">
 		 	<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="Nom de l'image">
 		 </a>
+		</div>
+		<ul class ="header-page">
+			<li><a href="<%= request.getContextPath() %>">Enchères</a></li>
+			<c:if test="${not empty sessionScope.user}">
+				<li><a href="<%= request.getContextPath() %>/NewSold">Vendre un article</a></li>
+				<li><a href="<%= request.getContextPath() %>/Profile?userId=${sessionScope.user.userId}">Mon profil</a></li>
+				<li><a href="<%= request.getContextPath() %>/Logout">Déconnexion</a></li>
+			</c:if>
+			<c:if test="${empty sessionScope.user}">
+			<li><a href="<%= request.getContextPath() %>/Connection">Connexion</a></li>
+			</c:if>
+		</ul>
 	</div>
-	<ul class ="header-page">
-		<li><a href="<%= request.getContextPath() %>">Enchères</a></li>
-		<c:if test="${not empty sessionScope.user}">
-		<li><a href="<%= request.getContextPath() %>/NewSold">Vendre un article</a></li>
-		</c:if>
-		<c:if test="${not empty sessionScope.user}">
-		<li><a href="<%= request.getContextPath() %>/Profile?userId=${sessionScope.user.userId}">Mon profil</a></li>
-		</c:if>
-		<c:if test="${not empty sessionScope.user}">
-		<li><a href="<%= request.getContextPath() %>/Logout">Déconnexion</a></li>
-		</c:if>
-		<c:if test="${empty sessionScope.user}">
-		<li><a href="<%= request.getContextPath() %>/Connection">Connexion</a></li>
-		</c:if>
-	</ul>
 </nav>
+<div class="container-principal">

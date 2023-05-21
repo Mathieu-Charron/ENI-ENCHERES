@@ -3,6 +3,7 @@ package dal;
 import java.util.List;
 
 import bo.Bid;
+import bo.Category;
 import bo.SoldItem;
 import bo.User;
 
@@ -15,6 +16,9 @@ public interface ISoldItemDAO extends ICRUDDAO<SoldItem> {
 			User user) throws DALException;
 	
 	void bidOnItem(int soldItemId, int coins, User user) throws DALException;
+	
+	List<Category> selectAllCategories() throws DALException; //SINGLETON
+	
 	
 	
 }

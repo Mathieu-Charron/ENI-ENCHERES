@@ -1,13 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  --principal-color: #f8ab3f;
+}
+
 * {
 	font-family: 'Roboto', sans-serif;
 }
 body {
-	max-width: 95%;
     margin: auto;
-    padding: 0px 50px;
     font-family: 'Roboto', sans-serif;
 }
+
+.container-principal, .header-margin{
+    padding: 0px 50px;
+   	margin: auto;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;
@@ -16,13 +25,18 @@ li {
 	list-style: none;
 }
 
-.header {
+.header-margin {
+    width: 80%;
 	display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 80%;
-    margin: auto;
+    height: 85px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px 2px #a7a7a7;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--principal-color);
 }
 .header .header-page {
 	display: flex;
@@ -38,7 +52,7 @@ li {
     width: 0%;
     position: absolute;
     height: 2px;
-    background: #f8ab3f;
+    background: var(--principal-color);
     bottom: -5px;
     transition: 0.25s
 }
@@ -47,24 +61,26 @@ li {
     transition: 0.25s
 }
 .header-image {
-	width: 110px;
+	display: flex;
+	align-items: center;
 }
 .header-image img {
-	width: 100%;
+	height: 65px;
 }
 
 .button-style-1 {
 	padding: 15px 45px;
     border: none;
     cursor: pointer;
-    background: #f8ab3f;
+    background: var(--principal-color);
     color: #ffffff;
-    border: 2px solid #f8ab3f;
+    border: 2px solid var(--principal-color);
     transition: 0.25s;
     margin: 25px auto 0px auto;
+    border-radius: 30px;
 }
 .button-style-1:hover {
 	background: white;
-    color: #f8ab3f;
+    color: var(--principal-color);
     transition: 0.25s;
 }
