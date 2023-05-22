@@ -157,3 +157,29 @@
 .detail-button:hover{
   	transform: scale(1.1);
 }
+
+@media screen and (max-width: 1456px) {
+	.container-home {
+		flex-direction: column;
+	}
+	.container-filters {
+		margin-bottom: 30px
+	}
+	.container-checks-filters {
+		display: flex;
+    	place-content: center;
+	}
+	.container-main-filters {
+    	padding: 0px 80px;
+    	display: flex;
+	}
+	.container-main-filters div {
+		margin: 0px 5px;
+	}
+	.container-main-filters div:nth-child(1) {
+		width: 70%;
+	}
+	.container-main-filters div:nth-child(2) {
+		width: 30%;
+	}
+}

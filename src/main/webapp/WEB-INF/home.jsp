@@ -17,8 +17,9 @@
 				    	<c:forEach var="category" items="${categories}">
 				    		<option value="${category.categoryId}">${category.label}</option>
 						</c:forEach>
-			  		</select>
+		  			</select>
 				</div>
+			</div>
 				<c:if test="${not empty sessionScope.user}">
 				
 				  	<div class="container-checks-filters">
@@ -61,7 +62,7 @@
 			  		</div>
 			  		
 		  		</c:if>
-		  	</div>
+		  	
 	  	</div>
 		<div class="container-items">
 			<h2>ARTICLES</h2>

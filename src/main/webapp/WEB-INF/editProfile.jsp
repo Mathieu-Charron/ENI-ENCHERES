@@ -57,13 +57,20 @@
                 <label for="confirmationPassword">Confirmation du mot de passe :</label>
                 <input type="password" id="confirmationPassword" name="confirmationPassword" required>
             </div>
+            
+             <div class="form-element">
+                <label for="city">Crédit :</label>
+                <%-- <input type="text" id="credit" name="credit" value="<c:out value="${user.credit}"/>"> --%>
+                <label id="credit" for="credit">${user.credit}</label>
+            </div>
+            
 			<div class="profile-button">
 			<c:if test="${not empty sessionScope.user}">
 			<input class="button-style-1" type="submit" value="Enregistrer">
 			</c:if>
-			<c:if test="${not empty sessionScope.user}">
+			<%-- <c:if test="${not empty sessionScope.user}">
 		    <input class="button-style-1" type="button" value="Supprimer mon compte">
-		    </c:if>
+		    </c:if> --%>
 		    
 		    
 		    <c:if test="${empty sessionScope.user}">
