@@ -18,20 +18,17 @@ import bo.User;
 public class servletEditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String title = "EditProfile";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletEditProfile() {
-        super();
-        // TODO Auto-generated constructor stub
+	private UserManager manager;
+    
+    public void init() throws ServletException {
+        super.init();
+        manager = UserManager.getInstance();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setAttribute("title", title);
 		request.getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request, response);
 	}
@@ -41,31 +38,29 @@ public class servletEditProfile extends HttpServlet {
 	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String action = request.getParameter("action");
-	    if (action != null && action.equals("delete")) {
-	        User currentUser = (User) request.getSession().getAttribute("user");
-	        if (currentUser != null) {
-	            int userId = currentUser.getUserId();
-	            UserManager userManager = UserManager.getInstance();
-	            try {
-					userManager.deleteUser(userId);
-		            // Déconnecter l'utilisateur et rediriger vers une page appropriée
-		            request.getSession().invalidate();
-		            response.sendRedirect(request.getContextPath());
+		try {
+			manager.updateUser(
+					(User) request.getSession().getAttribute("user")
+					, request.getParameter("username")
+					, request.getParameter("lastName")
+					, request.getParameter("firstName")
+					, request.getParameter("email")
+					, request.getParameter("phone")
+					, request.getParameter("street")
+					, request.getParameter("postalCode")
+					, request.getParameter("city")
+					, request.getParameter("oldPassword")
+					, request.getParameter("password")
+					, request.getParameter("confirmationPassword"));
+			
+				User user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
+				request.getSession().setAttribute("user", user);
 
-				} catch (BLLException e) {
-					e.printStackTrace();
-		            response.sendRedirect(request.getContextPath() + "/EditProfile");
-
-				}
-	            
-	        } else {
-	            // L'utilisateur n'est pas connecté, gérer l'erreur ou la redirection
-	            response.sendRedirect(request.getContextPath() + "/Connection");
-	        }
-	    } else {
-	        doGet(request, response);
-	    }
+	        response.sendRedirect(request.getContextPath());
+		} catch (BLLException e) {
+			request.getSession().setAttribute("error", e.getSimpleMessage());
+	        response.sendRedirect(request.getContextPath()+"/Register");
+		}
 	}
 
 

@@ -43,7 +43,6 @@ function searchBids(){
 	})
 	  .then(response => response.json())
 	  .then(items => {
-		  console.log(items);
 		document.querySelector('.container-main-items').innerHTML = '';
 	    for(item of items){
 			new CardItem(item);
