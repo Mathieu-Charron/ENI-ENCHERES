@@ -1,8 +1,13 @@
 <%@ include file="templates/header.jsp"%>
-	<div class="container-connection">
 	<style>
 		<%@ include file="../public/css/connection.css"%>
 	</style>
+	<div id="errorDiv">
+	<div class="error-message">${error}</div>
+	<div class="error-button"><i class="fa-solid fa-xmark"></i></div>
+	</div>
+	<div class="container-connection">
+	
 		<h1>Connexion</h1>
 	
 		<form action="${pageContext.request.contextPath}/Connection" method="post">
@@ -29,7 +34,14 @@
 			
 		</form>
 	
-		<p>${error}</p>
+		
 		<a href="<%= request.getContextPath() %>/Register">Créer un compte</a>
 	</div>
+	
+<script>
+
+errorDiv.addEventListener('click', function() {
+	  errorDiv.style.display = 'none';
+	});
+</script>
 <%@ include file="templates/footer.jsp"%>
