@@ -1,5 +1,8 @@
 package bll;
 
+import java.util.Arrays;
+import java.util.List;
+
 import bo.User;
 import dal.DALException;
 import dal.DAOFactory;
@@ -71,7 +74,18 @@ public class UserManager /*SINGLETON*/ {
 			String password,
 			String confirmationPassword) throws BLLException {
 		user = null;
+		
+		String errorMessage = "";
+
+		
 		//verif authenticate with oldUsername && oldPassword
+		
+		try {
+			authentication(user.getUsername(), confirmationPassword);
+		} catch(BLLException e) {
+			errorMessage+= "Ancien mot de passe incorrect\n";
+		}
+		
 		
 		//verif not null values
 		
@@ -88,6 +102,7 @@ public class UserManager /*SINGLETON*/ {
 		//verif alphaNumeric username
 		
 		//FIRST THROW IF errorMessage is not empty
+		if(errorMessage.length()>0) throw new BLLException(errorMessage);
 		
 		//verif unique username && email in the BDD
 		
@@ -122,7 +137,11 @@ public class UserManager /*SINGLETON*/ {
 		
 		//verif not null values
 		
+		errorMessage+= checkValuesAreNotEmpty(Arrays.asList(username, lastName, firstName, email, phone, street, postalCode, city, password));
+		
 		//verif username > 3 characters
+		
+		errorMessage+= checkUsernameSize(username);
 		
 		//verif regex email
 		
@@ -147,4 +166,23 @@ public class UserManager /*SINGLETON*/ {
 			throw new BLLException(ERROR_BDD);
 		}
 	}
+	
+	
+	private String checkValuesAreNotEmpty(List<String> values) {
+		for(String value : values) {
+			if(value.isBlank() || value.isEmpty()) {
+				return "Les champs ne doivent pas être vides\n";
+			}
+		}
+		return null;
+	}
+	
+	private String checkUsernameSize(String username) {
+		if (username.length() <= 4) {
+		    return "Le nom d'utilisateur doit contenir plus de 3 caractères\n";
+		}
+		return null;
+	}
+	
+	
 }

@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap');
+
 :root {
   --main-color: #f8ab3f;
 }
 
 * {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Readex Pro', sans-serif;
 }
 body {
     margin: auto;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Readex Pro', sans-serif;
 }
 
 .container-principal, .header-margin{
@@ -23,6 +25,9 @@ a {
 }
 li {
 	list-style: none;
+}
+input:focus-visible {
+	outline: none;
 }
 
 .header-margin {
@@ -84,4 +89,27 @@ li {
 	background: white;
     color: var(--main-color);
     transition: 0.25s;
+}
+.button-danger {
+	padding: 15px 45px;
+    border: none;
+    cursor: pointer;
+    background: #f83f3f;
+    color: #ffffff;
+    border: 2px solid #f83f3f;
+    transition: 0.25s;
+    margin: 25px auto 0px auto;
+    border-radius: 30px;
+    font-size: 1rem;
+}
+.button-danger:hover {
+	background: white;
+    color: #f83f3f;
+    transition: 0.25s;
+}
+.fa-solid.fa-coins {
+	margin-left: 5px;
+}
+footer p{
+	text-align: center;
 }

@@ -2,10 +2,14 @@
 	text-align: center;
 }
 .container-profile, .container-edit-profile {
-	max-width: 620px;
+	max-width: 1045px;
     margin: 55px auto;
     padding: 20px 120px;
-    box-shadow: 0px 5px 15px 2px #a7a7a7;
+    box-shadow: 0px 5px 15px 2px #d1cece;
+    border-radius: 15px;
+    border-bottom: 2px solid var(--main-color);
+    border-top: 2px solid var(--main-color);
+    position: relative;
 }
 .container-profile form, .container-edit-profile form {
 	display: flex;
@@ -13,18 +17,32 @@
 }
 .container-edit-profile form .form-element {
 	width: 50%;
-	display: flex;
-	margin: 15px 0px;
+	margin: 5px 0px;
 }
-.container-edit-profile form .form-element > input {
+.container-edit-profile form .form-element > div {
+	display: flex;
+	flex-direction: column;
+	padding: 0px 15px;
+}
+/*.container-edit-profile form .form-element > input {
 	margin: 0px 10px;
+}*/
+.container-edit-profile form .form-element > div > input {
+	height: 25px;
+	padding: 5px 10px;
+    margin: 10px 0px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
+}
+.container-edit-profile form .form-element > div > input:focus-visible {
+	border: 1px solid var(--main-color);
 }
 .container-profile form .form-element {
 	width: 100%;
 	display: flex;
 	margin: 15px 0px;
 }
-.container-edit-profile form .form-element label, .container-profile form .form-element input {
+.container-profile form .form-element input {
 	width: 50%;
 }
 .container-profile form .form-element label {
@@ -35,4 +53,9 @@
 }
 .container-edit-profile .profile-button {
 	margin: 20px auto;
+}
+.coins {
+	position: absolute;
+   	right: 50px;
+    top: 30px;
 }
