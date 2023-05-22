@@ -96,6 +96,8 @@ public class UserDAOJdbcImpl implements IUserDAO {
 			
 			int i = 0;
 			
+			System.out.println("DAL - " + user);
+			
 			unStmt.setString(++i, user.getUsername());
 			unStmt.setString(++i, user.getLastName());
 			unStmt.setString(++i, user.getFirstName());
@@ -111,6 +113,7 @@ public class UserDAOJdbcImpl implements IUserDAO {
 			
 			unStmt.executeUpdate();
 			
+			System.out.println("ok");
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage());
 		}

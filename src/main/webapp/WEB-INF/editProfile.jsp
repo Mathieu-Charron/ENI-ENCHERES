@@ -107,7 +107,7 @@
 			<input class="button-style-1" type="submit" value="Enregistrer">
 			</c:if>
 			<c:if test="${not empty sessionScope.user}">
-    			<a href="${pageContext.request.contextPath}/EditProfile?action=delete"><input class="button-danger" type="submit" value="Supprimer mon compte" onclick="confirmDelete();"></a>        			
+    			<a href="${pageContext.request.contextPath}/EditProfile?action=delete"><input class="button-danger" type="button" value="Supprimer mon compte" onclick="confirmDelete();"></a>        			
 			</c:if>
 		    
 		    

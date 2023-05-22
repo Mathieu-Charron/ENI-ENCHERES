@@ -12,8 +12,8 @@ public class UserManager /*SINGLETON*/ {
 	private IUserDAO userDAO;
 	private static UserManager instance;
 	
-	private static final String ERROR_BDD = "Une erreur est survenue";
-	private static final String INCORRECT_CREDENTIALS = "Identifiants incorrects";
+	private static final String ERROR_BDD = "Une erreur est survenue\n";
+	private static final String INCORRECT_CREDENTIALS = "Identifiants incorrects\n";
 	
 	private UserManager() {
 		this.userDAO=DAOFactory.getUserDAO();
@@ -73,7 +73,6 @@ public class UserManager /*SINGLETON*/ {
 			String oldPassword,
 			String password,
 			String confirmationPassword) throws BLLException {
-		user = null;
 		
 		String errorMessage = "";
 
@@ -81,7 +80,7 @@ public class UserManager /*SINGLETON*/ {
 		//verif authenticate with oldUsername && oldPassword
 		
 		try {
-			authentication(user.getUsername(), confirmationPassword);
+			authentication(user.getUsername(), oldPassword);
 		} catch(BLLException e) {
 			errorMessage+= "Ancien mot de passe incorrect\n";
 		}
@@ -124,8 +123,9 @@ public class UserManager /*SINGLETON*/ {
 		
 		
 		try {
-			userDAO.update(new User(username, lastName, firstName, email, phone, street, postalCode, city, 100, false, password));
-			user = userDAO.authenticate(username, confirmationPassword);
+			userDAO.update(new User(user.getUserId(),username, lastName, firstName, email, phone, street, postalCode, city, user.getCredit(), user.getAdministrator(), password));
+			user = this.authentication(username, password);
+
 		} catch (DALException e) {
 			e.printStackTrace();
 			
@@ -235,7 +235,8 @@ public class UserManager /*SINGLETON*/ {
 	
 	private String checkPassword (String password) {
 		// au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule et un chiffre
-		String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+//		String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+		String passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 		if (!password.matches(passwordRegex)) {
 		    return "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre majuscule, une lettre minuscule et un chiffre\n";
 		}
