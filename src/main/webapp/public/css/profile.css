@@ -2,7 +2,7 @@
 	text-align: center;
 }
 .container-profile, .container-edit-profile {
-	max-width: 500px;
+	max-width: 620px;
     margin: 55px auto;
     padding: 20px 120px;
     box-shadow: 0px 5px 15px 2px #a7a7a7;
@@ -15,6 +15,9 @@
 	width: 50%;
 	display: flex;
 	margin: 15px 0px;
+}
+.container-edit-profile form .form-element > input {
+	margin: 0px 10px;
 }
 .container-profile form .form-element {
 	width: 100%;

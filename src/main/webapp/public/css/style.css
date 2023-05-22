@@ -78,6 +78,7 @@ li {
     transition: 0.25s;
     margin: 25px auto 0px auto;
     border-radius: 30px;
+    font-size: 1rem;
 }
 .button-style-1:hover {
 	background: white;
