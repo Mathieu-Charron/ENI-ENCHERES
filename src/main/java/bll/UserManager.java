@@ -89,17 +89,31 @@ public class UserManager /*SINGLETON*/ {
 		
 		//verif not null values
 		
+		errorMessage+= checkValuesAreNotEmpty(Arrays.asList(username, lastName, firstName, email, phone, street, postalCode, city, password));
+		
 		//verif username > 3 characters
+		
+		errorMessage+= checkUsernameSize(username);
 		
 		//verif regex email
 		
+		errorMessage+= checkEmail(email);
+		
 		//verif regex phone
+		
+		errorMessage+= checkPhone(phone);
 		
 		//verif password = confirmPassword
 		
+		errorMessage+= checkConfirmPassword(password, confirmationPassword);
+		
 		//verif regex password
 		
+		errorMessage+= checkPassword(password);
+		
 		//verif alphaNumeric username
+		
+		errorMessage+= checkUsername(username);
 		
 		//FIRST THROW IF errorMessage is not empty
 		if(errorMessage.length()>0) throw new BLLException(errorMessage);
@@ -145,16 +159,28 @@ public class UserManager /*SINGLETON*/ {
 		
 		//verif regex email
 		
+		errorMessage+= checkEmail(email);
+		
 		//verif regex phone
+		
+		errorMessage+= checkPhone(phone);
 		
 		//verif password = confirmPassword
 		
+		errorMessage+= checkConfirmPassword(password, confirmationPassword);
+		
 		//verif regex password
+		
+		errorMessage+= checkPassword(password);
 		
 		//verif alphaNumeric username
 		
-		//FIRST THROW IF errorMessage is not empty
+		errorMessage+= checkUsername(username);
 		
+		//FIRST THROW IF errorMessage is not empty
+		if(errorMessage.length()>0) {
+			throw new BLLException(errorMessage);
+		}
 		//verif unique username && email in the BDD
 		
 		//SECOND THROW IF errorMessage is not empty
@@ -174,14 +200,54 @@ public class UserManager /*SINGLETON*/ {
 				return "Les champs ne doivent pas être vides\n";
 			}
 		}
-		return null;
+		return "";
 	}
 	
 	private String checkUsernameSize(String username) {
 		if (username.length() <= 4) {
 		    return "Le nom d'utilisateur doit contenir plus de 3 caractères\n";
 		}
-		return null;
+		return "";
+	}
+	
+	private String checkEmail(String email) {
+		String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+		if (!email.matches(emailRegex)) {
+		    return "L'adresse e-mail n'est pas valide\n";
+		}
+		return "";
+	}
+	
+	private String checkPhone(String phone) {
+		String phoneRegex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
+		if (!phone.matches(phoneRegex)) {
+		    return "Le numéro de téléphone n'est pas valide\n";
+		}
+		return "";
+	}
+	
+	private String checkConfirmPassword(String password, String confirmationPassword) {
+		if (!password.equals(confirmationPassword)) {
+		    return "Les mots de passe ne correspondent pas\n";
+		}
+		return "";
+	}
+	
+	private String checkPassword (String password) {
+		// au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule et un chiffre
+		String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+		if (!password.matches(passwordRegex)) {
+		    return "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre majuscule, une lettre minuscule et un chiffre\n";
+		}
+		return "";
+	}
+	
+	private String checkUsername (String username) {
+		String usernameRegex = "^[a-zA-Z0-9]+$";
+		if (!username.matches(usernameRegex)) {
+		    return "Le nom d'utilisateur ne doit contenir que des caractères alphanumériques\n";
+		}
+		return "";
 	}
 	
 	

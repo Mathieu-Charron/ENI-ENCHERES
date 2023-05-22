@@ -61,6 +61,7 @@ public class servletRegister extends HttpServlet {
 			}
 	        response.sendRedirect(request.getContextPath());
 		} catch (BLLException e) {
+			System.out.println(e.getSimpleMessage());
 			request.getSession().setAttribute("error", e.getSimpleMessage());
 	        response.sendRedirect(request.getContextPath()+"/Register");
 		}

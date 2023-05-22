@@ -17,6 +17,7 @@ body {
 .container-principal, .header-margin{
     padding: 0px 50px;
    	margin: auto;
+   	position: relative;
 }
 
 a {
