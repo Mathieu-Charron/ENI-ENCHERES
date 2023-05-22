@@ -8,17 +8,17 @@
 		<div>
 			<div class="container">
 				<div class="image-container">
-					<img src="chemin/vers/mon-image.jpg" alt="#">
+					<div class="image-container-box">
+						<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="#">
+					</div>
 				</div>
 				<div class="form">
 					<form action="${pageContext.request.contextPath}/newSold">
 						<div>
-							<label for="article">Article :</label>
-							<input type="text" id="article" name="article" required size="20">
+							<input placeholder="Nom de l'article" type="text" id="article" name="article" required size="20">
 						</div>
 						<div>
-							<label for="description">Description :</label>
-							<textarea id="description" name="description" required rows="5"></textarea>
+							<textarea placeholder="Description" id="description" name="description" required rows="5"></textarea>
 						</div>
 						<div>
 							<label for="categorie-select">Catégorie :</label>
@@ -34,8 +34,7 @@
 							<input type="file" id="picture" name="picture" accept="image/png, image/jpeg" required>
 						</div>
 						<div>
-							<label for="price">Mise à prix :</label>
-							<input type="number" id="price" name="price" min="0" max="9999999" required>
+							<input placeholder="Prix de l'article" type="number" id="price" name="price" min="0" max="9999999" required>
 						</div>
 						<div>
 							<label for="startBids">Début de l'enchère :</label>
@@ -48,19 +47,20 @@
 						<div>
 							<p>Retrait :</p>
 							<div>
-								<label for="street">Rue :</label>
-								<input type="street" name="street" size="15" required>
-								<br>
-								<label for="postalCode">Code Postal :</label>
-								<input type="postalCode" name="postalCode" size="15" required>
-								<br>
-								<label for="city">Ville :</label>
-								<input type="city" name="city" size="15" required>
+								<div>
+									<input placeholder="Rue" type="street" name="street" size="15" required>
+								</div>
+								<div>
+									<input placeholder="Code Postale" type="postalCode" name="postalCode" size="15" required>
+								</div>
+								<div>
+									<input placeholder="Ville :" type="city" name="city" size="15" required>
+								</div>
 							</div>
 						</div>
 						<div>
-							<input type="submit" name="Register" value="Enregistrer">
-							<input type="button" name="Cancel" value="Annuler">
+							<input class="button-style-1" type="submit" name="Register" value="Enregistrer">
+							<input class="button-style-1" type="button" name="Cancel" value="Annuler">
 						</div>
 					</form>
 				</div>
