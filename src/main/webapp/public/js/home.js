@@ -134,7 +134,13 @@ class CardItem {
 	addDesc(seller, itemName, initialPrice, endDate){
 		endDate = (endDate.dayOfMonth+"").padStart(2, "0")+"/"+(endDate.monthValue+"").padStart(2, "0")+"/"+endDate.year;
 		this.cardDesc.appendChild(this.createElementWithTxt('h4',itemName));
-		this.cardDesc.appendChild(this.createElementWithTxt('p','Prix : '+initialPrice));
+		
+		//prix
+		const priceBalise = this.createElementWithTxt('p','Prix : '+initialPrice);
+		priceBalise.appendChild(this.createElementWithClass('i','fa-solid fa-coins'));
+		this.cardDesc.appendChild(priceBalise);
+		
+		
 		this.cardDesc.appendChild(this.createElementWithTxt('p','Fin de l\'enchère : '+ endDate));
 		
 		this.cardDesc.appendChild(document.createElement('br'));
