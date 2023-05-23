@@ -5,6 +5,11 @@ window.addEventListener('load', function(){
 	  		document.querySelector('#errorDiv').remove();
 		})
 	}
+	if(document.querySelector('.success-button')){
+		document.querySelector('.success-button').addEventListener('click', function() {
+	  		document.querySelector('#successDiv').remove();
+		})
+	}
 
 	date = new Date();
 	year = date.getFullYear();

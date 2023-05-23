@@ -19,7 +19,9 @@ body {
    	margin: auto;
    	position: relative;
 }
-
+.container-home {
+	margin-top: 60px;
+}
 a {
 	text-decoration: none;
 	color: inherit;
@@ -117,7 +119,7 @@ footer p{
 
 #errorDiv {
 	background: #ff525252;
-    padding: 30px 35px;
+    padding: 10px 35px;
     margin: 0px auto -50px auto;
     width: 70%;
     left: 50%-70%;
@@ -130,13 +132,29 @@ footer p{
     border-right: 5px solid #db2626;
     justify-content: space-between;
 }
-#errorDiv div {
+#errorDiv div, #successDiv div {
 	margin: 0px 15px;
 }
-#errorDiv i {
+#errorDiv i, #successDiv i {
 	cursor: pointer;
 }
 
-#errorDiv li {
+#errorDiv li, #successDiv li {
 	list-style: inherit;
+}
+
+#successDiv {
+    background: #5dff5252;
+    padding: 10px 35px;
+    margin: 0px auto -50px auto;
+    width: 70%;
+    left: 50%-70%;
+    top: 0%;
+    left: 50%;
+    border-left: 5px solid #26db43;
+    display: flex;
+    align-items: center;
+    border-radius: 4px 58px;
+    border-right: 5px solid #26db43;
+    justify-content: space-between;
 }

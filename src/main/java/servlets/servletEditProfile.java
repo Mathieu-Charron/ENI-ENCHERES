@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,10 +80,23 @@ public class servletEditProfile extends HttpServlet {
 					, request.getParameter("confirmationPassword"));
 			
 			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("success", "Profile modifier avec succès");
 
 	        response.sendRedirect(request.getContextPath());
 		} catch (BLLException e) {
 			request.getSession().setAttribute("error", e.getSimpleMessage());
+			
+			Map<String, String> form = new HashMap<>();
+			form.put("username", request.getParameter("username"));
+			form.put("lastName", request.getParameter("lastName"));
+			form.put("firstName", request.getParameter("firstName"));
+			form.put("email", request.getParameter("email"));
+			form.put("phone", request.getParameter("phone"));
+			form.put("street", request.getParameter("street"));
+			form.put("postalCode", request.getParameter("postalCode"));
+			form.put("city", request.getParameter("city"));
+			request.getSession().setAttribute("form", form);
+			
 	        response.sendRedirect(request.getContextPath()+"/EditProfile");
 		}
 	}

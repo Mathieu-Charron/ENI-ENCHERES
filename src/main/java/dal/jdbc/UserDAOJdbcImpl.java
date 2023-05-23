@@ -214,5 +214,25 @@ public class UserDAOJdbcImpl implements IUserDAO {
 	        throw new DALException(e.getMessage());
 	    }
 	}
+	
+	public boolean isUsernameOrEmailTaken(int userIdAuthenticate,String username, String email) {
+	    String sql = "SELECT COUNT(*) FROM " + TABLE_NAME+ " WHERE (username = ? OR email=?) and userId!=?";
+	    try (Connection connection = ConnectionProvider.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+	        statement.setString(1, username);
+	        statement.setString(2, email);
+	        statement.setInt(3, userIdAuthenticate);
+	        ResultSet resultSet = statement.executeQuery();
+	        
+            if (resultSet.next())return true;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Gérer l'exception
+	    }
+	    return false;
+	}
+
+
+
 
 }

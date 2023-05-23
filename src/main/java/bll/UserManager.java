@@ -114,13 +114,15 @@ public class UserManager /*SINGLETON*/ {
 		
 		errorMessage+= checkUsername(username);
 		
-		//FIRST THROW IF errorMessage is not empty
-		if(errorMessage.length()>0) throw new BLLException(errorMessage);
 		
 		//verif unique username && email in the BDD
 		
-		//SECOND THROW IF errorMessage is not empty
+		errorMessage+= checkUsernameEmailUnique(user.getUserId(),username, email);
 		
+		//FIRST THROW IF errorMessage is not empty
+		
+		if(errorMessage.length()>0) throw new BLLException(errorMessage);
+
 		
 		try {
 			userDAO.update(new User(user.getUserId(),username, lastName, firstName, email, phone, street, postalCode, city, user.getCredit(), user.getAdministrator(), password));
@@ -177,13 +179,13 @@ public class UserManager /*SINGLETON*/ {
 		
 		errorMessage+= checkUsername(username);
 		
-		//FIRST THROW IF errorMessage is not empty
-		if(errorMessage.length()>0) {
-			throw new BLLException(errorMessage);
-		}
 		//verif unique username && email in the BDD
 		
-		//SECOND THROW IF errorMessage is not empty
+		errorMessage+= checkUsernameEmailUnique(0,username, email);
+		
+		//FIRST THROW IF errorMessage is not empty
+		if(errorMessage.length()>0) throw new BLLException(errorMessage);
+		
 		try {
 			return userDAO.insert(new User(username, lastName, firstName, email, phone, street, postalCode, city, 100, false, password));
 		} catch (DALException e) {
@@ -235,7 +237,6 @@ public class UserManager /*SINGLETON*/ {
 	
 	private String checkPassword (String password) {
 		// au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule et un chiffre
-//		String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 		String passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 		if (!password.matches(passwordRegex)) {
 		    return "Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre majuscule, une lettre minuscule et un chiffre\n";
@@ -252,4 +253,18 @@ public class UserManager /*SINGLETON*/ {
 	}
 	
 	
+	
+	
+	
+	private String checkUsernameEmailUnique(int userId, String username, String email) {
+	    try {
+	        if (userDAO.isUsernameOrEmailTaken(userId,username, email)) {
+	            return "Ce nom d'utilisateur ou cette adresse email est déjà utilisé\n";
+	        }
+	    } catch (DALException e) {
+	        e.printStackTrace();
+	    }
+	    return "";
+	}
+
 }
