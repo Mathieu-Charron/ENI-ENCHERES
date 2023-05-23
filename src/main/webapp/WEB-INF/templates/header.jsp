@@ -4,29 +4,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<style>
-	<%@ include file="../../public/css/style.css"%>
-</style>
-<title>ENI ENCHERE - <%= request.getAttribute("title") %></title>
-<link rel="icon" href="<%= request.getContextPath() %>/public/assets/image/logo.png" />
-  <link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
-  <link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/brands.css" rel="stylesheet">
-  <link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/solid.css" rel="stylesheet">
-<script type="text/javascript">
-
-window.addEventListener('scroll', function() {
-	  var navbar = document.querySelector('.header');
-	  var scrollPosition = window.scrollY || document.documentElement.scrollTop;
-
-	  if (scrollPosition > 0) {
-	    navbar.classList.add('fixed');
-	  } else {
-	    navbar.classList.remove('fixed');
-	  }
-	});
-
-</script>
+	<meta charset="UTF-8">
+	<style>
+		<%@ include file="../../public/css/style.css"%>
+	</style>
+	
+	<link rel="icon" href="<%= request.getContextPath() %>/public/assets/image/logo.png" />
+	<link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/fontawesome.css" rel="stylesheet">
+	<link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/brands.css" rel="stylesheet">
+	<link href="<%= request.getContextPath() %>/public/assets/fontawesome/css/solid.css" rel="stylesheet">
+	<title>ENI ENCHERE - <%= request.getAttribute("title") %></title>
+	<script type="text/javascript" src="<%= request.getContextPath() %>/public/js/main.js"></script>
+	<script type="text/javascript">
+	
+	window.addEventListener('scroll', function() {
+		  var navbar = document.querySelector('.header');
+		  var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+	
+		  if (scrollPosition > 0) {
+		    navbar.classList.add('fixed');
+		  } else {
+		    navbar.classList.remove('fixed');
+		  }
+		});
+	
+	</script>
 </head>
 <body>
 <nav class="header">
@@ -51,4 +53,25 @@ window.addEventListener('scroll', function() {
 		</ul>
 	</div>
 </nav>
+
+<% 
+	if(request.getSession().getAttribute("error") != null){
+		String[] errorList = request.getSession().getAttribute("error").toString().split("\n"); 
+		request.setAttribute("errorList", errorList);
+	}
+
+%>
+
 <div class="container-principal">
+	<c:if test="${not empty sessionScope.error}">	
+		<div id="errorDiv">
+			<div class="error-message">
+				<ul>
+					<c:forEach var="error" items="${errorList}">
+    					<li>${error}</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div class="error-button"><i class="fa-solid fa-xmark"></i></div>
+		</div>
+	</c:if>

@@ -56,8 +56,8 @@ public class servletConnection extends HttpServlet {
 			session.setAttribute("user", user);
 	        response.sendRedirect(request.getContextPath());
 		} catch (BLLException e) {
-            request.setAttribute("error", e.getSimpleMessage());
-            doGet(request, response);
+            request.getSession().setAttribute("error", e.getSimpleMessage());
+            response.sendRedirect(request.getContextPath()+request.getServletPath());
 		}
 	}
 

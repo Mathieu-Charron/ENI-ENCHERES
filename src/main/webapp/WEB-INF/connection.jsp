@@ -1,8 +1,9 @@
 <%@ include file="templates/header.jsp"%>
-	<div class="container-connection">
 	<style>
 		<%@ include file="../public/css/connection.css"%>
 	</style>
+	<div class="container-connection">
+	
 		<h1>Connexion</h1>
 	
 		<form action="${pageContext.request.contextPath}/Connection" method="post">
@@ -29,7 +30,8 @@
 			
 		</form>
 	
-		<p>${error}</p>
+		
 		<a href="<%= request.getContextPath() %>/Register">Créer un compte</a>
 	</div>
+	
 <%@ include file="templates/footer.jsp"%>
