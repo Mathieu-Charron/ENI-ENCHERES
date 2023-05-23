@@ -33,6 +33,7 @@ public class AuthenticationFilter implements Filter {
         		&& !link.contains("/public/")
         		&& !link.equals("/rest/bids/searchWithFilters")) {
         	
+        	httpRequest.getSession().setAttribute("error", "Vous n'avez pas l'authorisation d'accéder à cette page");
             httpResponse.sendRedirect(httpRequest.getContextPath());
         } else {
             chain.doFilter(request, response);

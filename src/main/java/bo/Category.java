@@ -8,6 +8,10 @@ public class Category {
         this.categoryId = categoryId;
         this.label = label;
     }
+    
+    public Category(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getCategoryId() {
         return categoryId;

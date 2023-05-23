@@ -12,47 +12,48 @@
 				</div>
 				<div class="form">
 						<div>
-							<p id="article">PC Gamer pour travailler</p>
+							<p id="article">${item.itemName}</p>
 						</div>
 						<div>
 							<label for="description">Description :</label>
-							<p id="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing.
-							</p>
+							<p id="description">${item.description}</p>
 						</div>
 						<div>
 							<label for="categorie-select">Catégorie :</label>
 							<p id="categorie">
-								Informatique
+								${item.category.label}
 							</p>
 						</div>
-						<div>
-							<label for="bestOffer">Meilleure offre :</label>
-							<p id="bestOffer">210 pts par Bob</p>
-						</div>
+						<c:if test="${item.bestOffer != 0}">
+							<div>
+								<label for="bestOffer">Meilleure offre :</label>
+								<p id="bestOffer">${item.bestOffer} pts par ${item.buyer.username}</p>
+							</div>
+						</c:if>
 						<div>
 							<label for="price">Mise à prix :</label>
-							<p id="price">185 points</p>
+							<p id="price">${item.initialPrice} points</p>
 						</div>
 						<div>
 							<label for="endBids">Fin de l'enchère :</label>
-							<p id="endBids">09/10/2018</p>
+							<p id="endBids">${item.endDateFormatFR}</p>
 						</div>
 						<div>
 							<p>Adresse :</p>
 							<div>
-								<p id="street">10 allée des alouettes</p>
-								<p id="postalCode">44450</p>
-								<p id="city">Nantes</p>
+								<p id="street">${item.withdrawal.street}</p>
+								<p id="postalCode">${item.withdrawal.postalCode }</p>
+								<p id="city">${item.withdrawal.city}</p>
 							</div>
 						</div>
 						<div>
 							<label for="seller">Vendeur :</label>
-							<p id="seller">jojo44</p>
+							<p id="seller">${item.seller.username}</p>
 						</div>
-						<form action="#">
+						<form action="<%= request.getContextPath() %>/">
 							<div>
 								<label for="myBids">Mon enchère :</label>
-								<input type="number" id="myBids">
+								<input type="number" id="myBids" min='<c:out value="${item.minNextValueBid}"></c:out>' value='<c:out value="${item.minNextValueBid}"></c:out>'>
 							</div>
 							<div>
 								<input type="submit" name="Bids" value="Enchérir">
@@ -61,21 +62,7 @@
 				</div>
 			</div>
 		</div>
-	<script>
-		// Obtient la date actuelle
-		var today = new Date().toISOString().split('T')[0];
-		// Définit la date minimale pour le champ de début d'enchère
-		document.getElementById('startBids').setAttribute('min', today);
-	
-		// Gère l'événement de changement de date de début d'enchère
-		document.getElementById('startBids').addEventListener('change', function() {
-			// Obtient la valeur sélectionnée du champ de début d'enchère
-			var startDate = this.value;
-			
-			// Définit la date minimale pour le champ de fin d'enchère
-			document.getElementById('endBids').setAttribute('min', startDate);
-		});
-	</script>	
+
 <%@ include file="templates/footer.jsp"%>
 
 

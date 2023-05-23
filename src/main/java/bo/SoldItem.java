@@ -2,6 +2,7 @@ package bo;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class SoldItem {
     private int soldItemId;
@@ -13,7 +14,7 @@ public class SoldItem {
     private User seller;
     private Category category;
     private User buyer;
-    private Integer bestOffer;
+    private Integer bestOffer = 0;
     private Withdrawal withdrawal;
     
 //	public SoldItem(int itemId, String itemName, String description, LocalDate startDate, LocalDate endDate, int initialPrice,
@@ -48,6 +49,19 @@ public class SoldItem {
 		this.withdrawal = widWithdrawal;
 	}	
 	
+	public SoldItem(String itemName, int initialPrice, LocalDate startDate,
+			LocalDate endDate, User seller, String description, 
+			Category category, Withdrawal widWithdrawal) {
+		this.itemName = itemName;
+		this.initialPrice = initialPrice;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.seller = seller;
+		this.description = description;
+		this.category = category;
+		this.withdrawal = widWithdrawal;
+	}
+	
 	public int getItemId() {
 		return soldItemId;
 	}
@@ -75,6 +89,13 @@ public class SoldItem {
 	public LocalDate getEndDate() {
 		return endDate;
 	}
+	
+	public String getEndDateFormatFR() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String endDateString = endDate.format(formatter);
+		return endDateString;
+	}
+	
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
@@ -108,6 +129,10 @@ public class SoldItem {
 
 	public Withdrawal getWithdrawal() {
 		return withdrawal;
+	}
+	
+	public int getMinNextValueBid() {
+		return bestOffer>initialPrice ? bestOffer+10 : initialPrice +10;
 	}
 
 	@Override

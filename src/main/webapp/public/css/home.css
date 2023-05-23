@@ -135,7 +135,7 @@
 	font-size: 12px;
 }
 
-.card-item-desc a{
+.card-item-desc p a{
 	text-decoration: underline;
 	color: rgb(0, 102, 204);
 }

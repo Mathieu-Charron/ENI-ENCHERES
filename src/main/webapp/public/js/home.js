@@ -88,8 +88,8 @@ class CardItem {
 	constructor(item){
 		this.createCardItem();
 		this.createDetailButton(item.itemId);
-		this.addImg('/ENI-ENCHERES/public/assets/image/logo.png');
-		this.addDesc(item.seller, item.itemName, item.initialPrice, item.endDate);
+		this.addImg('/ENI-ENCHERES/public/assets/image/logo.png',item.itemId);
+		this.addDesc(item.seller, item.itemName, item.initialPrice, item.endDate, item.itemId);
 	}
 	
 	createCardItem(){
@@ -123,16 +123,26 @@ class CardItem {
 		this.cardItem.appendChild(detailHref);
 	}
 	
-	addImg(_linkImg){
+	addImg(_linkImg,_itemId){
+		const detailHref = document.createElement('a');
+		detailHref.setAttribute('href','DetailBid?itemId='+_itemId);
+		
 		const img = document.createElement('img');
 		img.setAttribute('src',_linkImg);
 		
-		this.cardImg.appendChild(img);
+		detailHref.appendChild(img);
+		this.cardImg.appendChild(detailHref);
 	}
 	
-	addDesc(seller, itemName, initialPrice, endDate){
+	addDesc(seller, itemName, initialPrice, endDate, itemId){
 		endDate = (endDate.dayOfMonth+"").padStart(2, "0")+"/"+(endDate.monthValue+"").padStart(2, "0")+"/"+endDate.year;
-		this.cardDesc.appendChild(this.createElementWithTxt('h4',itemName));
+		
+		const detailHref = document.createElement('a');
+		detailHref.setAttribute('href','DetailBid?itemId='+itemId);
+		const itemNameTag = this.createElementWithTxt('h4',itemName);
+		
+		detailHref.appendChild(itemNameTag);
+		this.cardDesc.appendChild(detailHref);
 		
 		//prix
 		const priceBalise = this.createElementWithTxt('p','Prix : '+initialPrice);

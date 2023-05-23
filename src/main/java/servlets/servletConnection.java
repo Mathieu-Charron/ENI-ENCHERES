@@ -41,6 +41,7 @@ public class servletConnection extends HttpServlet {
 //		user = new User(user.getUserId(),"a", "b", "c", "d", "e", "f", "g", "h", 0, false, "i");
 //		manager.updateUser(user);
 //		System.out.println(manager2.SearchBidsWithFilters("Ipho", 1, true, new ArrayList<>()/*Arrays.asList("Valeur 1", "Valeur 2", "Valeur 3")*/,(User) request.getSession().getAttribute("user")));
+		
 		request.setAttribute("title", title);
 		request.getRequestDispatcher("/WEB-INF/connection.jsp").forward(request, response);
 	}
@@ -54,7 +55,7 @@ public class servletConnection extends HttpServlet {
 			user = manager.authentication(request.getParameter("username"), request.getParameter("password"));
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
-	        response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath());
 		} catch (BLLException e) {
             request.getSession().setAttribute("error", e.getSimpleMessage());
             response.sendRedirect(request.getContextPath()+request.getServletPath());
