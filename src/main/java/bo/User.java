@@ -74,6 +74,10 @@ public class User {
 		this.username = username;
 	}
 	
+	public User(int userId) {
+		this.userId = userId;
+	}
+	
 	
 	public int getUserId() {
 		return userId;

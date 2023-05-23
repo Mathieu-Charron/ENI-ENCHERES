@@ -38,7 +38,7 @@ public class SoldItem {
 	}
 	
 	public SoldItem(int itemId, String itemName, int initialPrice, 
-			LocalDate endDate, User seller, String description, 
+			LocalDate startDate, LocalDate endDate, User seller, String description, 
 			Category category, User buyer, Integer betterOffer,
 			Withdrawal widWithdrawal) {
 		this(itemId,itemName,initialPrice,endDate,seller);
@@ -47,6 +47,7 @@ public class SoldItem {
 		this.buyer = buyer;
 		this.bestOffer = betterOffer;
 		this.withdrawal = widWithdrawal;
+		this.startDate =startDate;
 	}	
 	
 	public SoldItem(String itemName, int initialPrice, LocalDate startDate,
@@ -133,6 +134,15 @@ public class SoldItem {
 	
 	public int getMinNextValueBid() {
 		return bestOffer>initialPrice ? bestOffer+10 : initialPrice +10;
+	}
+	
+	public boolean getCurrentDateIsBetweenStartDateAndEndDate() {
+		if(this.startDate != null && this.endDate !=null) {
+			return !(LocalDate.now().isBefore(this.startDate) 
+			|| LocalDate.now().isAfter(this.endDate));
+		}
+
+		return false;
 	}
 
 	@Override

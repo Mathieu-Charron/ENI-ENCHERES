@@ -8,11 +8,10 @@ import dal.DALException;
 import dal.DAOFactory;
 import dal.IUserDAO;
 
-public class UserManager /*SINGLETON*/ {
+public class UserManager implements IManager /*SINGLETON*/ {
 	private IUserDAO userDAO;
 	private static UserManager instance;
 	
-	private static final String ERROR_BDD = "Une erreur est survenue\n";
 	private static final String INCORRECT_CREDENTIALS = "Identifiants incorrects\n";
 	
 	private UserManager() {

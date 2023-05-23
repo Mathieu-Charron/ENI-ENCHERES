@@ -71,12 +71,13 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				+ "	i.description, "
 				+ "	c.categoryId, "
 				+ "	c.label, "
-				+ "	(select top(1) b.userId from BIDS b where b.soldItemId=i.soldItemId) as buyerUserId, "
+				+ "	(select top(1) b.userId from BIDS b where b.soldItemId=i.soldItemId ORDER BY b.bidAmount DESC) as buyerUserId, "
 				+ "	(select top(1) us.username "
 				+ "	from BIDS b "
-				+ "	LEFT JOIN USERS us ON b.userId = us.userId where b.soldItemId=i.soldItemId) as buyerUsername, "
-				+ "	(select top(1) b.bidAmount from BIDS b where b.soldItemId=i.soldItemId) as bestOffer, "
+				+ "	LEFT JOIN USERS us ON b.userId = us.userId where b.soldItemId=i.soldItemId ORDER BY b.bidAmount DESC) as buyerUsername, "
+				+ "	(select top(1) b.bidAmount from BIDS b where b.soldItemId=i.soldItemId ORDER BY b.bidAmount DESC) as bestOffer, "
 				+ "	i.initialPrice, "
+				+ "	i.startDate, "
 				+ "	i.endDate, "
 				+ "	w.street, "
 				+ "	w.postalCode, "
@@ -112,6 +113,7 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				int bestOffer = rs.getInt("bestOffer");
 				
 				int initialPrice = rs.getInt("initialPrice");
+				LocalDate startDate = rs.getDate("startDate").toLocalDate();
 				LocalDate endDate = rs.getDate("endDate").toLocalDate();
 				
 				String street = rs.getString("street");
@@ -122,7 +124,7 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				int sellerId = rs.getInt("sellerId");
 				String sellerUsername = rs.getString("sellerUsername");
 				
-				return new SoldItem(soldItemId, itemName, initialPrice, endDate, 
+				return new SoldItem(soldItemId, itemName, initialPrice, startDate, endDate, 
 						new User(sellerId, sellerUsername), description, 
 						new Category(cateogryId, label), new User(buyerUserId,buyerUsername)
 						, bestOffer, new Withdrawal(street, postalCode, city));
@@ -231,6 +233,8 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 
 	@Override
 	public void bidOnItem(int soldItemId, int credits, User user) throws DALException {
+		Bid oldBid = selectBestOfferByItemId(soldItemId);
+		
 		String sql = "INSERT BIDS VALUES (GETDATE(), ?, ?, ?)";
 		try(Connection uneConnection= ConnectionProvider.getConnection();
 				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
@@ -239,23 +243,24 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			unStmt.setInt(++i, credits);
 			unStmt.setInt(++i, soldItemId);
 			unStmt.setInt(++i, user.getUserId());
-			
-//			if(unStmt.executeUpdate()>0) {
-//				//remove credits from buyer
-//				user.addCredit(-credits);
-//				DAOFactory.getUserDAO().update(user);
-//				
-//				//take soldItems
-//				SoldItem soldItem = DAOFactory.getSoldItemDAO().selectById(soldItemId);
-//				
-//				
-//				//take seller from soldItemId
-//				User seller = DAOFactory.getUserDAO().selectById(soldItem.getSeller().getUserId());
-//				
-//				//update user add credits
-//				user.addCredit(credits);
-//				DAOFactory.getUserDAO().update(seller);
-//			}
+			unStmt.executeUpdate();
+			if(unStmt.executeUpdate()>0) {
+				//remove credits from buyer
+				user.addCredit(-credits);
+				DAOFactory.getUserDAO().updateCredit(user);
+				
+				//take soldItems
+				SoldItem soldItem = DAOFactory.getSoldItemDAO().selectById(soldItemId);
+				
+				if(oldBid == null) {
+					//repay user on the oldBid
+					User userOldBid = DAOFactory.getUserDAO().selectById(soldItem.getSeller().getUserId());
+					
+					//update user add credits
+					userOldBid.addCredit(oldBid.getBidAmount());
+					DAOFactory.getUserDAO().updateCredit(userOldBid);
+				}
+			}
 			
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage());
@@ -289,6 +294,30 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 		}
 
 		return categories;
+	}
+	
+	
+	public Bid selectBestOfferByItemId(int itemId) throws DALException {
+		String sql = "SELECT TOP(1) bidAmount, userId FROM BIDS WHERE soldItemId=? ORDER BY bidAmount DESC";
+		try(Connection uneConnection= ConnectionProvider.getConnection();
+				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
+			int i = 0;
+
+			unStmt.setInt(++i, itemId);
+			
+			ResultSet rs = unStmt.executeQuery();
+			
+			while(rs.next()) {
+				int bidAmount = rs.getInt("bidAmount");
+				int userId = rs.getInt("userId");
+				
+				return new Bid(bidAmount, new User(userId));
+			}
+			
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
+		return null;
 	}
 
 }

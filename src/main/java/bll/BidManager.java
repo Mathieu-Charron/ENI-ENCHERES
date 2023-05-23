@@ -15,7 +15,7 @@ import dal.DALException;
 import dal.DAOFactory;
 import dal.ISoldItemDAO;
 
-public class BidManager {
+public class BidManager implements IManager {
 	private ISoldItemDAO soldItemDAO;
 	private static BidManager instance;
 	
@@ -23,8 +23,6 @@ public class BidManager {
 	private static final int MAX_DESCRIPTION_SIZE = 300;
 
 	
-	private static final String ERROR_BDD = "Une erreur est survenue";
-
 	
 	private BidManager() {
 		this.soldItemDAO = DAOFactory.getSoldItemDAO();
@@ -102,6 +100,7 @@ public class BidManager {
 		LocalDate endDate = LocalDate.parse(endDateString, formatter);
 		
 		//verif startDate>today && endDate>startDate
+		errorMessage+= checkDate(startDate,endDate);
 		
 		if(errorMessage.length()>0) throw new BLLException(errorMessage);
 		
@@ -116,24 +115,87 @@ public class BidManager {
 	
 	private String checkItemNameSize(String itemName) {
 		
-		if(itemName.length()>MAX_ITEM_NAME_SIZE) return "Le nom de l'article doit contenir maximum " + MAX_ITEM_NAME_SIZE + " charactères";
+		if(itemName.length()>MAX_ITEM_NAME_SIZE) return "Le nom de l'article doit contenir maximum " + MAX_ITEM_NAME_SIZE + " charactères\n";
 		return "";
 	}
 	
 	private String checkDescriptionSize(String description) {
 		
-		if(description.length()>MAX_DESCRIPTION_SIZE) return "La description doit contenir maximum " + MAX_DESCRIPTION_SIZE + " charactères";
+		if(description.length()>MAX_DESCRIPTION_SIZE) return "La description doit contenir maximum " + MAX_DESCRIPTION_SIZE + " charactères\n";
 		return "";
 	}
 	
 	private String checkDate(LocalDate startDate,LocalDate endDate) {
 		String errorMessage="";
 		if(startDate.isBefore(LocalDate.now())) {
-			errorMessage+= "La date "
+			errorMessage+= "Les dates doivent être superieures à celle d'aujourd'hui\n";
+		}
+		
+		if(startDate.isAfter(endDate)) {
+			errorMessage+= "La date doit être superieur à celle d'aujourd'hui\n";
 		}
 		return errorMessage;
 	}
 	
 	
-//	public void insertBid(int itemId, )
+	public void insertBid(User userAuthenticate, int itemId, int creditsSpent) throws BLLException {
+		String errorMessage= "";
+
+		Bid oldBid = null;
+		SoldItem soldItem = null;
+		try {
+			oldBid = soldItemDAO.selectBestOfferByItemId(itemId);
+			soldItem = soldItemDAO.selectById(itemId);
+			if(soldItem == null) throw new DALException("soldItem is null");
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
+		}
+		
+		//verif not seller user (THROW ERROR IF TRUE)
+		errorMessage+= userAuthenticate.getUserId() == soldItem.getSeller().getUserId() ? "Vous ne pouvez pas surenchérir sur votre vente voyons !" : "";
+		if(errorMessage.length()>0) throw new BLLException(errorMessage);
+		
+		if(oldBid != null) {
+			//verif not same user (THROW ERROR IF TRUE)
+			errorMessage+= userAuthenticate.getUserId() == oldBid.getUser().getUserId() ? "Vous ne pouvez pas surenchérir sur votre offre voyons !" : "";
+			if(errorMessage.length()>0) throw new BLLException(errorMessage);
+		}
+		
+		//verif getdate() between startDate && endDate (THROW ERROR IF FALSE)
+		errorMessage+= checkCurrentDateIsBetweenStartDateAndEndDate(soldItem.getStartDate(), soldItem.getEndDate());
+		if(errorMessage.length()>0) throw new BLLException(errorMessage);
+
+		//verif coins user not in negative
+		errorMessage+=checkCreditsNotInNegative(userAuthenticate.getCredit(), creditsSpent);
+		
+		if(oldBid != null) {
+			//verif bid > oldBid
+			errorMessage+= oldBid.getBidAmount() > creditsSpent ? "Vous devez surenchérir !\n" :"";
+		}
+		
+		if(errorMessage.length()>0) throw new BLLException(errorMessage);
+		
+		try {
+			soldItemDAO.bidOnItem(itemId, creditsSpent, userAuthenticate);
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException(ERROR_BDD);
+		}
+		
+		
+	}
+	
+	private String checkCreditsNotInNegative(int userCredits, int creditsSpent) {
+		
+		return (userCredits-creditsSpent) < 0 ? "Vous n'avez pas assez de credits\n" : "";
+	}
+	
+	private String checkCurrentDateIsBetweenStartDateAndEndDate(LocalDate startDate, LocalDate endDate) {
+
+		return LocalDate.now().isBefore(startDate) 
+				|| LocalDate.now().isAfter(endDate) 
+				? "La vente n'est pas en cours\n"
+				: "";
+	}
 }

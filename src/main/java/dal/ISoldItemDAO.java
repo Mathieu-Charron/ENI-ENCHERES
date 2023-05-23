@@ -19,6 +19,6 @@ public interface ISoldItemDAO extends ICRUDDAO<SoldItem> {
 	
 	List<Category> selectAllCategories() throws DALException; //SINGLETON
 	
-	
+	Bid selectBestOfferByItemId(int itemId) throws DALException;
 	
 }

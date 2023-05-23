@@ -7,5 +7,6 @@ public interface IUserDAO extends ICRUDDAO<User> {
 	
 	User authenticate(String username, String password) throws DALException;
 	boolean isUsernameOrEmailTaken(int userIdAuthenticate, String username, String email) throws DALException;
+	void updateCredit(User user) throws DALException;
 	
 }

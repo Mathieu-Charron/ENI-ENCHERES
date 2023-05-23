@@ -46,8 +46,8 @@ public class servletDetailBid extends HttpServlet {
 			} catch (NumberFormatException e) {
 		        response.sendRedirect(request.getContextPath());
 			}catch(BLLException e){
-					e.printStackTrace();
-			        response.sendRedirect(request.getContextPath());
+				request.getSession().setAttribute("error", e.getSimpleMessage());
+		        response.sendRedirect(request.getContextPath());
 			}
 		}else {
 	        response.sendRedirect(request.getContextPath());
@@ -59,9 +59,18 @@ public class servletDetailBid extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		manager.insertItem(null, title, 0, title, 0, title, title, title, title, title)
+		try {
+			manager.insertBid((User) request.getSession().getAttribute("user"),Integer.parseInt(request.getParameter("itemId")), Integer.parseInt(request.getParameter("bidAmount")));
+			request.getSession().setAttribute("success", "Vous avez surenchéri avec succès");
+			response.sendRedirect(request.getContextPath());
+		} catch (NumberFormatException e) {
+			request.getSession().setAttribute("error", "Une erreur survenue");
+	        response.sendRedirect(request.getContextPath()+"/DetailBid");
+		}catch(BLLException e){
+			request.getSession().setAttribute("error", e.getSimpleMessage());
+	        response.sendRedirect(request.getContextPath()+"/DetailBid");
+		}
 		
-		doGet(request, response);
 	}
 
 }
