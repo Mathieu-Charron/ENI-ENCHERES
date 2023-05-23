@@ -41,10 +41,13 @@ body {
 	display: flex;
 	box-shadow: 0px 5px 15px 2px #a7a7a7;
 	margin: auto;
-	padding: 5px;
+	padding: 15px 30px 15px 30px;
 	flex-direction: column;
 	width: 70%;
 	justify-content: center;
+	border-radius: 10px;
+	border-left: 2px solid var(--main-color);
+    border-right: 2px solid var(--main-color);
 }
 
 .form div {
@@ -61,12 +64,30 @@ body {
 .form textarea,
 .form select {
 	box-sizing: border-box;
-	resize: none;
-	width: 100%;
+ 	resize: none;
+ 	width: 100%;
 	margin: auto;
+    padding: 5px 10px;
+    border: 1px solid var(--main-color);
+    border-radius: 10px;
 }
 
 .form input[type="submit"],
 .form input[type="button"] {
 	margin-top: 10px;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: dark;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+}
+
+.bidsDate{
+	display: flex;
+	padding: 20px;
+	align-items: center;
+	margin: auto;
 }
