@@ -35,22 +35,15 @@
 				<div>
 					<textarea placeholder="Description" id="description" name="description" required rows="5"></textarea>
 				</div>
-				<div style="display:flex;">
+				<div class="flex">
 					<p style="width:20%">Photo de l'article :</p>
 					<input style="width:100%" type="file" id="picture" name="picture" accept="image/png, image/jpeg">
-				</div>
-				<div style="display:flex;">
-					<p style="width:20%">Prix de l'article :</p>
-					<input placeholder="Prix de l'article" type="number" id="initialPrice" name="initialPrice" min="0" max="9999999" required>
-				<div class="flex">
-					<p class="pLabel">Photo de l'article :</p>
-					<input type="file" id="picture" name="picture" accept="image/*" required>
 				</div>
 				<div class="flex">
 					<p class="pLabel">Prix de l'article :</p>
 					<input placeholder="Prix de l'article" type="number" id="initialPrice" name="initialPrice" min="0" max="9999999" required>
 				</div>
-				<div class="bidsDate">
+				<div class="bidsDate flex">
 					<div class="startBids">
 						<p>Début de l'enchère :</p>
 						<input type="date" name="startDate" id="startDate" required>
