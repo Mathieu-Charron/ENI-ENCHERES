@@ -8,8 +8,7 @@
 		<div class="image-container">
 			<div class="image-container-box">
 				<img id="preview" src="#" alt="Aperçu de l'image">
-<%-- 				<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="#">
- --%>			</div>
+			</div>
 		</div>
 		<div class="form">
 			<form action="${pageContext.request.contextPath}/newSold">
@@ -19,12 +18,12 @@
 				<div>
 					<p>Article :</p>
 				</div>
-				<div style="display: flex; justify-content: center;">
-					<div style="width: 60%; margin-right: 5px">
+				<div class="flex" style="justify-content: center;">
+					<div class="articleName">
 						<input placeholder="Nom de l'article" type="text" id="article" name="article" required>
 					</div>
-					<div style="width:40%; margin-left: 5px">
-						<select style="width:100%" name="categorie" id="categorie-select" required>
+					<div class="categorie">
+						<select name="categorie" id="categorie-select" required>
 							<option value="">--Choisir une Catégorie--</option>
 							<option value="informatique">Informatique</option>
 							<option value="meuble">Meuble</option>
@@ -35,20 +34,20 @@
 				<div>
 					<textarea placeholder="Description" id="description" name="description" required rows="5"></textarea>
 				</div>
-				<div style="display:flex;">
-					<p style="width:20%">Photo de l'article :</p>
-					<input style="width:100%" type="file" id="picture" name="picture" accept="image/png, image/jpeg" required>
+				<div class="flex">
+					<p class="pLabel">Photo de l'article :</p>
+					<input type="file" id="picture" name="picture" accept="image/*" required>
 				</div>
-				<div style="display:flex;">
-					<p style="width:20%">Prix de l'article :</p>
+				<div class="flex">
+					<p class="pLabel">Prix de l'article :</p>
 					<input placeholder="Prix de l'article" type="number" id="price" name="price" min="0" max="9999999" required>
 				</div>
-				<div class="bidsDate" style="justify-content: center;">
-					<div style="margin-right: 5%; width: 40%;">
+				<div class="bidsDate">
+					<div class="startBids">
 						<p>Début de l'enchère :</p>
 						<input type="date" name="startBids" id="startBids" required>
 					</div>
-					<div style="margin-left: 5%; width: 40%;">
+					<div class="endBids">
 						<p>Fin de l'enchère :</p>
 						<input type="date" name="endBids" id="endBids" required>
 					</div>
@@ -60,14 +59,14 @@
 							<input placeholder="Rue" name="street" size="15" required>
 						</div>
 						<div>
-							<input placeholder="Code Postale" name="postalCode" size="15" required>
+							<input placeholder="Code Postal" name="postalCode" size="15" required>
 						</div>
 						<div>
 							<input placeholder="Ville :" name="city" size="15" required>
 						</div>
 					</div>
 				</div>
-				<div style="display: flex; width:100%; margin:auto; box-sizing: border-box;">
+				<div class="flex-button">
 					<input class="button-style-1" style="margin-right: 5px;" type="submit" name="Register" value="Enregistrer">
 					<input class="button-style-1" style="margin-left: 5px;" type="button" name="Cancel" value="Annuler">
 				</div>
