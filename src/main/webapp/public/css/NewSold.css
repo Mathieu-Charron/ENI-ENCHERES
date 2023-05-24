@@ -86,8 +86,7 @@ body {
 	height: 100px;
 }
 
-.form input[type="submit"],
-.form input[type="button"] {
+.form button-style-1 {
 	margin-top: 10px;
 }
 

@@ -144,6 +144,13 @@ public class SoldItem {
 
 		return false;
 	}
+	
+	public boolean getCheckEndedBid () {
+		if(this.endDate !=null) {
+			return !(LocalDate.now().isBefore(this.endDate));
+		}
+		return false;
+	}
 
 	@Override
 	public String toString() {

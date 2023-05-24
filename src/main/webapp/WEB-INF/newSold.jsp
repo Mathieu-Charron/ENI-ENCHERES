@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="image-container">
 			<div class="image-container-box">
-				<img id="preview" src="#" alt="Aperçu de l'image">
+				<img id="preview" src="<%= request.getContextPath() %>/public/assets/image/no-image.png" alt="Aperçu de l'image">
 <%-- 				<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="#">
  --%>			</div>
 		</div>
@@ -69,7 +69,8 @@
 				</div>
 				<div style="display: flex; width:100%; margin:auto; box-sizing: border-box;">
 					<input class="button-style-1" style="margin-right: 5px;" type="submit" name="Register" value="Enregistrer">
-					<input class="button-style-1" style="margin-left: 5px;" type="button" name="Cancel" value="Annuler">
+<!-- 					<input class="button-style-1" style="margin-left: 5px;" type="button" name="Cancel" value="Annuler">
+ -->					<a class="button-style-1" style="margin-left: 5px;" href="<%= request.getContextPath() %>/">Annuler</a>
 				</div>
 			</form>
 		</div>
