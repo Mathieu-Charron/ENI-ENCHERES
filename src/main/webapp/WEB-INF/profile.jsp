@@ -49,11 +49,19 @@
 			
 		    <!-- <input type="button" value="Modifier"> -->
 <%-- 		    <a class="button-style-1" href="<%= request.getContextPath() %>/EditProfile">Modifier</a>
- --%>		    <c:if test="${sessionScope.user.userId eq param.userId}">
+ --%>		<c:if test="${sessionScope.user.userId eq param.userId}">
     			<a class="button-style-1" href="<%= request.getContextPath() %>/EditProfile">Modifier</a>
 			</c:if>
 		    
 		</form>
+		<c:if test="${sessionScope.user.userId eq param.userId}">
+		<div class="coins">
+	      		<div>
+	                <label for="city">Crédit :</label>
+	                <label id="credit" for="credit">${user.credit}<i class="fa-solid fa-coins"></i></label>
+	           	</div>
+         </div>
+         </c:if>
 	</div>
 	</div>
 <%@ include file="templates/footer.jsp"%>

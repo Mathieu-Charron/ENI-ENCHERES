@@ -30,7 +30,7 @@ CREATE TABLE USERS (
 	firstName VARCHAR(30) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	phone VARCHAR(15),
-	street VARCHAR(30) NOT NULL,
+	street VARCHAR(50) NOT NULL,
 	postalCode VARCHAR(10) NOT NULL,
 	city VARCHAR(50) NOT NULL,
 	password VARCHAR(255) NOT NULL,
@@ -40,17 +40,31 @@ CREATE TABLE USERS (
 
 ALTER TABLE USERS ADD CONSTRAINT user_pk PRIMARY KEY (userId)
 
+
 INSERT INTO USERS (username, lastName, firstName, email, phone, street, postalCode, city, password, credit, administrator)
-VALUES ('johnDoe', 'Doe', 'John', 'johndoe@example.com', '1234567890', '123 Main St', '12345', 'New York', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1000, 0),
+VALUES
+('johnDoe', 'Doe', 'John', 'johndoe@example.com', '1234567890', '123 Main St', '12345', 'New York', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1000, 0),
 ('janeSmith', 'Smith', 'Jane', 'janesmith@example.com', '9876543210', '456 Oak Ave', '67890', 'Los Angeles', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 6000, 1),
 ('user1', 'Lastname1', 'Firstname1', 'user1@example.com', '1234567890', '123 Street', '12345', 'City1', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 300, 0),
-('user2', 'Lastname2', 'Firstname2', 'user2@example.com', '9876543210', '456 Avenue', '67890', 'City2', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 0, 0),
-('user3', 'Lastname3', 'Firstname3', 'user3@example.com', '5555555555', '789 Road', '54321', 'City3', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1300, 0),
-('user4', 'Lastname4', 'Firstname4', 'user4@example.com', '1111111111', '987 Lane', '09876', 'City4', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 3250, 1),
-('user5', 'Lastname5', 'Firstname5', 'user5@example.com', '2222222222', '654 Boulevard', '54321', 'City5', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 666, 0),
-('user6', 'Lastname6', 'Firstname6', 'user6@example.com', '3333333333', '321 Drive', '12345', 'City6', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 999, 0),
-('user7', 'Lastname7', 'Firstname7', 'user7@example.com', '4444444444', '159 Street', '67890', 'City7', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1, 0),
-('user8', 'Lastname8', 'Firstname8', 'user8@example.com', '9999999999', '753 Avenue', '09876', 'City8', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 500, 0);
+('JeanDupont', 'Dupont', 'Jean', 'jeandupont@example.com', '0102030405', '1 Rue Principale', '75001', 'Paris', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1000, 0),
+('MarieLambert', 'Lambert', 'Marie', 'marielambert@example.com', '0607080910', '5 Avenue des Roses', '69001', 'Lyon', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 6000, 1),
+('PierreMartin', 'Martin', 'Pierre', 'pierremartin@example.com', '0601020304', '10 Rue Saint-Jacques', '31000', 'Toulouse', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 300, 0),
+('SophieBernard', 'Bernard', 'Sophie', 'sophiebernard@example.com', '0607080910', '15 Boulevard Victor Hugo', '06000', 'Nice', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 0, 0),
+('LuciePetit', 'Petit', 'Lucie', 'luciepetit@example.com', '0601020304', '20 Rue de la Paix', '44000', 'Nantes', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1300, 0),
+('ThomasDurand', 'Durand', 'Thomas', 'thomasdurand@example.com', '0607080910', '25 Avenue Foch', '33000', 'Bordeaux', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 3250, 1),
+('CamilleLeroy', 'Leroy', 'Camille', 'camilleleroy@example.com', '0601020304', '30 Rue Gambetta', '59000', 'Lille', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 666, 0),
+('AntoineMoreau', 'Moreau', 'Antoine', 'antoinemoreau@example.com', '0607080910', '35 Avenue du Général de Gaulle', '67000', 'Strasbourg', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 999, 0),
+('EmmaGirard', 'Girard', 'Emma', 'emmagirard@example.com', '0601020304', '40 Rue de la République', '69002', 'Lyon', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1, 0),
+('HugoRoux', 'Roux', 'Hugo', 'hugoroux@example.com', '0607080910', '45 Boulevard Haussmann', '75008', 'Paris', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 500, 0),
+('JulietteLefebvre', 'Lefebvre', 'Juliette', 'juliettelefebvre@example.com', '0601020304', '50 Avenue des Champs-Élysées', '75016', 'Paris', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 200, 0),
+('MaximeMercier', 'Mercier', 'Maxime', 'maximemercier@example.com', '0607080910', '55 Rue de la Liberté', '13001', 'Marseille', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 3500, 1),
+('ManonGarnier', 'Garnier', 'Manon', 'manongarnier@example.com', '0601020304', '60 Boulevard des Alpes', '06000', 'Nice', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 850, 0),
+('GabrielChevalier', 'Chevalier', 'Gabriel', 'gabrielchevalier@example.com', '0607080910', '65 Rue Victor Hugo', '59000', 'Lille', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 1250, 0),
+('ClaraGuerin', 'Guerin', 'Clara', 'claraguerin@example.com', '0601020304', '70 Avenue de la Gare', '33000', 'Bordeaux', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 400, 0),
+('EnzoMeyer', 'Meyer', 'Enzo', 'enzomeyer@example.com', '0607080910', '75 Rue Saint-Michel', '67000', 'Strasbourg', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 700, 0),
+('ChloéRenaud', 'Renaud', 'Chloé', 'chloerenaud@example.com', '0601020304', '80 Boulevard Voltaire', '75011', 'Paris', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 100, 0),
+('ThéoLemoine', 'Lemoine', 'Théo', 'theolemoine@example.com', '0607080910', '85 Rue du Faubourg Saint-Antoine', '75012', 'Paris', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 950, 0),
+('LéaBarbier', 'Barbier', 'Léa', 'leabarbier@example.com', '0601020304', '90 Avenue des Lilas', '13002', 'Marseille', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 2200, 1);
 
 
 /*****************************
