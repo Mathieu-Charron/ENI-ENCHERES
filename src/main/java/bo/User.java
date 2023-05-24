@@ -135,7 +135,7 @@ public class User {
 	}
 	
 	public void addCredit(int credit) {
-		this.credit = credit;
+		this.credit = this.credit + credit;
 	}
 
 
