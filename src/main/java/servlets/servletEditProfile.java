@@ -80,7 +80,7 @@ public class servletEditProfile extends HttpServlet {
 					, request.getParameter("confirmationPassword"));
 			
 			request.getSession().setAttribute("user", user);
-			request.getSession().setAttribute("success", "Profile modifier avec succès");
+			request.getSession().setAttribute("success", "Profil modifié avec succès");
 
 	        response.sendRedirect(request.getContextPath());
 		} catch (BLLException e) {

@@ -5,7 +5,9 @@
 :root {
   --main-color: #f8ab3f;
 }
-
+::selection {
+	background: #f5dab4;
+}
 * {
 	font-family: 'Readex Pro', sans-serif;
 }

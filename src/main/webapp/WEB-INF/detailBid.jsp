@@ -63,8 +63,9 @@
 					<div>
 						<label for="retrait">Adresse :</label>
 						<div class="address" id="retrait">
-							<p id="street">${item.withdrawal.street}</p>
-							<p id="postalCode">${item.withdrawal.postalCode} ${item.withdrawal.city}</p>
+							<p id="street"><a href="https://www.google.fr/maps/search/${item.withdrawal.street}+${item.withdrawal.postalCode}+${item.withdrawal.city}" target="_blank"> ${item.withdrawal.street} <br>
+							${item.withdrawal.postalCode} ${item.withdrawal.city}</a></p>
+							<!-- <p id="postalCode"></p> -->
 						</div>
 					</div>
 					<div class="flex">
