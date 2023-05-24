@@ -234,7 +234,6 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 	@Override
 	public void bidOnItem(int soldItemId, int credits, User user) throws DALException {
 		Bid oldBid = selectBestOfferByItemId(soldItemId);
-		
 		String sql = "INSERT BIDS VALUES (GETDATE(), ?, ?, ?)";
 		try(Connection uneConnection= ConnectionProvider.getConnection();
 				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
@@ -243,7 +242,6 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			unStmt.setInt(++i, credits);
 			unStmt.setInt(++i, soldItemId);
 			unStmt.setInt(++i, user.getUserId());
-			unStmt.executeUpdate();
 			if(unStmt.executeUpdate()>0) {
 				//remove credits from buyer
 				user.addCredit(-credits);
@@ -252,7 +250,7 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				//take soldItems
 				SoldItem soldItem = DAOFactory.getSoldItemDAO().selectById(soldItemId);
 				
-				if(oldBid == null) {
+				if(oldBid != null) {
 					//repay user on the oldBid
 					User userOldBid = DAOFactory.getUserDAO().selectById(soldItem.getSeller().getUserId());
 					
