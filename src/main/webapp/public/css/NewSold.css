@@ -21,27 +21,31 @@ body {
 }
 
 .image-container {
-	margin-right: 4%;
+	margin-right: 8%;
 }
 
 .image-container-box{
-	width: 100%;
-	height: auto;
+	width: 600px;
+	height: 600px;
 	outline: solid var(--main-color);		
 	border-radius: 10px;
 	box-shadow: 0px 5px 15px 2px #a7a7a7;
+	margin-left:14%;
 }
 	
 .image-container img {
-	max-width: 100%;
-	height: auto;
+    object-fit: contain;
+    max-width: 800px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+	object-position: 50% 50%;
 }
 
 .form {
 	display: flex;
 	box-shadow: 0px 5px 15px 2px #a7a7a7;
-	margin: auto;
-	padding: 15px 30px 15px 30px;
+	padding: 20px 60px;
 	flex-direction: column;
 	width: 70%;
 	justify-content: center;
@@ -60,11 +64,12 @@ body {
 	margin-bottom: 5px;
 }
 
-.form input,
+.form input:not(.button-style-1),
 .form textarea,
 .form select {
 	box-sizing: border-box;
  	resize: none;
+ 	align-items: center;
  	width: 100%;
 	margin: auto;
     padding: 5px 10px;
@@ -72,20 +77,36 @@ body {
     border-radius: 10px;
 }
 
+.form input:not(.button-style-1),
+.form select{
+	height: 35px;
+}
+
+.form textarea{
+	height: 100px;
+}
+
 .form input[type="submit"],
 .form input[type="button"] {
 	margin-top: 10px;
 }
 
+.form input[type="file"] {
+	height: 50px;
+}
+
 input::file-selector-button {
+	height:35px;
     font-weight: bold;
     color: dark;
     padding: 0.5em;
     border: thin solid grey;
     border-radius: 3px;
+    width:50%;
 }
 
 .bidsDate{
+	height: 35px;
 	display: flex;
 	padding: 20px;
 	align-items: center;

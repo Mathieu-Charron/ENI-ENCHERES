@@ -4,23 +4,27 @@
 	<%@ include file="../public/css/profile.css"%>
 </style>
 <div>
-	<h1 class="title">Nouvelle vente</h1>
-</div>
-<div>
 	<div class="container">
 		<div class="image-container">
 			<div class="image-container-box">
-				<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="#">
-			</div>
+				<img id="preview" src="#" alt="Aperçu de l'image">
+<%-- 				<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="#">
+ --%>			</div>
 		</div>
 		<div class="form">
 			<form action="${pageContext.request.contextPath}/newSold">
-				<div style="display: flex; justify-content: center; ">
-					<div>
-						<input placeholder="Nom de l'article" type="text" id="article" name="article" required size="20">
+				<div>
+					<h1 class="title">Nouvelle vente</h1>
+				</div>
+				<div>
+					<p>Article :</p>
+				</div>
+				<div style="display: flex; justify-content: center;">
+					<div style="width: 60%; margin-right: 5px">
+						<input placeholder="Nom de l'article" type="text" id="article" name="article" required>
 					</div>
-					<div>
-						<select name="categorie" id="categorie-select" required>
+					<div style="width:40%; margin-left: 5px">
+						<select style="width:100%" name="categorie" id="categorie-select" required>
 							<option value="">--Choisir une Catégorie--</option>
 							<option value="informatique">Informatique</option>
 							<option value="meuble">Meuble</option>
@@ -31,20 +35,21 @@
 				<div>
 					<textarea placeholder="Description" id="description" name="description" required rows="5"></textarea>
 				</div>
-				<div>
-					<label for="picture">Photo de l'article :</label>
-					<input type="file" id="picture" name="picture" accept="image/png, image/jpeg" required>
+				<div style="display:flex;">
+					<p style="width:20%">Photo de l'article :</p>
+					<input style="width:100%" type="file" id="picture" name="picture" accept="image/png, image/jpeg" required>
 				</div>
-				<div>
+				<div style="display:flex;">
+					<p style="width:20%">Prix de l'article :</p>
 					<input placeholder="Prix de l'article" type="number" id="price" name="price" min="0" max="9999999" required>
 				</div>
 				<div class="bidsDate" style="justify-content: center;">
-					<div style="margin-right: 25px;">
-						<label for="startBids">Début de l'enchère :</label>
+					<div style="margin-right: 5%; width: 40%;">
+						<p>Début de l'enchère :</p>
 						<input type="date" name="startBids" id="startBids" required>
 					</div>
-					<div style="margin-left: 25px;">
-						<label for="endBids">Fin de l'enchère :</label>
+					<div style="margin-left: 5%; width: 40%;">
+						<p>Fin de l'enchère :</p>
 						<input type="date" name="endBids" id="endBids" required>
 					</div>
 				</div>
@@ -52,37 +57,42 @@
 					<p>Retrait :</p>
 					<div>
 						<div>
-							<input placeholder="Rue" type="street" name="street" size="15" required>
+							<input placeholder="Rue" name="street" size="15" required>
 						</div>
 						<div>
-							<input placeholder="Code Postale" type="postalCode" name="postalCode" size="15" required>
+							<input placeholder="Code Postale" name="postalCode" size="15" required>
 						</div>
 						<div>
-							<input placeholder="Ville :" type="city" name="city" size="15" required>
+							<input placeholder="Ville :" name="city" size="15" required>
 						</div>
 					</div>
 				</div>
-				<div style="display: flex; justify-content: center; ">
-					<input class="button-style-1" type="submit" name="Register" value="Enregistrer">
-					<input class="button-style-1" type="button" name="Cancel" value="Annuler">
+				<div style="display: flex; width:100%; margin:auto; box-sizing: border-box;">
+					<input class="button-style-1" style="margin-right: 5px;" type="submit" name="Register" value="Enregistrer">
+					<input class="button-style-1" style="margin-left: 5px;" type="button" name="Cancel" value="Annuler">
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <script>
-	// Obtient la date actuelle
+	/* Date du jour */
 	var today = new Date().toISOString().split('T')[0];
-	// Définit la date minimale pour le champ de début d'enchère
 	document.getElementById('startBids').setAttribute('min', today);
-
-	// Gère l'événement de changement de date de début d'enchère
 	document.getElementById('startBids').addEventListener('change', function() {
-		// Obtient la valeur sélectionnée du champ de début d'enchère
 		var startDate = this.value;
-
-		// Définit la date minimale pour le champ de fin d'enchère
 		document.getElementById('endBids').setAttribute('min', startDate);
 	});
+	/* Affichage de l'image de l'enchère */
+	document.getElementById('picture').addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            document.getElementById('preview').setAttribute('src', e.target.result);
+        }
+
+        reader.readAsDataURL(file);
+    });
 </script>
 <%@ include file="templates/footer.jsp"%>
