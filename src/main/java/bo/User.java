@@ -74,6 +74,12 @@ public class User {
 		this.username = username;
 	}
 	
+	public User(int userId, String username, String phone) {
+		this(userId,username);
+		this.phone = phone;
+
+	}
+	
 	public User(int userId) {
 		this.userId = userId;
 	}

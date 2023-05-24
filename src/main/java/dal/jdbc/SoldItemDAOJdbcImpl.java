@@ -83,7 +83,8 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				+ "	w.postalCode, "
 				+ "	w.city, "
 				+ "	i.userId AS sellerId, "
-				+ "	seller.username AS sellerUsername "
+				+ "	seller.username AS sellerUsername, "
+				+ " seller.phone AS sellerPhone "
 				+ "from SOLD_ITEMS i "
 				+ "JOIN CATEGORIES c ON i.categoryId=c.categoryId "
 				+ "LEFT JOIN WITHDRAWALS w ON w.soldItemId=i.soldItemId "
@@ -123,9 +124,9 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				
 				int sellerId = rs.getInt("sellerId");
 				String sellerUsername = rs.getString("sellerUsername");
-				
+				String sellerPhone = rs.getString("sellerPhone");
 				return new SoldItem(soldItemId, itemName, initialPrice, startDate, endDate, 
-						new User(sellerId, sellerUsername), description, 
+						new User(sellerId, sellerUsername, sellerPhone), description, 
 						new Category(cateogryId, label), new User(buyerUserId,buyerUsername)
 						, bestOffer, new Withdrawal(street, postalCode, city));
 			}

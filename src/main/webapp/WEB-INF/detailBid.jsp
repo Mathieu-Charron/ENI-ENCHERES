@@ -72,7 +72,13 @@
 						<label for="seller">Vendeur :</label>
 						<p id="seller">${item.seller.username}</p>
 					</div>
-					<c:if test="${item.currentDateIsBetweenStartDateAndEndDate}">
+					<c:if test="${item.checkEndedBid && (sessionScope.user.userId eq item.buyer.userId)}" >
+						<div class="flex">
+							<label for="phone">Tel :</label>
+							<p id="phone">${item.seller.phone}</p>
+						</div>
+					</c:if>
+					<c:if test="${item.currentDateIsBetweenStartDateAndEndDate && !(sessionScope.user.userId eq item.seller.userId) && !(sessionScope.user.userId eq item.buyer.userId)}" >
 						<form method="POST" action="<%= request.getContextPath() %>/DetailBid?itemId=${item.itemId}">
 							<div class="flex">
 								<label for="myBids">Mon enchère :</label>
@@ -82,6 +88,9 @@
 								<input class="button-style-1" type="submit" name="Bids" value="Enchérir">
 							</div>
 						</form>
+					</c:if>
+					<c:if test="${item.checkEndedBid && (sessionScope.user.userId eq item.buyer.userId)}" >
+						<a class="button-style-1" href="<%= request.getContextPath() %>">Retour</a>
 					</c:if>
 				</div>
 			</div>
