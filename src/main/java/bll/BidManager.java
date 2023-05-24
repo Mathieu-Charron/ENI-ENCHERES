@@ -2,6 +2,7 @@ package bll;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.text.DateFormatter;
@@ -84,6 +85,10 @@ public class BidManager implements IManager {
 			String city) throws BLLException {
 		
 		String errorMessage = "";
+		
+		//verif not empty
+		errorMessage+= checkValuesAreNotEmpty(Arrays.asList(itemName,description,startDateString,endDateString,street,postalCode,city));
+		
 		//verif itemName <=30
 		errorMessage+= checkItemNameSize(itemName);
 		
@@ -132,7 +137,7 @@ public class BidManager implements IManager {
 		}
 		
 		if(startDate.isAfter(endDate)) {
-			errorMessage+= "La date doit être superieur à celle d'aujourd'hui\n";
+			errorMessage+= "La date de fin ne peut pas être inferieur à celle de début\n";
 		}
 		return errorMessage;
 	}
@@ -197,5 +202,14 @@ public class BidManager implements IManager {
 				|| LocalDate.now().isAfter(endDate) 
 				? "La vente n'est pas en cours\n"
 				: "";
+	}
+	
+	private String checkValuesAreNotEmpty(List<String> values) {
+		for(String value : values) {
+			if(value.isBlank() || value.isEmpty()) {
+				return "Les champs ne doivent pas être vides\n";
+			}
+		}
+		return "";
 	}
 }

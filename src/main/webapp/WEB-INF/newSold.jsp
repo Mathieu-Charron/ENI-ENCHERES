@@ -12,7 +12,7 @@
  --%>			</div>
 		</div>
 		<div class="form">
-			<form action="${pageContext.request.contextPath}/newSold">
+			<form method="POST" action="${pageContext.request.contextPath}/NewSold">
 				<div>
 					<h1 class="title">Nouvelle vente</h1>
 				</div>
@@ -21,14 +21,14 @@
 				</div>
 				<div style="display: flex; justify-content: center;">
 					<div style="width: 60%; margin-right: 5px">
-						<input placeholder="Nom de l'article" type="text" id="article" name="article" required>
+						<input placeholder="Nom de l'article" type="text" id="itemName" name="itemName" required>
 					</div>
 					<div style="width:40%; margin-left: 5px">
-						<select style="width:100%" name="categorie" id="categorie-select" required>
+						<select style="width:100%" name="categoryId" id="categoryId" required>
 							<option value="">--Choisir une Catégorie--</option>
-							<option value="informatique">Informatique</option>
-							<option value="meuble">Meuble</option>
-							<option value="livre">Livre</option>
+					    	<c:forEach var="category" items="${categories}">
+					    		<option value="${category.categoryId}">${category.label}</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -37,20 +37,20 @@
 				</div>
 				<div style="display:flex;">
 					<p style="width:20%">Photo de l'article :</p>
-					<input style="width:100%" type="file" id="picture" name="picture" accept="image/png, image/jpeg" required>
+					<input style="width:100%" type="file" id="picture" name="picture" accept="image/png, image/jpeg">
 				</div>
 				<div style="display:flex;">
 					<p style="width:20%">Prix de l'article :</p>
-					<input placeholder="Prix de l'article" type="number" id="price" name="price" min="0" max="9999999" required>
+					<input placeholder="Prix de l'article" type="number" id="initialPrice" name="initialPrice" min="0" max="9999999" required>
 				</div>
 				<div class="bidsDate" style="justify-content: center;">
 					<div style="margin-right: 5%; width: 40%;">
 						<p>Début de l'enchère :</p>
-						<input type="date" name="startBids" id="startBids" required>
+						<input type="date" name="startDate" id="startDate" required>
 					</div>
 					<div style="margin-left: 5%; width: 40%;">
 						<p>Fin de l'enchère :</p>
-						<input type="date" name="endBids" id="endBids" required>
+						<input type="date" name="endDate" id="endDate" required>
 					</div>
 				</div>
 				<div>
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 				<div style="display: flex; width:100%; margin:auto; box-sizing: border-box;">
-					<input class="button-style-1" style="margin-right: 5px;" type="submit" name="Register" value="Enregistrer">
+					<input class="button-style-1" style="margin-right: 5px;" type="submit"  value="Enregistrer">
 					<input class="button-style-1" style="margin-left: 5px;" type="button" name="Cancel" value="Annuler">
 				</div>
 			</form>
@@ -78,10 +78,10 @@
 <script>
 	/* Date du jour */
 	var today = new Date().toISOString().split('T')[0];
-	document.getElementById('startBids').setAttribute('min', today);
-	document.getElementById('startBids').addEventListener('change', function() {
+	document.getElementById('startDate').setAttribute('min', today);
+	document.getElementById('startDate').addEventListener('change', function() {
 		var startDate = this.value;
-		document.getElementById('endBids').setAttribute('min', startDate);
+		document.getElementById('endDate').setAttribute('min', startDate);
 	});
 	/* Affichage de l'image de l'enchère */
 	document.getElementById('picture').addEventListener('change', function(e) {

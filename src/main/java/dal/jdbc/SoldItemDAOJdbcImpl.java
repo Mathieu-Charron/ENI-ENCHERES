@@ -29,7 +29,7 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 		String sql = "INSERT SOLD_ITEMS VALUES (?,?,?,?,?,?,?)";
 		
 		try(Connection uneConnection= ConnectionProvider.getConnection();
-				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
+				PreparedStatement unStmt= uneConnection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			int i = 0;
 
 			unStmt.setString(++i, item.getItemName());
@@ -41,7 +41,16 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			unStmt.setInt(++i, item.getCategory().getCategoryId());
 
 			unStmt.executeUpdate();
-
+			
+			ResultSet rs = unStmt.getGeneratedKeys();
+			
+			if(rs.next()) {
+				int itemId = rs.getInt(1);
+				Withdrawal withdrawal = item.getWithdrawal();
+				insertWithDrawal(new Withdrawal(itemId, withdrawal.getStreet(), withdrawal.getPostalCode(), withdrawal.getCity()));
+			};
+			
+			
 			
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage());
@@ -316,6 +325,30 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			throw new DALException(e.getMessage());
 		}
 		return null;
+	}
+
+	@Override
+	public void insertWithDrawal(Withdrawal withdrawal) throws DALException {
+		
+		String sql = "INSERT WITHDRAWALS VALUES (?,?,?,?)";
+		
+		try(Connection uneConnection= ConnectionProvider.getConnection();
+				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
+			int i = 0;
+
+			unStmt.setInt(++i, withdrawal.getSoldItemId());
+			unStmt.setString(++i, withdrawal.getStreet());
+			unStmt.setString(++i, withdrawal.getPostalCode());
+			unStmt.setString(++i, withdrawal.getCity());
+
+
+			unStmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
+		
 	}
 
 }
