@@ -95,9 +95,7 @@ public class UserDAOJdbcImpl implements IUserDAO {
 				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
 			
 			int i = 0;
-			
-			System.out.println("DAL - " + user);
-			
+						
 			unStmt.setString(++i, user.getUsername());
 			unStmt.setString(++i, user.getLastName());
 			unStmt.setString(++i, user.getFirstName());
@@ -113,7 +111,27 @@ public class UserDAOJdbcImpl implements IUserDAO {
 			
 			unStmt.executeUpdate();
 			
-			System.out.println("ok");
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
+		
+	}
+	
+	@Override
+	public void updateCredit(User user) throws DALException {
+		String sql="UPDATE "+ TABLE_NAME + " SET "
+				+ "	credit=? "
+				+ "	WHERE userId=?";
+		try(Connection uneConnection= ConnectionProvider.getConnection();
+				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
+			
+			int i = 0;
+						
+			unStmt.setInt(++i, user.getCredit());
+			unStmt.setInt(++i, user.getUserId());
+			
+			unStmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			throw new DALException(e.getMessage());
 		}
@@ -214,5 +232,25 @@ public class UserDAOJdbcImpl implements IUserDAO {
 	        throw new DALException(e.getMessage());
 	    }
 	}
+	
+	public boolean isUsernameOrEmailTaken(int userIdAuthenticate,String username, String email) {
+	    String sql = "SELECT COUNT(*) FROM " + TABLE_NAME+ " WHERE (username = ? OR email=?) and userId!=?";
+	    try (Connection connection = ConnectionProvider.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+	        statement.setString(1, username);
+	        statement.setString(2, email);
+	        statement.setInt(3, userIdAuthenticate);
+	        ResultSet resultSet = statement.executeQuery();
+	        
+            if (resultSet.next())return true;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        // Gérer l'exception
+	    }
+	    return false;
+	}
+
+
+
 
 }

@@ -11,69 +11,125 @@
 			<div class="form-element">
 				<div>
                 	<label for="username">Pseudo</label>
-                	<input type="text" id="username" name="username" value="<c:out value="${user.username}"/>">
+                	<c:choose>
+				         <c:when test="${not empty form}">
+           	                <input type="text" id="username" name="username" value="<c:out value="${form.username}"/>">
+				         </c:when>
+				         <c:otherwise>
+           	                <input type="text" id="username" name="username" value="<c:out value="${user.username}"/>">
+				         </c:otherwise>
+				    </c:choose>
                 </div>
             </div>
             
             <div class="form-element">
             	<div>
                 	<label for="lastName">Nom</label>
-                	<input type="text" id="lastName" name="lastName" value="<c:out value="${user.lastName}"/>">
+                	<c:choose>
+				         <c:when test="${not empty form}">
+           	                <input type="text" id="lastName" name="lastName" value="<c:out value="${form.lastName}"/>">
+				         </c:when>
+				         <c:otherwise>
+           	                <input type="text" id="lastName" name="lastName" value="<c:out value="${user.lastName}"/>">
+				         </c:otherwise>
+				    </c:choose>
                 </div>
             </div>
             
             <div class="form-element">
 	            <div>
 	                <label for="firstName">Prénom</label>
-	                <input type="text" id="firstName" name="firstName" value="<c:out value="${user.firstName}"/>">
+	                <c:choose>
+				         <c:when test="${not empty form}">
+           	                <input type="text" id="firstName" name="firstName" value="<c:out value="${form.firstName}"/>">
+				         </c:when>
+				         <c:otherwise>
+           	                <input type="text" id="firstName" name="firstName" value="<c:out value="${user.firstName}"/>">
+				         </c:otherwise>
+				    </c:choose>
                 </div>
             </div>
             
             <div class="form-element">
 	            <div>
 	                <label for="email">Email</label>
-	                <input type="email" id="email" name="email" value="<c:out value="${user.email}"/>">
+	                <c:choose>
+				         <c:when test="${not empty form}">
+           	                <input type="email" id="email" name="email" value="<c:out value="${form.email}"/>">
+				         </c:when>
+				         <c:otherwise>
+           	                <input type="email" id="email" name="email" value="<c:out value="${user.email}"/>">
+				         </c:otherwise>
+				    </c:choose>
                 </div>
             </div>
             
             <div class="form-element">
 	            <div>
 	                <label for="phone">Téléphone</label>
-	                <input type="tel" id="phone" name="phone" value="<c:out value="${user.phone}"/>">
+	                <c:choose>
+				         <c:when test="${not empty form}">
+           	                <input type="text" id="phone" name="phone" value="<c:out value="${form.phone}"/>">
+				         </c:when>
+				         <c:otherwise>
+           	                <input type="text" id="phone" name="phone" value="<c:out value="${user.phone}"/>">
+				         </c:otherwise>
+				    </c:choose>
                 </div>
             </div>
             
             <div class="form-element">
 	            <div>
 	                <label for="street">Rue</label>
-	                <input type="text" id="street" name="street" value="<c:out value="${user.street}"/>">
+        			<c:choose>
+				         <c:when test="${not empty form}">
+           	                <input type="text" id="street" name="street" value="<c:out value="${form.street}"/>">
+				         </c:when>
+				         <c:otherwise>
+           	                <input type="text" id="street" name="street" value="<c:out value="${user.street}"/>">
+				         </c:otherwise>
+				    </c:choose>
                 </div>
             </div>
         
             <div class="form-element">
 	            <div>
 	                <label for="postalCode">Code Postal</label>
-	                <input type="text" id="postalCode" name="postalCode" value="<c:out value="${user.postalCode}"/>">
+                     <c:choose>
+				         <c:when test="${not empty form}">
+	          	                <input type="text" id="postalCode" name="postalCode" value="<c:out value="${form.postalCode}"/>">
+				         </c:when>
+				         <c:otherwise>
+	          	                <input type="text" id="postalCode" name="postalCode" value="<c:out value="${user.postalCode}"/>">
+				         </c:otherwise>
+				      </c:choose>
                 </div>
             </div>
-        
+                    
             <div class="form-element">
 	            <div>
 	                <label for="city">Ville</label>
-	                <input type="text" id="city" name="city" value="<c:out value="${user.city}"/>">
+	                <c:choose>
+				         <c:when test="${not empty form}">
+	          	                <input type="text" id="city" name="city" value="<c:out value="${form.city}"/>">
+				         </c:when>
+				         <c:otherwise>
+	          	                <input type="text" id="city" name="city" value="<c:out value="${user.city}"/>">
+				         </c:otherwise>
+				      </c:choose>
+	            </div>
+	        </div>
+            <c:if test="${servletPath.equals('/EditProfile')}">
+	            <div class="form-element">
+		            <div>
+		                <label for="oldPassword">Mot de passe actuel</label>
+		                <input type="password" id="oldPassword" name="oldPassword">
 	                </div>
 	            </div>
-            <c:if test="${servletPath.equals('/EditProfile')}">
-            <div class="form-element">
-	            <div>
-	                <label for="oldPassword">Mot de passe actuel</label>
-	                <input type="password" id="oldPassword" name="oldPassword">
-                </div>
-            </div>
-            
-            <div class="form-element">
-               
-            </div>
+	            
+	            <div class="form-element">
+	               
+	            </div>
         	</c:if>
             <div class="form-element">
 	            <div>

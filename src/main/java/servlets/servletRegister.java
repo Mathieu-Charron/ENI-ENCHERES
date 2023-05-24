@@ -1,6 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,6 +67,17 @@ public class servletRegister extends HttpServlet {
 		} catch (BLLException e) {
 			System.out.println(e.getSimpleMessage());
 			request.getSession().setAttribute("error", e.getSimpleMessage());
+			Map<String, String> form = new HashMap<>();
+			form.put("username", request.getParameter("username"));
+			form.put("lastName", request.getParameter("lastName"));
+			form.put("firstName", request.getParameter("firstName"));
+			form.put("email", request.getParameter("email"));
+			form.put("phone", request.getParameter("phone"));
+			form.put("street", request.getParameter("street"));
+			form.put("postalCode", request.getParameter("postalCode"));
+			form.put("city", request.getParameter("city"));
+			request.getSession().setAttribute("form", form);
+
 	        response.sendRedirect(request.getContextPath()+"/Register");
 		}
 		

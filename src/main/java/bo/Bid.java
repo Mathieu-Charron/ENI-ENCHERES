@@ -4,44 +4,35 @@ import java.sql.Date;
 
 public class Bid {
 	private Date bidsDate;
-    private int bidsAmount;
+    private int bidAmount;
     private SoldItem soldItem;
     private User user;
-    
-	public Bid(Date bidsDate, int bidsAmount, SoldItem soldItem, User user) {
+	
+	public Bid(int bidAmount, User user) {
 		super();
-		this.bidsDate = bidsDate;
-		this.bidsAmount = bidsAmount;
-		this.soldItem = soldItem;
+		this.bidAmount = bidAmount;
 		this.user = user;
 	}
-	public Date getAuctionDate() {
+	
+	public Date getBidDate() {
 		return bidsDate;
 	}
-	public void setAuctionDate(Date auctionDate) {
-		this.bidsDate = auctionDate;
+
+	public int getBidAmount() {
+		return bidAmount;
 	}
-	public double getAuctionAmount() {
-		return bidsAmount;
-	}
-	public void setAuctionAmount(int auctionAmount) {
-		this.bidsAmount = auctionAmount;
-	}
+
 	public SoldItem getItem() {
 		return soldItem;
 	}
-	public void setItem(SoldItem soldItem) {
-		this.soldItem = soldItem;
-	}
+
 	public User getUser() {
 		return user;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+
 	@Override
 	public String toString() {
-		return "Bids [bidsDate=" + bidsDate + ", bidsAmount=" + bidsAmount + ", soldItem=" + soldItem + ", user=" + user
+		return "Bids [bidsDate=" + bidsDate + ", bidAmount=" + bidAmount + ", soldItem=" + soldItem + ", user=" + user
 				+ "]";
 	}
 }

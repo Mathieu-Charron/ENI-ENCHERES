@@ -75,3 +75,14 @@
 			<div class="error-button"><i class="fa-solid fa-xmark"></i></div>
 		</div>
 	</c:if>
+
+	<c:if test="${not empty sessionScope.success}">	
+		<div id="successDiv">
+			<div class="success-message">
+				<ul>
+   					<li>${success}</li>
+				</ul>
+			</div>
+			<div class="success-button"><i class="fa-solid fa-xmark"></i></div>
+		</div>
+	</c:if>
