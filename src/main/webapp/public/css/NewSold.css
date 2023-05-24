@@ -1,6 +1,5 @@
 body {
 	margin: 0;
-	padding: 20px;
 }
 
 .logo{
@@ -94,6 +93,12 @@ body {
 	height: 50px;
 }
 
+.form input[type="number"] {
+ 	width: 15%;
+    text-align: right;
+    margin-left: -3.5%;
+}
+
 input::file-selector-button {
 	height:35px;
     font-weight: bold;
@@ -110,4 +115,40 @@ input::file-selector-button {
 	padding: 20px;
 	align-items: center;
 	margin: auto;
+	justify-content: center;
+}
+
+.startBids{
+	margin-right: 5%;
+	width: 40%;	
+}
+
+.endBids{
+	margin-left: 5%;
+	width: 40%;	
+}
+
+.flex{
+	display: flex;
+}
+
+.flex-button{
+	display: flex;
+	width:100%;
+	margin:auto;
+	box-sizing: border-box;
+}
+
+.pLabel{
+	width: 20%;
+}
+
+.categorie{
+	width:40%; 
+	margin-left: 5px;
+}
+
+.articleName{
+	width: 60%; 
+	margin-right: 5px;
 }
