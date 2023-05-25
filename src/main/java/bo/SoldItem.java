@@ -138,8 +138,8 @@ public class SoldItem {
 	
 	public boolean getCurrentDateIsBetweenStartDateAndEndDate() {
 		if(this.startDate != null && this.endDate !=null) {
-			return !(LocalDate.now().isBefore(this.startDate) 
-			|| LocalDate.now().isAfter(this.endDate));
+			return (LocalDate.now().isAfter(this.startDate) 
+			&& LocalDate.now().isBefore(this.endDate)) || LocalDate.now().isEqual(startDate) || LocalDate.now().isEqual(endDate);
 		}
 
 		return false;
@@ -147,7 +147,7 @@ public class SoldItem {
 	
 	public boolean getCheckEndedBid () {
 		if(this.endDate !=null) {
-			return !(LocalDate.now().isBefore(this.endDate));
+			return (LocalDate.now().isAfter(this.endDate));
 		}
 		return false;
 	}

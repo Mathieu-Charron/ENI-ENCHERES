@@ -234,7 +234,7 @@ public class UserDAOJdbcImpl implements IUserDAO {
 	}
 	
 	public boolean isUsernameOrEmailTaken(int userIdAuthenticate,String username, String email) {
-	    String sql = "SELECT COUNT(*) FROM " + TABLE_NAME+ " WHERE (username = ? OR email=?) and userId!=?";
+	    String sql = "SELECT * FROM " + TABLE_NAME+ " WHERE (username = ? OR email=?) and userId!=?";
 	    try (Connection connection = ConnectionProvider.getConnection();
 	         PreparedStatement statement = connection.prepareStatement(sql)) {
 	        statement.setString(1, username);
