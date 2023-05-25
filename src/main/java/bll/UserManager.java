@@ -3,6 +3,7 @@ package bll;
 import java.util.Arrays;
 import java.util.List;
 
+
 import bo.User;
 import dal.DALException;
 import dal.DAOFactory;
@@ -28,7 +29,6 @@ public class UserManager implements IManager /*SINGLETON*/ {
 	public User authentication(String username,String password) throws BLLException {
 		try {
 			User user = userDAO.authenticate(username, password);
-			
 			if(user == null) {
 				throw new BLLException(INCORRECT_CREDENTIALS);
 			}

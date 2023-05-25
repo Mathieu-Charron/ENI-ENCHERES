@@ -249,8 +249,7 @@ public class UserDAOJdbcImpl implements IUserDAO {
 	    }
 	    return false;
 	}
-
-
+	
 
 
 }

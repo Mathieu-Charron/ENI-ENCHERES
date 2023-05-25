@@ -48,6 +48,8 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 				int itemId = rs.getInt(1);
 				Withdrawal withdrawal = item.getWithdrawal();
 				insertWithDrawal(new Withdrawal(itemId, withdrawal.getStreet(), withdrawal.getPostalCode(), withdrawal.getCity()));
+				
+				return selectById(itemId);
 			};
 			
 			
@@ -350,6 +352,32 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 			throw new DALException(e.getMessage());
 		}
 		
+	}
+	
+	public void updateUserCreditWithBestOfferOfItem(int itemId) throws DALException {
+		SoldItem item = selectById(itemId);
+		User seller = DAOFactory.getUserDAO().selectById(item.getSeller().getUserId());
+		Bid bestOffer = selectBestOfferByItemId(itemId);
+		
+		if(bestOffer == null) return;
+		
+		String sql = "UPDATE USERS set credit=? where userId=?";
+		
+		try(Connection uneConnection= ConnectionProvider.getConnection();
+				PreparedStatement unStmt= uneConnection.prepareStatement(sql);) {
+			int i = 0;
+
+			unStmt.setInt(++i, seller.getCredit() + bestOffer.getBidAmount());
+			unStmt.setInt(++i, seller.getUserId());
+
+
+
+			unStmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			throw new DALException(e.getMessage());
+		}
 	}
 	
 

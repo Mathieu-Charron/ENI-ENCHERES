@@ -24,4 +24,6 @@ public interface ISoldItemDAO extends ICRUDDAO<SoldItem> {
 	
 	void insertWithDrawal(Withdrawal withdrawal)  throws DALException;
 	
+	void updateUserCreditWithBestOfferOfItem(int itemId) throws DALException;
+	
 }

@@ -1,10 +1,16 @@
 package bll;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.text.DateFormatter;
 
@@ -16,6 +22,7 @@ import bo.Withdrawal;
 import dal.DALException;
 import dal.DAOFactory;
 import dal.ISoldItemDAO;
+import jobs.JobEndBid;
 
 public class BidManager implements IManager {
 	private ISoldItemDAO soldItemDAO;
@@ -117,7 +124,8 @@ public class BidManager implements IManager {
 		if(errorMessage.length()>0) throw new BLLException(errorMessage);
 		
 		try {
-			soldItemDAO.insert(new SoldItem(itemName, initialPrice, startDate, endDate, seller, description, new Category(categoryId), new Withdrawal(street, postalCode, city)));
+			SoldItem item = soldItemDAO.insert(new SoldItem(itemName, initialPrice, startDate, endDate, seller, description, new Category(categoryId), new Withdrawal(street, postalCode, city)));
+			prepareJobEndBid(endDate, item.getItemId());
 		} catch (DALException e) {
 			e.printStackTrace();
 			throw new BLLException(ERROR_BDD);
@@ -219,5 +227,27 @@ public class BidManager implements IManager {
 		}
 		return "";
 	}
+	
+	private void prepareJobEndBid(LocalDate endDate, int itemId) {
+		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+     	Duration delay = Duration.between(LocalDateTime.now(), endDate.atTime(LocalTime.MIN));
+//     	Duration delay = Duration.between(LocalDateTime.now(), LocalDateTime.now().plusSeconds(30));
+     	executor.schedule(new JobEndBid(itemId), delay.toMillis(), TimeUnit.MILLISECONDS);
+     
+     	executor.shutdown();
+	}
+	
+	
+	public void paySeller(int itemId) throws BLLException {
+		try {
+			soldItemDAO.updateUserCreditWithBestOfferOfItem(itemId);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 }
