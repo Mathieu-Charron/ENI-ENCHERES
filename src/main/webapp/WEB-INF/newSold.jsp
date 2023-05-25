@@ -21,19 +21,24 @@
 				</div>
 				<div class="flex" style="justify-content: center;">
 					<div class="articleName">
-						<input placeholder="Nom de l'article" type="text" id="itemName" name="itemName" required>
+						<input placeholder="Nom de l'article" type="text" id="itemName" name="itemName" value="${form.itemName}" required>
 					</div>
 					<div class="categorie">
-						<select name="categorie" id="categorie-select" required>
+						<select name="categoryId" id="categorie-select" required>
 							<option value="">--Choisir une Catégorie--</option>
 					    	<c:forEach var="category" items="${categories}">
-					    		<option value="${category.categoryId}">${category.label}</option>
+					    		<c:if test="${category.categoryId eq form.categoryId}">
+					    			<option value="${category.categoryId}" selected>${category.label}</option>
+					    		</c:if>
+					    		<c:if test="${!(category.categoryId eq form.categoryId)}">
+					    			<option value="${category.categoryId}" >${category.label}</option>
+					    		</c:if>
 							</c:forEach>
 						</select>
 					</div>
 				</div>
 				<div>
-					<textarea placeholder="Description" id="description" name="description" required rows="5"></textarea>
+					<textarea placeholder="Description" id="description" name="description" required rows="5">${form.description}</textarea>
 				</div>
 				<div class="flex">
 					<p style="width:20%">Photo de l'article :</p>
@@ -41,29 +46,50 @@
 				</div>
 				<div class="flex">
 					<p class="pLabel">Prix de l'article :</p>
-					<input placeholder="Prix de l'article" type="number" id="initialPrice" name="initialPrice" min="0" max="9999999" required>
+					<input placeholder="Prix de l'article" type="number" value="${form.initialPrice}" id="initialPrice" name="initialPrice" min="0" max="9999999" required>
 				</div>
 				<div class="bidsDate flex">
 					<div class="startBids">
 						<p>Début de l'enchère :</p>
-						<input type="date" name="startDate" id="startDate" required>
+						<input type="date" name="startDate" id="startDate" value="${form.startDate}" required>
 					</div>
 					<div class="endBids">
 						<p>Fin de l'enchère :</p>
-						<input type="date" name="endDate" id="endDate" required>
+						<input type="date" name="endDate" id="endDate"  value="${form.endDate}" required>
 					</div>
 				</div>
 				<div>
 					<p>Retrait :</p>
 					<div>
 						<div>
-							<input placeholder="Rue" name="street" size="15" required>
+							<c:choose>
+								<c:when test="${form != null}">
+									<input placeholder="Rue" name="street" size="15" required value='<c:out value="${form.street}"/>'>
+								</c:when>
+								<c:otherwise>
+									<input placeholder="Rue" name="street" size="15" required value='<c:out value="${sessionScope.user.street}" />'>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div>
-							<input placeholder="Code Postal" name="postalCode" size="15" required>
+							<c:choose>
+								<c:when test="${form != null}">
+									<input placeholder="Code Postal" name="postalCode" size="15" required value='<c:out value="${form.postalCode}" />'>
+								</c:when>
+								<c:otherwise>
+									<input placeholder="Code Postal" name="postalCode" size="15" required value='<c:out value="${sessionScope.user.postalCode}" />'>
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div>
-							<input placeholder="Ville :" name="city" size="15" required>
+							<c:choose>
+								<c:when test="${form != null}">
+									<input placeholder="Ville" name="city" size="15" required value='<c:out value="${form.city}" />'>
+								</c:when>
+								<c:otherwise>
+									<input placeholder="Ville" name="city" size="15" required value='<c:out value="${sessionScope.user.city}" />'>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
 				</div>

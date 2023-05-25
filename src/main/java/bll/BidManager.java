@@ -212,4 +212,5 @@ public class BidManager implements IManager {
 		}
 		return "";
 	}
+	
 }

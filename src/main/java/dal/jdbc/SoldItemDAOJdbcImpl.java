@@ -351,5 +351,6 @@ public class SoldItemDAOJdbcImpl implements ISoldItemDAO {
 		}
 		
 	}
+	
 
 }
