@@ -47,7 +47,7 @@
 									    <p id="bestOffer">${item.bestOffer} <i class="fa-solid fa-coins"></i> (vous)</p>
 									</c:when>
 									<c:otherwise>
-									    <p id="bestOffer">${item.bestOffer} <i class="fa-solid fa-coins"></i> par ${item.buyer.username}</p>
+									    <p id="bestOffer">${item.bestOffer} <i class="fa-solid fa-coins"></i> par <a href="<%= request.getContextPath() %>/Profile?userId=${item.buyer.userId}">${item.buyer.username}</a></p>
 									</c:otherwise>
 								</c:choose>
 						</div>
@@ -70,7 +70,7 @@
 					</div>
 					<div class="flex">
 						<label for="seller">Vendeur :</label>
-						<p id="seller">${item.seller.username}</p>
+						<p id="seller"><a href="<%= request.getContextPath() %>/Profile?userId=${item.seller.userId}">${item.seller.username}</a></p>
 					</div>
 					<c:if test="${item.checkEndedBid && (sessionScope.user.userId eq item.buyer.userId)}" >
 						<div class="flex">
