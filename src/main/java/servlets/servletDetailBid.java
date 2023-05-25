@@ -65,10 +65,10 @@ public class servletDetailBid extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 		} catch (NumberFormatException e) {
 			request.getSession().setAttribute("error", "Une erreur survenue");
-	        response.sendRedirect(request.getContextPath()+"/DetailBid");
+	        response.sendRedirect(request.getContextPath());
 		}catch(BLLException e){
 			request.getSession().setAttribute("error", e.getSimpleMessage());
-	        response.sendRedirect(request.getContextPath()+"/DetailBid");
+	        response.sendRedirect(request.getContextPath()+"/DetailBid?itemId="+Integer.parseInt(request.getParameter("itemId")));
 		}
 		
 	}

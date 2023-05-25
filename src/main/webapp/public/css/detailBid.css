@@ -2,6 +2,10 @@ body {
 	margin: 0;
 }
 
+.container-detail-bid {
+	margin-top: 65px;
+}
+
 .logo{
 	justify-content: flex-start;
 	width: 130px;

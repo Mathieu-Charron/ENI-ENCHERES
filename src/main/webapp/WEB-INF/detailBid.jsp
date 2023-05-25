@@ -2,7 +2,7 @@
 		<style>
 			<%@ include file="../public/css/detailBid.css"%>
 		</style>
-		<div>
+		<div class="container-detail-bid">
 			<div class="container">
 				<div class="image-container">
 					<div class="image-container-box">
