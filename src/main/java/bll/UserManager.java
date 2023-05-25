@@ -206,7 +206,7 @@ public class UserManager implements IManager /*SINGLETON*/ {
 	
 	private String checkUsernameSize(String username) {
 		if (username.length() <= 4) {
-		    return "Le nom d'utilisateur doit contenir plus de 3 caractères\n";
+		    return "Le nom d'utilisateur doit contenir plus de 5 caractères\n";
 		}
 		return "";
 	}
@@ -229,7 +229,7 @@ public class UserManager implements IManager /*SINGLETON*/ {
 	
 	private String checkConfirmPassword(String password, String confirmationPassword) {
 		if (!password.equals(confirmationPassword)) {
-		    return "Les mots de passe ne correspondent pas\n";
+		    return "Les mots de passe ne sont pas identiques\n";
 		}
 		return "";
 	}

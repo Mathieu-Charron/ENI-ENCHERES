@@ -5,7 +5,9 @@
 :root {
   --main-color: #f8ab3f;
 }
-
+::selection {
+	background: #f5dab4;
+}
 * {
 	font-family: 'Readex Pro', sans-serif;
 }
@@ -157,4 +159,7 @@ footer p{
     border-radius: 4px 58px;
     border-right: 5px solid #26db43;
     justify-content: space-between;
+}
+.header-coin {
+	font-weight: 600;
 }

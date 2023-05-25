@@ -1,15 +1,29 @@
 package bo;
 
 public class Withdrawal {
+	private int soldItemId;
     private String street;
     private String postalCode;
     private String city;
+    
+	public Withdrawal(int soldItemId, String street, String postalCode, String city) {
+		this(street,postalCode,city);
+		this.soldItemId = soldItemId;
+	}
+	
 	public Withdrawal(String street, String postalCode, String city) {
 		super();
 		this.street = street;
 		this.postalCode = postalCode;
 		this.city = city;
 	}
+	
+	
+	
+	public int getSoldItemId() {
+		return soldItemId;
+	}
+
 	public String getStreet() {
 		return street;
 	}

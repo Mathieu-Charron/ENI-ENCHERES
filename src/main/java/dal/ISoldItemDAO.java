@@ -6,6 +6,7 @@ import bo.Bid;
 import bo.Category;
 import bo.SoldItem;
 import bo.User;
+import bo.Withdrawal;
 
 public interface ISoldItemDAO extends ICRUDDAO<SoldItem> {
 	List<SoldItem> selectItemsByFilters(
@@ -20,5 +21,7 @@ public interface ISoldItemDAO extends ICRUDDAO<SoldItem> {
 	List<Category> selectAllCategories() throws DALException; //SINGLETON
 	
 	Bid selectBestOfferByItemId(int itemId) throws DALException;
+	
+	void insertWithDrawal(Withdrawal withdrawal)  throws DALException;
 	
 }

@@ -66,7 +66,7 @@ body {
 
 .form label {
 	font-weight: bold;
-	margin: 10px;
+	margin: 1em;
 }
 
 .form input:not(.button-style-1),
@@ -101,6 +101,7 @@ body {
 .form input[type="number"] {
  	width: 10%;
     text-align: right;
+    margin: 0.75em 0em;
 }
 
 .form input[type="file"] {
@@ -118,7 +119,7 @@ input::file-selector-button {
 }
 .flex{
 	display: flex;
-	place-items: center;
+	/* place-items: center; */
 }
 
 .address{
