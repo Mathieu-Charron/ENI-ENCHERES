@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +48,16 @@ public class servletNewSold extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		Map<String, String> form = new HashMap<>();
+		form.put("itemName", request.getParameter("itemName"));
+		form.put("categoryId", request.getParameter("categoryId"));
+		form.put("description", request.getParameter("description"));
+		form.put("initialPrice", request.getParameter("initialPrice"));
+		form.put("startDate", request.getParameter("startDate"));
+		form.put("endDate", request.getParameter("endDate"));
+		form.put("street", request.getParameter("street"));
+		form.put("postalCode", request.getParameter("postalCode"));
+		form.put("city", request.getParameter("city"));
 		try {
 			manager.insertItem(
 					(User) request.getSession().getAttribute("user"), 
@@ -65,9 +77,13 @@ public class servletNewSold extends HttpServlet {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			request.getSession().setAttribute("error", "Une erreur est survenue");
+			request.getSession().setAttribute("form", form);
+
 			response.sendRedirect(request.getContextPath()+"/NewSold");
 		}catch(BLLException e) {
 			request.getSession().setAttribute("error", e.getSimpleMessage());
+			request.getSession().setAttribute("form", form);
+
 			response.sendRedirect(request.getContextPath()+"/NewSold");
 		}
 	}
