@@ -3,7 +3,7 @@
 	<%@ include file="../public/css/NewSold.css"%>
 	<%@ include file="../public/css/profile.css"%>
 </style>
-<div>
+<div class="container-new-sold">
 	<div class="container">
 		<div class="image-container">
 			<div class="image-container-box">
