@@ -40,7 +40,11 @@
 		 	<img src="<%= request.getContextPath() %>/public/assets/image/logo.png" alt="Nom de l'image">
 		 </a>
 		</div>
+		
 		<ul class ="header-page">
+			<div class="close-hamburger-menu">
+				    <i class="fa-solid fa-xmark"></i>
+			</div>
 			<li><a href="<%= request.getContextPath() %>">Enchères</a></li>
 			<c:if test="${not empty sessionScope.user}">
 				<li><a href="<%= request.getContextPath() %>/NewSold">Vendre un article</a></li>
@@ -52,6 +56,23 @@
 			<li><a href="<%= request.getContextPath() %>/Connection">Connexion</a></li>
 			</c:if>
 		</ul>
+		<div class="hamburger-menu">
+		    <i class="fa-solid fa-bars"></i>
+		</div>
+		<script type="text/javascript">
+		    document.addEventListener('DOMContentLoaded', function() {
+		        var hamburgerMenu = document.querySelector('.hamburger-menu');
+		        var closeHamburgerMenu = document.querySelector('.close-hamburger-menu');
+		        var navigationMenu = document.querySelector('.header-page');
+		        
+		        hamburgerMenu.addEventListener('click', function() {
+		            navigationMenu.classList.toggle('show');
+		        });
+		        closeHamburgerMenu.addEventListener('click', function() {
+		            navigationMenu.classList.remove('show');
+		        });
+		    });
+		</script>
 	</div>
 </nav>
 
