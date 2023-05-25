@@ -22,7 +22,7 @@ window.addEventListener("load",function(){
 	
 });
 	
-function searchBids(){
+/*function searchBids(){
 	let urlParameters = "?searchItemName="+document.querySelector('#search').value;
 	urlParameters+= "&categoryId="+document.querySelector('#categoryId').value;
 	
@@ -48,6 +48,113 @@ function searchBids(){
 			new CardItem(item);
 		}
 	  })
+}*/
+function searchBids(pageNumber = 1) {
+    const itemsPerPage = 6;
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    let urlParameters = "?searchItemName=" + document.querySelector('#search').value;
+    urlParameters += "&categoryId=" + document.querySelector('#categoryId').value;
+
+    radiobuttonIsTypeBuy = document.querySelector('#isTypeBuy-true');
+
+    urlParameters += "&isTypeBuy=" + (radiobuttonIsTypeBuy != null ? radiobuttonIsTypeBuy.checked : "false");
+    for (checkboxId of listCheckboxFilter) {
+        const checkbox = document.querySelector('#' + checkboxId);
+        urlParameters += "&" + checkboxId + "=" + (checkbox != null ? checkbox.checked : "false");
+    }
+
+    fetch("/ENI-ENCHERES/rest/bids/searchWithFilters" + urlParameters, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => response.json())
+        .then(items => {
+            const bidItemsContainer = document.querySelector('.container-main-items');
+			bidItemsContainer.innerHTML = '';
+
+            const paginationContainer = document.getElementById('paginationContainer');
+            paginationContainer.innerHTML = '';
+
+            for (let i = startIndex; i < Math.min(endIndex, items.length); i++) {
+                new CardItem(items[i]);
+            }
+
+            if (items.length > itemsPerPage) {
+                createPaginationLinks(items.length, itemsPerPage, pageNumber);
+            }
+        });
+}
+
+function createPaginationLinks(totalItems, itemsPerPage, currentPage) {
+    const paginationContainer = document.getElementById('paginationContainer');
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const maxVisibleLinks = 5;
+    const halfVisibleLinks = Math.floor(maxVisibleLinks / 2);
+
+    let startPage = Math.max(currentPage - halfVisibleLinks, 1);
+    let endPage = Math.min(startPage + maxVisibleLinks - 1, totalPages);
+
+    if (endPage - startPage < maxVisibleLinks - 1) {
+        startPage = Math.max(endPage - maxVisibleLinks + 1, 1);
+    }
+
+    const paginationList = document.createElement('ul');
+    paginationList.classList.add('pagination-list');
+
+    if (startPage > 1) {
+        const firstPageLink = createPaginationLink(1, '<<');
+        paginationList.appendChild(firstPageLink);
+    }
+
+    if (currentPage > 1) {
+        const prevPageLink = createPaginationLink(currentPage - 1, '<');
+        paginationList.appendChild(prevPageLink);
+    }
+
+    for (let page = startPage; page <= endPage; page++) {
+        const pageLink = createPaginationLink(page, page.toString(), page === currentPage);
+        paginationList.appendChild(pageLink);
+    }
+
+    if (currentPage < totalPages) {
+        const nextPageLink = createPaginationLink(currentPage + 1, '>');
+        paginationList.appendChild(nextPageLink);
+    }
+
+
+    if (endPage < totalPages) {
+        const lastPageLink = createPaginationLink(totalPages, '>>');
+        paginationList.appendChild(lastPageLink);
+    }
+
+    paginationContainer.appendChild(paginationList);
+}
+
+function createPaginationLink(page, text, isActive = false) {
+    const paginationLink = document.createElement('li');
+    paginationLink.classList.add('pagination-link');
+
+    if (isActive) {
+        paginationLink.classList.add('active');
+    }
+
+    const link = document.createElement('a');
+    link.setAttribute('href', '#');
+    link.textContent = text;
+
+    link.addEventListener('click', function (event) {
+        event.preventDefault();
+        searchBids(page);
+    });
+
+    paginationLink.appendChild(link);
+    return paginationLink;
 }
 
 

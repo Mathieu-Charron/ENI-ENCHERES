@@ -86,6 +86,9 @@
 				<div class="card-item">a</div>
 				<div class="card-item">a</div> -->
 			</div>
+			<div class="pagination" id="paginationContainer">
+            	<!-- Pagination links will be added dynamically by JavaScript -->
+        	</div>
 			
 	  	</div>
   	</div>

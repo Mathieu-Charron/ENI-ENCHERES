@@ -158,6 +158,17 @@
   	transform: scale(1.1);
 }
 
+.pagination-list {
+	display: flex;
+	justify-content: center;
+}
+.pagination-list .pagination-link {
+	margin: 0px 5px;
+}
+.pagination-list .pagination-link.active {
+	color: var(--main-color);
+}
+
 @media screen and (max-width: 1456px) {
 	.container-home {
 		flex-direction: column;
