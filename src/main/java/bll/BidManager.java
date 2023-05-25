@@ -2,6 +2,7 @@ package bll;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -95,17 +96,23 @@ public class BidManager implements IManager {
 		//verif description <=300
 		errorMessage+= checkDescriptionSize(description);
 
-		
+		LocalDate startDate = null;
+		LocalDate endDate = null;
 		//verif intialPrice >0
 		errorMessage+= initialPrice > 0 ? "" : "Le prix doit être supérieur à 0";
+		try {
+			//check is date format
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			startDate = LocalDate.parse(startDateString, formatter);
+			endDate = LocalDate.parse(endDateString, formatter);
+			
+			//verif startDate>today && endDates>startDate
+			errorMessage+= checkDate(startDate,endDate);
+		} catch (DateTimeParseException e) {
+			e.printStackTrace();
+			errorMessage+= "Vous devez rentrer une date valide !!!!!!!";
+		}
 		
-		//check is date format
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate startDate = LocalDate.parse(startDateString, formatter);
-		LocalDate endDate = LocalDate.parse(endDateString, formatter);
-		
-		//verif startDate>today && endDate>startDate
-		errorMessage+= checkDate(startDate,endDate);
 		
 		if(errorMessage.length()>0) throw new BLLException(errorMessage);
 		

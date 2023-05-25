@@ -50,7 +50,7 @@
 				<li><a href="<%= request.getContextPath() %>/NewSold">Vendre un article</a></li>
 				<li><a href="<%= request.getContextPath() %>/Profile?userId=${sessionScope.user.userId}">Mon profil</a></li>
 				<li><a href="<%= request.getContextPath() %>/Logout">Déconnexion</a></li>
-				<li class="header-coin">${user.credit}<i class="fa-solid fa-coins"></i></li>
+				<li class="header-coin">${sessionScope.user.credit}<i class="fa-solid fa-coins"></i></li>
 			</c:if>
 			<c:if test="${empty sessionScope.user}">
 			<li><a href="<%= request.getContextPath() %>/Connection">Connexion</a></li>

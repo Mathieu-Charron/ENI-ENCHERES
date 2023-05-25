@@ -95,8 +95,8 @@ ON UPDATE NO ACTION
 
 INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
 
-VALUES ('iPhone X', 'Used iPhone X in good condition', CAST( GETDATE() AS Date ) , '2023-05-10', 450, 1, 1),
-('Leather Jacket', 'Black leather jacket, size M', '2023-05-03', '2023-05-08', 80, 2, 2),
+VALUES ('iPhone X', 'iPhone X utilisé en bonne condition', CAST( GETDATE() AS Date ) , '2023-05-10', 450, 1, 1),
+('Veste en cuir', 'Veste en cuir noir, taille M', '2023-05-03', '2023-05-08', 80, 2, 3),
 ('Montre intelligente', 'Montre intelligente neuve avec fonctionnalités de suivi fitness', '2023-06-15', '2023-06-20', 200, 3, 1),
 ('Lunettes de soleil de designer', 'Lunettes de soleil élégantes avec protection UV', '2023-06-10', '2023-06-15', 150, 4, 2),
 ('Vinyles vintage', 'Collection de vinyles classiques', '2023-06-01', '2023-06-07', 100, 5, 3),
@@ -130,32 +130,49 @@ VALUES ('iPhone X', 'Used iPhone X in good condition', CAST( GETDATE() AS Date )
 ('Chargeur sans fil', 'Chargeur sans fil pratique pour les smartphones', '2023-03-13', '2023-06-20', 50, 3, 1);
 
 
-DECLARE @Today DATE = CAST(GETDATE() AS DATE);
-DECLARE @StartDateOffset INT;
-DECLARE @EndDateOffset INT;
+-- Catégorie : Informatique
+INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
+VALUES 
+('Ordinateur portable HP', 'Un ordinateur portable puissant avec un processeur Intel Core i5, 8 Go de RAM et un disque dur de 512 Go.', 
+'2023-05-10', '2023-06-20', 1500, 1, 1),
 
--- Boucle pour ajouter 20 lignes
-DECLARE @Counter INT = 1;
-WHILE @Counter <= 20
-BEGIN
-    -- Génération d'un nombre aléatoire pour les offsets de startDate et endDate
-    SET @StartDateOffset = ABS(CHECKSUM(NEWID())) % 30;
-    SET @EndDateOffset = ABS(CHECKSUM(NEWID())) % 30;
-    
-    -- Insertion de la nouvelle ligne avec les valeurs générées
-    INSERT INTO SOLD_ITEMS (itemName, description, startDate, endDate, initialPrice, userId, categoryId)
-    VALUES (
-        'Item ' + CAST(@Counter AS VARCHAR(10)),
-        'Description of item ' + CAST(@Counter AS VARCHAR(10)),
-        DATEADD(DAY, -@StartDateOffset, @Today),
-        DATEADD(DAY, @EndDateOffset, @Today),
-        ABS(CHECKSUM(NEWID())) % 500 + 50,
-        ABS(CHECKSUM(NEWID())) % 10 + 1,
-        ABS(CHECKSUM(NEWID())) % 4 + 1
-    );
+('Imprimante sans fil Canon', 'Une imprimante sans fil compacte avec une résolution d''impression élevée et une connectivité facile.', 
+'2023-05-15', '2023-06-25', 200, 2, 1),
 
-    SET @Counter = @Counter + 1;
-END;
+('Clavier mécanique RGB', 'Un clavier mécanique rétroéclairé avec des touches programmables et une réponse rapide.', 
+'2023-05-05', '2023-06-15', 100, 3, 1),
+
+-- Catégorie : Ameublement
+('Canapé d''angle moderne', 'Un canapé d''angle en cuir noir avec un design moderne, confortable et spacieux.', 
+'2023-05-08', '2023-06-18', 1200, 4, 2),
+
+('Table basse en bois massif', 'Une table basse robuste en bois massif avec un plateau spacieux et des pieds élégants.', 
+'2023-05-12', '2023-06-22', 300, 5, 2),
+
+('Lampadaire design', 'Un lampadaire moderne avec un abat-jour en tissu et une base en acier inoxydable.', 
+'2023-05-20', '2023-06-30', 150, 6, 2),
+
+-- Catégorie : Vêtement
+('Chemise en coton pour homme', 'Une chemise décontractée en coton avec un col boutonné, des manches longues et un motif à carreaux.', 
+'2023-05-05', '2023-06-15', 50, 7, 3),
+
+('Robe d''été fleurie', 'Une robe d''été légère avec un imprimé floral, des bretelles réglables et une ceinture assortie.', 
+'2023-05-18', '2023-06-28', 80, 8, 3),
+
+('Chaussures de sport', 'Des chaussures de sport confortables avec une semelle amortissante et un design respirant.', 
+'2023-05-10', '2023-06-20', 70, 9, 3),
+
+-- Catégorie : Sport&Loisirs
+('Tapis de yoga antidérapant', 'Un tapis de yoga en caoutchouc naturel antidérapant, confortable et résistant.', 
+'2023-05-07', '2023-06-17', 30, 10, 4),
+
+('Sac à dos de randonnée', 'Un sac à dos spacieux avec plusieurs compartiments, une armature solide et des bretelles ajustables.', 
+'2023-05-14', '2023-06-24', 50, 11, 4),
+
+('Raquette de tennis pro', 'Une raquette de tennis haut de gamme avec une construction en graphite et une excellente prise en main.', 
+'2023-05-21', '2023-06-30', 200, 12, 4);
+
+
 
 
 /*****************************
@@ -220,15 +237,7 @@ VALUES (1, '2 Avenue du Port', '44300', 'Nantes'),
 (42, '14 Rue du Quoicou', '54000', 'Nancy'),
 (43, '28 Rue des Chênes', '13001', 'Marseille'),
 (44, '7 Rue des Alouettes', '35000', 'Rennes'),
-(45, '25 Rue des Primevères', '59000', 'Lille'),
-(46, '11 Rue des Platanes', '67000', 'Strasbourg'),
-(47, '33 Rue des Lilas', '57000', 'Metz'),
-(48, '20 Rue des Églantiers', '44000', 'Nantes'),
-(49, '4 Rue de la République', '86000', 'Poitiers'),
-(50, '27 Rue des Mimosas', '80000', 'Amiens'),
-(51, 'Rue des Acacias', '44300', 'Nantes'),
-(52, 'Avenue de la République', '49100', 'Angers'),
-(53, 'Boulevard Gambetta', '75001', 'Paris');
+(45, '25 Rue des Primevères', '59000', 'Lille');
 /*****************************
 BIDS
 ******************************/
@@ -253,55 +262,114 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 
 INSERT INTO BIDS (bidDate, bidAmount, soldItemId, userId)
-VALUES ('2023-05-05 10:30:00', 480, 1, 2),
-('2023-05-07 14:45:00', 90, 2, 1),
-('2023-05-05 10:30:00', 480, 1, 2),
-('2023-05-07 14:45:00', 90, 2, 1),
-('2023-06-06 11:15:00', 520, 3, 3),
-('2023-06-09 09:30:00', 200, 4, 4),
-('2023-11-06 16:00:00', 150, 5, 5),
-('2023-13-06 13:45:00', 300, 6, 6),
-('2023-15-06 10:30:00', 180, 7, 7),
-('2023-18-06 14:00:00', 400, 8, 8),
-('2023-20-06 11:30:00', 250, 9, 9),
-('2023-23-06 15:45:00', 350, 10, 10),
-('2023-26-06 12:15:00', 270, 11, 1),
-('2023-29-06 10:45:00', 320, 12, 2),
-('2023-07-02 14:30:00', 150, 13, 3),
-('2023-07-05 09:00:00', 280, 14, 4),
-('2023-07-08 11:45:00', 220, 15, 5),
-('2023-07-10 10:15:00', 400, 16, 6),
-('2023-13-07 14:30:00', 180, 17, 7),
-('2023-16-07 12:00:00', 350, 18, 8),
-('2023-19-07 10:30:00', 240, 19, 9),
-('2023-22-07 15:00:00', 320, 20, 10),
-('2023-25-07 11:45:00', 290, 21, 1),
-('2023-28-07 09:30:00', 370, 22, 2),
-('2023-30-07 13:15:00', 200, 23, 3),
-('2023-08-03 10:45:00', 330, 24, 4),
-('2023-08-06 11:30:00', 250, 25, 5),
-('2023-08-09 10:00:00', 420, 26, 6),
-('2023-08-12 13:45:00', 170, 27, 7),
-('2023-15-08 12:00:00', 380, 28, 8),
-('2023-18-08 10:30:00', 260, 29, 9),
-('2023-21-08 14:00:00', 350, 30, 10),
-('2023-24-08 11:00:00', 310, 31, 1),
-('2023-27-08 09:30:00', 420, 32, 2),
-('2023-30-08 13:45:00', 180, 33, 3),
-('2023-09-02 11:15:00', 390, 10, 4),
-('2023-09-05 10:45:00', 290, 19, 5),
-('2023-09-08 10:00:00', 450, 30, 6),
-('2023-09-11 13:30:00', 220, 5, 7),
-('2023-14-09 12:00:00', 370, 8, 8),
-('2023-17-09 10:30:00', 280, 8, 9),
-('2023-20-09 14:15:00', 320, 23, 10),
-('2023-23-09 11:45:00', 330, 12, 1),
-('2023-26-09 10:30:00', 480, 22, 2),
-('2023-29-09 12:00:00', 210, 1, 3),
-('2023-10-02 11:30:00', 400, 4, 4),
-('2023-10-05 10:00:00', 270, 26, 5),
-('2023-10-08 09:30:00', 430, 14, 6),
-('2023-10-11 13:00:00', 230, 7, 7),
-('2023-14-10 11:30:00', 380, 28, 8),
-('2023-17-10 10:00:00', 310, 10, 9),
-('2023-20-10 14:45:00', 360, 5, 10);
+VALUES
+-- Bids for 'iPhone X'
+('2023-10-05 09:30:00', 500, 1, 3),
+('2023-11-05 14:15:00', 550, 1, 4),
+('2023-11-05 15:30:00', 600, 1, 5),
+('2023-12-05 10:45:00', 520, 1, 6),
+('2023-13-05 13:20:00', 550, 1, 7),
+-- Bids for 'Leather Jacket'
+('2023-03-05 12:00:00', 90, 2, 1),
+('2023-04-05 09:45:00', 100, 2, 2),
+('2023-05-05 14:30:00', 110, 2, 3),
+('2023-06-05 16:00:00', 95, 2, 4),
+('2023-07-05 11:15:00', 120, 2, 5),
+-- Bids for 'Montre intelligente'
+('2023-15-06 13:30:00', 210, 3, 2),
+('2023-15-06 14:00:00', 220, 3, 3),
+('2023-16-06 10:30:00', 250, 3, 4),
+('2023-17-06 11:45:00', 230, 3, 5),
+('2023-17-06 15:15:00', 240, 3, 6),
+-- Bids for 'Lunettes de soleil de designer'
+('2023-10-06 10:00:00', 160, 4, 1),
+('2023-11-06 14:45:00', 180, 4, 2),
+('2023-12-06 09:30:00', 200, 4, 3),
+('2023-13-06 11:00:00', 170, 4, 4),
+('2023-14-06 13:30:00', 190, 4, 5),
+-- Bids for 'Vinyles vintage'
+('2023-01-06 15:45:00', 110, 5, 4),
+('2023-02-06 12:30:00', 120, 5, 5),
+('2023-03-06 14:00:00', 130, 5, 6),
+('2023-04-06 10:15:00', 115, 5, 7),
+('2023-05-06 09:45:00', 140, 5, 8),
+-- Bids for 'Appareil photo numérique'
+('2023-05-06 12:00:00', 280, 6, 5),
+('2023-06-06 09:30:00', 300, 6, 6),
+('2023-07-06 14:45:00', 320, 6, 7),
+('2023-08-06 10:30:00', 290, 6, 8),
+-- Bids for 'Chaussures de course'
+('2023-25-05 11:30:00', 80, 7, 2),
+('2023-25-05 12:45:00', 90, 7, 3),
+('2023-26-05 09:15:00', 100, 7, 4),
+('2023-27-05 14:30:00', 85, 7, 5),
+('2023-28-05 10:00:00', 110, 7, 6),
+-- Bids for 'Sac à dos de randonnée'
+('2023-20-05 13:00:00', 140, 8, 1),
+('2023-21-05 11:15:00', 150, 8, 2),
+('2023-22-05 14:30:00', 160, 8, 3),
+('2023-23-05 09:45:00', 135, 8, 4),
+('2023-24-05 12:30:00', 570, 8, 5),
+-- Bids for 'Ordinateur portable'
+('2023-08-06 15:30:00', 700, 9, 3),
+('2023-09-06 11:45:00', 750, 9, 4),
+('2023-10-06 13:00:00', 800, 9, 5),
+('2023-11-06 09:15:00', 720, 9, 6),
+('2023-12-06 12:30:00', 770, 9, 7),
+-- Bids for 'Montre-bracelet en acier inoxydable'
+('2023-30-05 14:45:00', 320, 10, 2),
+('2023-31-05 10:00:00', 350, 10, 3),
+('2023-01-06 11:15:00', 380, 10, 4),
+('2023-02-06 15:30:00', 330, 10, 5),
+('2023-03-06 09:45:00', 360, 10, 6),
+('2023-06-05 10:30:00', 500, 11, 3),
+('2023-07-05 14:45:00', 520, 11, 4),
+('2023-08-05 11:30:00', 540, 11, 5),
+('2023-09-05 09:15:00', 510, 11, 6),
+('2023-10-05 12:00:00', 530, 11, 7),
+-- Bids for 'Lampadaire design'
+('2023-21-05 13:00:00', 170, 12, 1),
+('2023-22-05 11:15:00', 190, 12, 2),
+('2023-23-05 14:30:00', 200, 12, 3),
+('2023-24-05 09:45:00', 180, 12, 4),
+('2023-25-05 12:30:00', 210, 12, 5),
+-- Bids for 'Chemise en coton pour homme'
+('2023-06-05 15:30:00', 60, 13, 2),
+('2023-07-05 11:45:00', 65, 13, 3),
+('2023-08-05 13:00:00', 70, 13, 4),
+('2023-09-05 09:15:00', 62, 13, 5),
+('2023-10-05 12:30:00', 68, 13, 6),
+-- Bids for 'Robe d'été fleurie'
+('2023-19-05 14:45:00', 90, 14, 3),
+('2023-20-05 10:00:00', 95, 14, 4),
+('2023-21-05 11:15:00', 100, 14, 5),
+('2023-22-05 15:30:00', 92, 14, 6),
+('2023-23-05 09:45:00', 98, 14, 7),
+-- Bids for 'Tapis de yoga antidérapant'
+('2023-09-05 13:00:00', 40, 15, 1),
+('2023-10-05 11:15:00', 45, 15, 2),
+('2023-11-05 14:30:00', 50, 15, 3),
+('2023-12-05 09:45:00', 42, 15, 4),
+('2023-13-05 12:30:00', 48, 15, 5),
+-- Bids for 'Sac à dos de randonnée'
+('2023-24-05 13:00:00', 120, 16, 2),
+('2023-25-05 11:15:00', 130, 16, 3),
+('2023-26-05 14:30:00', 140, 16, 4),
+('2023-27-05 09:45:00', 115, 16, 5),
+('2023-28-05 12:30:00', 150, 16, 6),
+-- Bids for 'Ordinateur portable HP'
+('2023-01-06 15:30:00', 900, 17, 2),
+('2023-02-06 11:45:00', 950, 17, 3),
+('2023-03-06 13:00:00', 1000, 17, 4),
+('2023-04-06 09:15:00', 920, 17, 5),
+('2023-05-06 12:30:00', 970, 17, 6),
+-- Bids for 'Montre-bracelet en acier inoxydable'
+('2023-28-05 14:45:00', 400, 18, 3),
+('2023-29-05 10:00:00', 430, 18, 4),
+('2023-30-05 11:15:00', 460, 18, 5),
+('2023-31-05 15:30:00', 410, 18, 6),
+('2023-01-06 09:45:00', 440, 18, 7);
+
+
+
+select * from SOLD_ITEMS
